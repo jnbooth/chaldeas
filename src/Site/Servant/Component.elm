@@ -144,9 +144,24 @@ component store =
                     else
                         listing
 
+                getMats label f = case f <| List.map Tuple.second listed of
+                    []   -> []
+                    mats ->
+                        [ ( label ++ "H"
+                          , h_ 2 <| "Total " ++ label ++ " Materials Needed"
+                          )
+                        , ( label
+                          , H.footer [P.class "materials"] <|
+                            List.map materialEl mats
+                          )
+                        ]
+
                 addButtons xs =
                     if mineOnly then
-                        xs ++ [ ( "I/O"
+                        xs
+                            ++ getMats "Ascension" ascendWishlist
+                            ++ getMats "Skill" skillWishlist
+                            ++ [ ( "I/O"
                                 , H.div [P.id "io"]
                                   [ button_ "Export" True <| Export True
                                   , button_ "Import" True <| Export False

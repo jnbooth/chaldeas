@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-46060275-3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-46060275-3');
+    </script>
+    <meta charset="utf-8">
+    <title>CHALDEAS</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="Fate/Grand Order database of EN Servants and Craft Essences.">
+    <link rel="icon" href="/img/favicon.png" type="image/x-icon" />
+    <style>
+      #error
+        { position: absolute
+        ; z-index: 1000
+        ; left: 0
+        ; right: 0
+        ; max-width: 600px
+        ; bottom: 10px
+        ; line-height: 1.2em
+        ; margin: auto
+        ; color: #d00
+        ; background-color: #fff
+        ; padding: 10px
+        ; font-size: 16px
+        ; border: 1px solid #d00
+        }
+      body
+        { margin: 0; padding: 0
+        ; font-family: Helvetica,Arial,sans-serif
+        ; font-size: 14px
+        ; line-height: 0
+        }
+      .light     { color: #585858 }
+      .dark      { color: #c0c0c0 }
+      .light #bg { background-color: #e6e6e6 }
+      .dark #bg  { background-color: #111111 }
+      #bg
+        { position: fixed
+        ; top:0;left:0;right:0;bottom:0
+        ; z-index: -1
+        }
+      .light .activates p:first-child::after, .light .demerit::after
+        { color: #585858 }
+      .dark .activates p:first-child::after, .dark .demerit::after
+        { color: #c0c0c0 }
+      .activates p:first-child::after, .demerit::after
+        { font-style: italic }
+      span, p, table, br, h1, h2, h3, h4, h5, ul, ol, a, strong, button
+        { line-height: 1.31em }
+      article table > tr > th
+        { min-width: 6em
+        ; vertical-align: top
+        }
+      a, footer, aside, .fade > section, .fade > aside, .fade > footer
+        { -webkit-user-select: none /* Chrome/Safari */
+        ; -moz-user-select: none /* Firefox */
+        ; -ms-user-select: none /* IE10+ */
+        /* Rules below not implemented in browsers yet */
+        ; -o-user-select: none
+        ; user-select: none
+        }
+      .light section p.link, .dark section p.link, #phantasm p.link
+        { color: inherit }
+      .link:hover, aside a:hover
+        { text-decoration: underline }
+      a, .link              { cursor: pointer; text-decoration: none }
+      h1, h2, h3            { margin: 0.5em 0 0 0 }
+      h2                    { font-size: 1.4em; margin-top: 1em }
+      p, h4                 { margin: 0 }
+      tr                    { vertical-align: text-top }
+      th                    { text-align: right }
+      th, td                { padding: 0 5px }
+      th::after             { content: ":" }
+      thead th::after       { content: "" }
+      td.rating             { color: #777777 }
+      h1, h2, aside h3      { text-transform: uppercase }
+      .selected             { font-weight: bold }
+      ul:last-child         { margin-bottom: 0.5em }
+      ul                    { padding: 0; margin: 0 }
+      label                 { display: inline-block }
+      form p                { margin-left: 20px }
+      section, p, td        { text-align: left }
+      .portrait footer button
+        { position: absolute
+        ; font-size: 16px
+        ; bottom: -3px
+        }
+      .portrait footer button:first-child
+        { left: 20px }
+      .portrait footer button:last-child
+        { right: 20px }
+      thead th, tbody th, tbody td
+        { text-align: center }
+      .light .link, .light aside a, .light article a
+        { color: #5656BF }
+      .dark .link, .dark aside a, .dark article a
+        { color: #D5A55F }
+      .dark button[disabled]
+        { color: #fff }
+      aside a
+        { display: block }
+      aside p input
+        { float: left
+        ; margin-left: -20px
+        ; margin-top: 1px
+        }
+      asideg button
+        { width: 5em
+        ; max-width: 45%
+        ; margin-bottom: 2px
+        ; padding: 0
+        }
+      aside:last-child button
+        { margin-bottom: 0 }
+      #leftbar button
+        { margin-right: -1em }
+      section p strong
+        { margin-left: 1em }
+      section p strong:first-child
+        { margin-left: 0em }
+      aside:last-child button
+        { width: 16em
+        ; max-width: 100%
+        ; margin-top: 5px
+        }
+      article table
+        { margin-top: -1px
+        ; margin-bottom: 12px
+        ; width: 100%
+        }
+      article table table
+        { width: auto }
+      article > div:first-child
+        { display: flex
+        ; margin-bottom: -2px
+        }
+      article > div > div:last-child
+        { flex-grow: 1
+        ; margin-right: 10px
+        }
+      article table.materials
+        { padding: 0 10px
+        }
+      .materials th
+        { min-width: initial
+        ; width: 2em
+        ; vertical-align: initial
+        ; padding-right: 1em
+        }
+      .materials img
+        { vertical-align: middle
+        ; margin: 1px -1px 4px 0
+        }
+      .materials div
+        { display: inline-block
+        ; text-align: left
+        }
+      .materials span
+        { display: inline-block
+        ; width: 2.25em
+        }
+      article .materials div:first-child span
+        { width: 6em }
+      footer.materials
+        { display: flex
+        ; flex-wrap: wrap
+        ; padding: 0 20px
+        }
+      footer.materials div
+        { margin-right: 1.2em }
+      #phantasm table
+        { margin-bottom: 5px }
+      #phantasm th
+        { width: 90px
+        ; vertical-align: text-top
+        }
+      #calc h3
+        { text-align: center
+        ; text-transform: uppercase
+        }
+      #calc th
+        { text-align: right
+        ; width: 135px
+        }
+      #calc td
+        { text-align: right }
+      #calc th:first-child
+        { min-width: 8em
+        }
+      #elm
+        { display: flex
+        ; position: absolute
+        ; top:0;bottom:0;left:0;right:0
+        }
+      body > div > aside
+        { overflow-y: scroll
+        ; padding: 0.5em 1em
+        ; flex: 2 1 0
+        ; min-width: 95px
+        }
+      body > div > aside:last-child
+        { flex: 3 1 0 }
+      body > div > footer
+        { display: none
+        ; position: fixed
+        ; bottom: 0
+        ; width: 100%
+        ; text-align: center
+        ; background: #eee
+        ; box-shadow: 0px 0px 5px rgba(0,0,0,0.2)
+        ; border-top: 1px solid #aaa
+        ; z-index: 1
+        }
+      .light > footer
+        { background: #eee }
+      .dark > footer
+        { background: #060606 }
+      .fade > footer
+        { pointer-events: none
+        ; filter: blur(1px)
+        }
+      body > div > footer button
+        { font-size: 15px
+        ; margin: 6px 5px
+        ; padding: 3px 15px
+        }
+        /*
+      body > div > aside button:first-child
+        { position: absolute
+        ; top: 1.75em
+        ; right: 1.5em
+        ; width: 2em
+        ; padding: 0
+        ; font-weight: bold
+        ; font-size: 14px
+        }
+        */
+      aside > nav span
+        { display: block }
+
+      .exclusive
+        { display: flex }
+      .exclusive button
+        { padding: 0
+        ; flex: 1
+        }
+
+      body > div > section
+        { overflow-y: scroll
+        ; flex: 8 1 0
+        ; text-align: center
+        }
+      .portrait
+        { position: relative
+        ; display: inline-block
+        ; line-height: 0
+        }
+      .portrait > img
+        { border-style: solid }
+      .portrait.stars5 img, .portrait.stars5 header span
+        { border-color: #ba8d00; color: #ba8d00 }
+      .portrait.stars4 img, .portrait.stars4 header span
+        { border-color: #d4802f; color: #d4802f }
+      .portrait.stars3 img, .portrait.stars3 header span
+        { border-color: #7a7777; color: #7a7777 }
+      .portrait.stars2 img, .portrait.stars2 header span
+        { border-color: #9d6e47; color: #9d6e47 }
+      .portrait.stars1 img, .portrait.stars1 header span
+        { border-color: #9f8f3f; color: #9f8f3f }
+      .portrait.stars0 img, .portrait.stars0 header span
+        { border-color: #0e0d0d; color: #555555 }
+      .portrait.stars0 footer button
+        { color: #ffffff }
+      .portrait header, .portrait footer
+        { position: absolute
+        ; left:0;right:0
+        ; text-align: center
+        ; color: #ffffff
+        }
+      article .portrait footer
+        { bottom: -4px }
+      section .portrait footer
+        { bottom: 1px }
+      .portrait header span
+        { border-radius: 20px
+        ; border-style: solid
+        ; border-width: 2px
+        ; background-color: #ffffff
+        ; display: inline-block
+        ; margin: -4px 6px 0px 6px
+        ; word-break: keep-all
+        }
+      .portrait div
+        { position: absolute }
+      .portrait aside
+        { display: none /*flex*/
+        ; flex-direction: column
+        ; position: absolute
+        ; top:0;right:0
+        }
+      .portrait aside img
+        { width: 15px }
+      section .portrait header
+        { bottom: 20px }
+      section .portrait footer
+        { font-size: 7px }
+      section .portrait header span
+        { font-size: 11.5px
+        ; padding: 1px 4px 0px 4px
+        }
+      section .portrait div
+        { top:-2px;left:-2px }
+      section .portrait div img
+        { width: 25px }
+      article .portrait div
+        { top:-10px;left:-4px; display: none }
+      article .portrait div img
+        { width: 50px }
+      article .portrait header
+        { bottom: 21px
+        ; margin-right: 10px
+        }
+      article .portrait footer
+        { font-size: 10px }
+      article .portrait header span
+        { font-size: 15px
+        ; padding: 1px 6px 0px 6px
+        }
+      article .portrait > img
+        { border-width: 6px
+        ; border-bottom-width: 16px
+        ; margin: -5px 10px -5px 0
+        }
+      section .portrait
+        { margin: 3px }
+      section .portrait > img
+        { width: 150px
+        ; height: 212px
+        ; border-width: 3px
+        ; border-bottom-width: 12px
+        ; object-fit: cover
+        }
+      section .portrait:hover
+        { cursor: pointer }
+      section .portrait:hover footer, section .portrait:hover header span
+        { color: #222222 }
+      .thumb
+        { display: inline-block
+        ; cursor: pointer
+        ; margin: 3px
+        }
+      aside form img
+        { width: 20px
+        ; vertical-align: sub
+        ; margin: -1px 3px -1px -3px
+        }
+      aside:last-child form img
+        { width: 15px
+        ; vertical-align: text-top
+        }
+      #cover
+        { position: absolute
+        ; top:0;bottom:0;left:0;right:0
+        }
+      article, #cover
+        { display: none }
+      .fade > article, .fade #cover
+        { display: block }
+      .fade > section, .fade > aside
+        { opacity: 0.2
+        ; pointer-events: none
+        ; filter: blur(1px)
+        }
+      article
+        { position: fixed
+        ; top:4%;left:0;right:0
+        ; max-height: 92%
+        ; overflow-y: scroll
+        ; margin: auto
+        ; max-width: 510px
+        ; box-sizing: border-box
+        ; z-index: 10
+        ; padding: 7px 0
+        ; text-align: center
+        }
+      article .portrait
+        { margin-top: -2px
+        ; display: table
+        }
+      .light article
+        { background-color: #ffffff
+        ; border: 1px solid #aaaaaa
+        ; border-top-color: #bbbbbb
+        ; box-shadow: 0 0px 10px rgba(0,0,0,0.2)
+        }
+      .dark article
+        { background-color: #060606
+        ; border: 1px solid #333333
+        ; border-top-color: #444444
+        ; box-shadow: 0 0px 10px rgba(0,0,0,0.5)
+        }
+      article section
+        { padding: 0 10px
+        ; min-height: 3em
+        }
+      article h2
+        { text-align: center }
+      #myservant
+        { clear: both
+        ; margin-top: -9px
+        ; padding: 7px 0 4px 0
+        }
+      #myservant input
+        { width: 3em
+        ; margin: 0 2px 0 5px
+        }
+      #myservant table
+        { width: 100%
+        ; padding: 0 10px
+        ; margin: -4px 0 0 0
+        }
+      #myservant td
+        { padding: 0
+        ; position: relative
+        }
+      #myservant strong
+        { text-align: right
+        ; width: 100%
+        ; display: inline-block
+        }
+      #myservant td:first-child strong
+        { text-align: left }
+      #myservant span
+        { opacity: 0.75 }
+      article footer button, article #myservant button
+        { font-family: unset
+        ; background: none
+        ; border: none
+        ; cursor: pointer
+        ; padding: 0
+        }
+      article button:disabled
+        { display: none }
+      #myservant button
+        { color: #ff0000
+        ; font-weight: bold
+        ; font-size: unset
+        }
+      #myservant > button
+        { color: #00a900 }
+      #myservant button:hover
+        { text-decoration: underline }
+      #myservant img
+        { height: 20px
+        ; margin: 0
+        ; padding: 0
+        ; vertical-align: bottom
+        ; position: absolute
+        ; right: 0
+        ; bottom: 1px
+        }
+      article div > img
+        { margin-bottom: -10px }
+      article div div section
+        { padding: 0 }
+      article section img
+        { float: left
+        ; width: 35px
+        ; margin: 1px 6px 0 1px
+        }
+      article section table, #phantasm table, .materials
+        { table-layout: fixed
+        ; margin-top: 3px
+        ; border-spacing: 0
+        ; line-height: 1em
+        }
+      article section td, #phantasm td, .materials td,
+      article section th, #phantasm th, .materials th
+        { padding-top: 4px }
+      .light article section table, .light #phantasm table, .light #myservant,
+      .light .materials tr
+        { background-color: #eeeeee
+        ; border: 1px solid #dddddd
+        }
+      .dark article section table, .dark #phantasm table, .dark #myservant,
+      .dark .materials tr
+        { background-color: #111111
+        ; border: 1px solid #181818
+        }
+      article section table
+        { width: 100% }
+      .light article section table col:nth-child(even)
+      ,     .light #phantasm table col:nth-child(even)
+      ,          .light .materials tr:nth-child(even)
+        { background-color: #dddddd }
+      .dark > article section table col:nth-child(even)
+      ,       .dark #phantasm table col:nth-child(even)
+      ,             .dark .materials tr:nth-child(even)
+        { background-color: #181818 }
+      article section table td
+        { padding: 4px 0 0 0
+        ; line-height: 1.1em
+        }
+      article section table thead th
+        { padding-left: 2px
+        ; line-height: 1em
+        }
+      .light article section table th, .light #phantasm table th
+        { border-bottom: 1px solid #cccccc }
+      .dark article section table th, .dark #phantasm table th
+        { border-bottom: 1px solid #222222 }
+      article section td:first-child, #phantasm table td:first-child
+        { font-weight: inherit }
+      aside form, .exclusive
+        { margin-bottom: 6px }
+      .activates p:first-child::after { content: " [Activates first]" }
+      .demerit::after                 { content: " [Demerit]" }
+      .team
+        { display: flex }
+      .team div
+        { display: flex
+        ; flex-direction: column
+        ; border: 1px solid #aaa
+        ; margin: 5px
+        }
+      .team div img
+        { width: 100px
+        ; display: inline-block
+        ; height: 25px
+        }
+      .team div img:first-child
+        { height: 75px }
+      #io
+        { margin-top: 10px }
+      #io button
+        { width: 100px
+        ; font-size: 16px
+        }
+      article textarea
+        { height: 200px
+        ; width: 90%
+        ; margin-bottom: 10px
+        }
+      @media (max-width: 890px)
+        { body                          { font-size: 12px }
+          section .portrait header span { font-size: 10px; word-break: normal }
+          .fade article                 { font-size: 14px }
+          aside td, aside th            { display: block }
+          .exclusive                    { flex-direction: column }
+          #leftbar button               { margin-right: inherit }
+          body > div > section          { flex: 6 1 0 }
+          section .portrait > img
+            { width: 100px
+            ; height: 142px
+            }
+          #calc td
+            { display: table
+            ; box-sizing: border-box
+            ; margin: auto
+            }
+          #calc td table
+            { min-width: 100% }
+          #calc td tr
+            { display: table }
+          #calc th
+            { vertical-align: unset
+            ; width: unset
+            }
+        }
+      @media (min-device-width: 800px) and (max-width: 890px)
+        { body > div > section          { flex: 6 1 0 } }
+      @media (max-device-width: 800px)
+        { #elm         { position: unset }
+          body > div > footer           { display: block }
+          body                          { font-size: 8px }
+          section .portrait > img       { width: 75px; min-height: 106px }
+          section .portrait div img     { width: 15px }
+          section .portrait header span { font-size: 9px }
+          form p                        { margin-left: 15px }
+          body > div > aside            { display: none }
+          body, section                 { overflow-x: hidden }
+          .thumb img                    { width: 60px }
+          body > div > aside:last-child:nth-child(4)
+            { display: block
+            ; font-size: 18px
+            ; margin: 0 1em
+            ; overflow: unset
+            }
+          article
+            { top: 0
+            ; bottom: 0
+            ; left: 6%
+            ; right: 6%
+            ; max-height: unset
+            }
+          article .portrait
+            { display: none }
+          article > div:first-child
+            { display: inline-block }
+          article > div > div > table
+            { float: right
+            ; clear: right
+            ; width: unset
+            }
+          article > div > div > table:last-child
+            { float: none }
+          article > div > div > table:first-child,
+          article > div > div > table:last-child
+            { clear: none }
+            /*
+          article table:nth-child(2), article table:nth-child(3)
+            { float: left
+            ; max-width: 36%
+            }
+          article table:nth-child(4)
+            { max-width: 33% }
+            */
+          article section
+            { max-width: 35em
+            ; margin: auto
+            }
+          article section img
+            { width: 20px
+            ; margin-top: 2px
+            }
+          aside form img
+            { width: 25px
+            }
+        }
+      @media(max-device-width: 540px)
+        { article > div:first-child
+            { flex-direction: column }
+          article > div > div > table
+            { margin-left: auto
+            ; margin-right: auto
+            ; float: none
+            }
+        }
+      @media(max-width: 520px)
+        { body > div > footer button
+            { margin: 6px 4px
+            ; padding: 2px 3px
+            }
+        }
+      @media(max-width:471px)
+        { #myservant td
+            { font-size: 11px }
+          #myservant input
+            { width: 2em
+            ; font-size: 9px
+            }
+          #myservant img
+            { height: 15px }
+        }
+      @media(max-width:400px)
+        { article > div > div > table
+          { clear: both !important }
+        }
+    </style>
+    <script type="text/javascript" src="/js/chaldeas.js"></script>
+  </head>
+  <body>
+      <script type="text/javascript">
+        function getValue(key) {
+          var stored = localStorage.getItem(key);
+          if (stored !== null) {
+            try {
+              return JSON.parse(stored);
+            } catch (e) {}
+          }
+          return null;
+        }
+        var app = Elm.Main.init({
+          flags: {
+            preferences: getValue("preferences"),
+            team:        getValue("team") || [],
+            teams:       getValue("teams") || [],
+            today:       Date.now()
+          }
+        });
+        app.ports.store.subscribe(function(pair) {
+          localStorage.setItem(pair[0], JSON.stringify(pair[1]));
+        });
+        app.ports.analytics.subscribe(function(page) {
+          gtag('config', 'UA-46060275-3', {'page_path': page});
+        });
+        app.ports.title.subscribe(function(title) {
+          document.title = title + " - CHALDEAS";
+        });
+        var Export = {};
+        app.ports.export.subscribe(function(pair) {
+          Export[pair[0]] = pair[1];
+        });
+      </script>
+  </body>
+</html>

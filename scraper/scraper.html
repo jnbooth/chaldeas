@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>CHALDEAS Testing</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <style>
+      body
+        { font-family: Helvetica,Arial,sans-serif
+        ; font-size: 16px
+        ; line-height: 1.5em
+        ; color: #585858
+        ; background-color: #f0f0f0
+        ; padding-top: 50px
+        }
+      body > ul
+        { margin: auto
+        ; width: 400px
+        }
+      body > ul > li:last-child
+        { font-weight: bold }
+      li li
+        { font-weight: normal }
+      .success  { color: #008800 }
+      .failure  { color: #880000 }
+      .progress { color: #888800 }
+    </style>
+    <script type="text/javascript" src="scraper.js"></script>
+  </head>
+  <body>
+      <div id="elm"></div>
+      <script type="text/javascript">
+        var app = Elm.Scraper.init({
+          node: document.getElementById('elm')
+        });
+      </script>
+  </body>
+</html>

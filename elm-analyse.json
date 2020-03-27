@@ -1,0 +1,9 @@
+{ "excludedPaths":
+    [ "src/Database/Servant/TODO.elm" ]
+, "checks":
+    { "ImportAll": false
+    , "ExposeAll": false
+    , "MultiLineRecordFormatting": false
+    , "NoTopLevelSignature": false
+    }
+}

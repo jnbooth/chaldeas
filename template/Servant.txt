@@ -1,0 +1,54 @@
+
+  , { name      = 
+    , spoiler   = Nothing
+    , id        = 
+    , rarity    = 
+    , class     = 
+    , stats     = { base  = { atk = ,  hp =  }
+                  , max   = { atk = ,  hp =  }
+                  , grail = { atk = , hp =  }
+                  }
+    , gen       = { starWeight = , starRate = , npAtk = , npDef =  }
+    , death     = 
+    , curve     = 
+    , attr      = 
+    , align     = 
+    , gender    = 
+    , traits    = 
+    , deck      = Deck 
+    , hits      = { quick = , arts = , buster = , ex =  }
+    , skills    = [ { name   = 
+                    , rank   = 
+                    , icon   = Icon.
+                    , cd     = 
+                    , effect = 
+                    }
+                  , { name   = 
+                    , rank   = 
+                    , icon   = Icon.
+                    , cd     = 
+                    , effect = 
+                    }
+                  , { name   = 
+                    , rank   = 
+                    , icon   = Icon.
+                    , cd     = 
+                    , effect = 
+                    }
+                  ]
+    , passives  = 
+    , phantasm  = { name   = 
+                  , desc   = 
+                  , rank   = 
+                  , card   = 
+                  , kind   = 
+                  , hits   = 
+                  , effect = 
+                  , over   = 
+                  , first  = 
+                  }
+    , limited   = 
+    , free      = 
+    , ascendUp  = 
+    , skillUp   = 
+    }

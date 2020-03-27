@@ -1,0 +1,12 @@
+
+    , { name    = 
+      , id      = 
+      , rarity  = 
+      , icon    = Icon.
+      , stats   = { base = { atk = , hp =  }
+                  , max  = { atk = , hp =  }
+                  }
+      , effect  = 
+      , bond    = Nothing
+      , limited = 
+      }

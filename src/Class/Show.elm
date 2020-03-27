@@ -576,7 +576,7 @@ nameDebuffEffect a =
         BuffBlock    -> "BuffBlock"
         AttackBuffDown     -> "AttackBuffDown"
         Burn         -> "Burn"
-        CardVuln _   -> "CardVuln"
+        CardVuln c   -> "CardVuln " ++ card c
         Charm        -> "Charm"
         CharmVuln    -> nameDebuffEffect DebuffVuln
         Confusion    -> "Confusion"

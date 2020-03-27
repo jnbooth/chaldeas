@@ -52,7 +52,7 @@ civilizationEncroachment =
     passive "Civilization Encroachment" Icon.ExclamationUp
     [ Give Self CritUp [ (EX, 10) ] ]
 
- 
+
 connectionRoot =
     passive "Connection to the Root" Icon.DamageUp
     [ Give Self (CardUp Quick)  [ (A, 6), (C, 4) ]
@@ -279,7 +279,7 @@ passive name icon effects rank =
                         |> Maybe.map makeAmount
                         >> Maybe.withDefault Placeholder
                         >> Grant targ 0 buff
-                
+
                 Do ef ranks ->
                     lookup rank ranks
                         |> Maybe.map makeAmount

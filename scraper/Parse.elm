@@ -153,7 +153,7 @@ translate a =
 
         "Mystic Eyes of Clairvoyance" ->
             "Clairvoyant Mystic Eyes"
-        
+
         "Mystic Eyes of Distortion (Skill)" ->
             "Mystic Eyes of distortion"
 
@@ -187,7 +187,7 @@ translate a =
 
         "Yagyu Munenori" ->
             "Munenori Yagyu"
-        
+
         "A Wish Spanning 3 Generations" ->
             "A Thought of Crossing Through 3 Generations"
 
@@ -241,7 +241,7 @@ translate a =
 
         "Perfect Form" ->
             "Consummated Shape"
-        
+
         "Piedra del Sol" ->
             "Piedra Del Sol"
 
@@ -260,7 +260,7 @@ translate a =
         "Spirit of the Vast Land" ->
             "Spirit of The Vast Land"
 
-        "Tenka Fubu -2017 Summer.ver-" -> 
+        "Tenka Fubu -2017 Summer.ver-" ->
             "Tenka Fubu ~2017 Summer.ver~"
 
         "The Palace of Luoyang" ->
@@ -273,7 +273,7 @@ translate a =
             "King Solomon's Tribute"
 
         "Uncertainty About the Future" ->
-            "Uncertainty About The Future" 
+            "Uncertainty About The Future"
 
         "Urvara Nandi" ->
             "Fertile Bull"
@@ -305,7 +305,7 @@ printIcon a =
 
         Icon.QuickBusterUp ->
             "BusterQuick Up"
-    
+
         Icon.Star ->
             "CStar Gain"
 

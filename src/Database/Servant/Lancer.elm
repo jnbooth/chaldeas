@@ -121,7 +121,7 @@ lancers =
                   , kind   = "Anti-Personnel"
                   , hits   = 5
                   , effect = [ To Enemies DamageThruDef <| Range 400 600
-                             , Debuff Enemies 3 DebuffDown <| Flat 20 
+                             , Debuff Enemies 3 DebuffDown <| Flat 20
                              ]
                   , over   = [ Debuff Enemies 3 Curse <| Range 500 2500 ]
                   , first  = False

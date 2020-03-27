@@ -1606,7 +1606,7 @@ sabers =
                   }
     , limited   = True
     , free      = False
-    , ascendUp  = Ascension 
+    , ascendUp  = Ascension
                   [(Piece Saber, 4)]
                   [(Piece Saber, 10), (ShellOfReminiscence, 6)]
                   [(Monument Saber, 4), (BlackBeastGrease, 5), (OctupletCrystals, 4)]

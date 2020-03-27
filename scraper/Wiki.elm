@@ -90,7 +90,7 @@ replace r s =
                 case m.submatches of
                     [Just sub] -> sub
                     _          -> s
-            
+
             else
                 m.match
     in
@@ -109,7 +109,7 @@ trim0s s =
                     |> replace forwardZeroes
                     >> replace backwardZeroes
                     >> replace trailingZero
-            
+
             in
             if String.startsWith "." trimmed then
                 "0" ++ trimmed
@@ -317,7 +317,7 @@ removeZeroes s =
                 case List.dropWhile ((==) '0') chars of
                     '.' :: xs -> xs
                     _         -> chars
-            
+
             percented =
                 if isPercent then
                     '%' :: stripped
@@ -327,7 +327,7 @@ removeZeroes s =
         percented
             |> String.fromList
             >> String.reverse
-    
+
     else
         s
 

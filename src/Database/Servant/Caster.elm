@@ -2122,7 +2122,7 @@ casters =
                   , hits   = 4
                   , effect = [ To Enemies Damage <| Range 450 750
                              , Debuff Enemies 1 SealSkills Full
-                             ] 
+                             ]
                   , over   = [ Debuff Enemies 3 DefenseDown <| Range 20 40 ]
                   , first  = False
                   }
@@ -2167,7 +2167,7 @@ casters =
                     , cd     = 8
                     , effect = [ Grant Self 3 (CardUp Arts) <| Range 20 30
                                , Grant Self 3 (CardUp Buster) <| Range 20 30
-                               ]   
+                               ]
                     }
                   , { name   = "Rapid Casting"
                     , rank   = BPlus

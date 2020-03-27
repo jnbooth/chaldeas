@@ -6,6 +6,7 @@ import Time exposing (Month(..))
 
 import StandardLibrary  exposing (..)
 import Database         exposing (..)
+import Database.Base    exposing (..)
 import Database.Servant exposing (..)
 import Database.Skill   exposing (..)
 import Printing         exposing (..)
@@ -20,12 +21,10 @@ import Class.ToImage as ToImage
 extraFilters : List (Filter Servant)
 extraFilters = List.concat
     [ [ nameFilter FilterAvailability "New"
-        [ "Enkidu"
-        , "Medusa (Lancer)"
-        , "Gilgamesh (Caster)"
-        , "Jaguar Warrior"
-        , "Gorgon"
-        , "Quetzalcoatl"
+        [ "Anastasia Nikolaevna Romanova"
+        , "Atalante (Alter)"
+        , "Avicebron"
+        , "Antonio Salieri"
         ]
       , Filter [] Nothing FilterAvailability "Free" <| \_ s ->
             s.free
@@ -42,9 +41,16 @@ extraFilters = List.concat
 
 scheduledFilters : List (ScheduledFilter Servant)
 scheduledFilters =
-    [ ScheduledFilter (Date 2018 Dec 6) (Date 2018 Dec 30) <|
+    [ ScheduledFilter (Date 2020 Mar 26) (Date 2020 Apr 9) <|
         nameFilter FilterAvailability "Rate-Up"
-        [ "Enkidu", "Medusa (Lancer)", "Gilgamesh (Caster)" ]
+        [ "Anastasia Nikolaevna Romanova"
+        , "Atalante (Alter)"
+        , "Avicebron"
+        , "Antonio Salieri"
+        ]
+    , ScheduledFilter (Date 2020 Mar 26) (Date 2020 Mar 27) <|
+        Filter [] Nothing FilterAvailability "Class Summon" <| \_ s ->
+        s.class == Saber && not s.limited
     ]
 
 

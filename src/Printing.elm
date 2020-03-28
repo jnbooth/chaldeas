@@ -130,6 +130,9 @@ prettify a =
         "Leonardo da Vinci" ->
             "Leonardo Da Vinci"
 
+        "Tauropolos Skia Thermokrasia" ->
+            "Tauropolos Skia Thermokrasía"
+
         "Wisdom of Dun Scaith" ->
             "Wisdom of Dún Scáith"
 

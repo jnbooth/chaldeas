@@ -2175,13 +2175,13 @@ casters =
                     , cd     = 10
                     , effect = [ To Self GaugeUp <| Range 54.5 79.5 ]
                     }
-                  , { name   = "Fig Tree of Tranquility"
+                  , { name   = "Tranquil Fig"
                     , rank   = EX
                     , icon   = Icon.ClockSkull
                     , cd     = 10
                     , effect = [ When "defeated within 5 turns" << To Others Heal <| Range 1000 2000
-                               , Times 2 <| Grant Party 3 Invincibility Full
-                               , When "level 10" << Times 1 <| Grant Party 3 Invincibility Full -- TODO
+                               , When "level 1-9" << Times 2 <| Grant Party 3 Invincibility Full
+                               , When "level 10" << Times 3 <| Grant Party 3 Invincibility Full
                                ]
                     }
                   ]

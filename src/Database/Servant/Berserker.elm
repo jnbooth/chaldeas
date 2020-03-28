@@ -1712,7 +1712,7 @@ berserkers =
     , traits    = [Humanoid, EnumaElish]
     , deck      = Deck Quick Quick Arts Buster Buster
     , hits      = { quick = 3, arts = 2, buster = 3, ex = 5 }
-    , skills    = [ { name   = "Self-Evolution"
+    , skills    = [ { name   = "Self Evolution"
                     , rank   = EX
                     , icon   = Icon.StarUp
                     , cd     = 7
@@ -1726,7 +1726,7 @@ berserkers =
                     , cd     = 7
                     , effect = [ Grant Party 1 (CardUp Quick) <| Range 30 50 ]
                     }
-                  , { name   = "Logic of Wild Beasts"
+                  , { name   = "Feral Logic"
                     , rank   = B
                     , icon   = Icon.Dodge
                     , cd     = 8

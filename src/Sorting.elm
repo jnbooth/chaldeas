@@ -23,6 +23,8 @@ type SortBy
     | NPDmgOver
     | NPSpec
     | NPSpecOver
+    | NPRefund
+    | NPRefundOver
 
 
 enumSortBy : List SortBy
@@ -40,6 +42,8 @@ enumSortBy =
     , NPDmgOver
     , NPSpec
     , NPSpecOver
+    , NPRefund
+    , NPRefundOver
     ]
 
 

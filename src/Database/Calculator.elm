@@ -1,4 +1,4 @@
-module Database.Calculator exposing (npPer, starsPer, npDamage)
+module Database.Calculator exposing (npPer, starsPer, npDamage, npRefund)
 
 {-| Calculates information for sorting based on datamined formulas. -}
 
@@ -52,6 +52,72 @@ npPer s card =
         * criticalModifier
         * overkillModifier
 
+{-| Formula source: [Beast's Lair: Mining for Bits, by Kyte](http://blogs.nrvnqsr.com/entry.php/3306-How-much-NP-do-I-get-in-combat) -}
+npRefund : Bool -> Bool -> Servant -> Float
+npRefund addSkills maxOver s =
+    let
+        getter =
+            if maxOver then
+                toMax
+            else
+                toMin
+
+        offensiveNPRate  =
+            s.gen.npAtk
+
+        firstCardBonus =
+            0
+
+        cardNpValue =
+            1.5 * case s.phantasm.card of
+                Arts   -> 3
+                Quick  -> 1
+                Buster -> 0
+                Extra  -> 1
+
+        (buffs, _, instants) =
+            effects addSkills False maxOver s
+
+        cardMod =
+            matchSum buffs <| CardUp s.phantasm.card
+
+        enemyServerMod =
+            1
+
+        npChargeRateMod =
+            matchSum buffs NPGen
+
+        criticalModifier =
+            1
+
+        overkillModifier =
+            1
+
+        gauge =
+            let
+                go a =
+                    case a of
+                        To t GaugeUp n ->
+                            if selfable t then
+                                getter n
+                            else
+                                0
+
+                        _ ->
+                            0
+            in
+            s.phantasm.effect ++ s.phantasm.over
+                |> List.map (simplify >> go)
+                >> List.sum
+    in
+    toFloat s.phantasm.hits
+        * offensiveNPRate
+        * (firstCardBonus + (cardNpValue * (1 + cardMod)))
+        * enemyServerMod
+        * (1 + npChargeRateMod)
+        * criticalModifier
+        * overkillModifier
+        + gauge
 
 {-| Formula source: [Beast's Lair: Mining for Bits, by Kyte](http://blogs.nrvnqsr.com/entry.php/3307-How-many-crit-stars-do-I-get-in-combat) -}
 starsPer : Servant -> Card -> Float
@@ -241,7 +307,55 @@ npDamage addSkills special maxOver s =
         -- INTERNAL
         -----------
 
-        {card, effect, over, first} =
+        card =
+            s.phantasm.card
+
+        ifSpecial =
+            if special then
+                identity
+            else
+                always []
+
+        (buffs, debuffs, instants) =
+            effects addSkills special maxOver s
+    in
+    if npDamageMultiplier + directDamage == 0 then
+        0
+    else
+        servantAtk
+            * npDamageMultiplier
+            * ( firstCardBonus + (cardDamageValue * (1.0 + cardMod)) )
+            * classAtkBonus
+            * triangleModifier
+            * attributeModifier
+            * randomModifier
+            * 0.23
+            * ( 1.0 + atkMod - defMod )
+            * criticalModifier
+            * extraCardModifier
+            * ( 1.0 - specialDefMod )
+            * ( 1.0
+                + powerMod
+                + selfDamageMod
+                + (critDamageMod * isCrit)
+                + (npDamageMod * isNP)
+                )
+            * ( 1.0 + ((superEffectiveModifier - 1.0) * isSuperEffective) )
+            + dmgPlusAdd
+            + selfDmgCutAdd
+            + ( servantAtk * busterChainMod )
+            + directDamage
+
+
+{-| Formula source: [Beast's Lair: Mining for Bits, by Kyte](http://blogs.nrvnqsr.com/entry.php/3309-How-is-damage-calculated) -}
+effects : Bool -> Bool -> Bool -> Servant
+       -> ( List (BuffEffect, Float)
+          , List (DebuffEffect, Float)
+          , List (InstantEffect, Float)
+          )
+effects addSkills special maxOver s =
+    let
+        {effect, over, first} =
             s.phantasm
 
         costsCharge ef =
@@ -255,12 +369,6 @@ npDamage addSkills special maxOver s =
             else
                 efs
 
-        ifSpecial =
-            if special then
-                identity
-            else
-                always []
-
         maxIf x =
             if x then
                 toMax
@@ -268,17 +376,17 @@ npDamage addSkills special maxOver s =
                 toMin
 
         npStrength =
-            maxIf <| s.free || (s.rarity <= 3 && s.rarity > 0)
+            maxIf s.free
 
         overStrength =
             maxIf maxOver
 
         maybeAddSkills xs =
             if addSkills then
-                xs
-            else
                 List.concatMap (.effect >> unCost) s.skills
                     ++ xs
+            else
+                xs
 
         skillFs =
             s.passives
@@ -354,32 +462,7 @@ npDamage addSkills special maxOver s =
                 ++ List.concatMap (go npStrength) npFs
                 ++ List.concatMap (go overStrength) overFs
     in
-    if npDamageMultiplier + directDamage == 0 then
-        0
-    else
-        servantAtk
-            * npDamageMultiplier
-            * ( firstCardBonus + (cardDamageValue * (1.0 + cardMod)) )
-            * classAtkBonus
-            * triangleModifier
-            * attributeModifier
-            * randomModifier
-            * 0.23
-            * ( 1.0 + atkMod - defMod )
-            * criticalModifier
-            * extraCardModifier
-            * ( 1.0 - specialDefMod )
-            * ( 1.0
-                + powerMod
-                + selfDamageMod
-                + (critDamageMod * isCrit)
-                + (npDamageMod * isNP)
-                )
-            * ( 1.0 + ((superEffectiveModifier - 1.0) * isSuperEffective) )
-            + dmgPlusAdd
-            + selfDmgCutAdd
-            + ( servantAtk * busterChainMod )
-            + directDamage
+    (buffs, debuffs, instants)
 
 
 {-| Obtains all self-granted always-active buff effects from passive skills.

@@ -111,19 +111,21 @@ deckSum addExtra f s =
 toSort : Bool -> SortBy -> Servant -> Float
 toSort addBonus sortBy s =
     case sortBy of
-        ID         -> toFloat <| -1 * s.id
-        Rarity     -> toFloat s.rarity
-        ATK        -> toFloat s.stats.max.atk
-        HP         -> toFloat s.stats.max.hp
-        StarWeight -> toFloat s.gen.starWeight
-        NPArts     -> npPer s Arts
-        NPDeck     -> deckSum addBonus npPer s
-        StarQuick  -> starsPer s Quick
-        StarDeck   -> deckSum addBonus starsPer s
-        NPDmg      -> npDamage addBonus False False s
-        NPDmgOver  -> npDamage addBonus False True s
-        NPSpec     -> npDamage addBonus True False s
-        NPSpecOver -> npDamage addBonus True True s
+        ID           -> toFloat <| -1 * s.id
+        Rarity       -> toFloat s.rarity
+        ATK          -> toFloat s.stats.max.atk
+        HP           -> toFloat s.stats.max.hp
+        StarWeight   -> toFloat s.gen.starWeight
+        NPArts       -> npPer s Arts
+        NPDeck       -> deckSum addBonus npPer s
+        StarQuick    -> starsPer s Quick
+        StarDeck     -> deckSum addBonus starsPer s
+        NPDmg        -> npDamage addBonus False False s
+        NPDmgOver    -> npDamage addBonus False True s
+        NPSpec       -> npDamage addBonus True False s
+        NPSpecOver   -> npDamage addBonus True True s
+        NPRefund     -> npRefund addBonus False s
+        NPRefundOver -> npRefund addBonus True s
 
 
 mapSort : MyServant -> MyServant
@@ -146,7 +148,7 @@ makeUnowned s =
     , level   = 0
     , fou     = { atk = 0, hp = 0 }
     , skills  = [10, 10, 10]
-    , npLvl   = if s.free || (s.rarity <= 3 && s.rarity > 0) then 5 else 1
+    , npLvl   = if s.free then 5 else 1
     , ascent  = 1
     , sorted  = Dict.empty
     }

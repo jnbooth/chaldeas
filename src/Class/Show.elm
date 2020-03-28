@@ -948,6 +948,8 @@ sortBy a =
         NPRefundOver -> "NP Refund + Overcharge"
         NPSpec       -> "NP Special Damage"
         NPSpecOver   -> "NP Special + Overcharge"
+        NPInstant    -> "NP Gauge increase"
+        -- NPTurn       -> "Average Gauge per turn"
         Rarity       -> "Rarity"
         StarDeck     -> "Stars per full deck"
         StarQuick    -> "Stars per Quick card"

@@ -341,7 +341,7 @@ toMax : Amount -> Float
 toMax a =
     case a of
         Placeholder -> 0
-        Full        -> 0
+        Full        -> 1/0
         Flat x      -> x
         Range _ y   -> y
 

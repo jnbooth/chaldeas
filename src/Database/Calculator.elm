@@ -1,4 +1,11 @@
-module Database.Calculator exposing (npPer, starsPer, npDamage, npRefund)
+module Database.Calculator exposing
+    ( npPer
+    , starsPer
+    , npDamage
+    , npRefund
+    , gaugeUp
+    , gaugePerTurn
+    )
 
 {-| Calculates information for sorting based on datamined formulas. -}
 
@@ -52,6 +59,7 @@ npPer s card =
         * criticalModifier
         * overkillModifier
 
+
 {-| Formula source: [Beast's Lair: Mining for Bits, by Kyte](http://blogs.nrvnqsr.com/entry.php/3306-How-much-NP-do-I-get-in-combat) -}
 npRefund : Bool -> Bool -> Servant -> Float
 npRefund addSkills maxOver s =
@@ -75,7 +83,7 @@ npRefund addSkills maxOver s =
                 Buster -> 0
                 Extra  -> 1
 
-        (buffs, _, instants) =
+        (buffs, _, _) =
             effects addSkills False maxOver s
 
         cardMod =
@@ -118,6 +126,7 @@ npRefund addSkills maxOver s =
         * criticalModifier
         * overkillModifier
         + gauge
+
 
 {-| Formula source: [Beast's Lair: Mining for Bits, by Kyte](http://blogs.nrvnqsr.com/entry.php/3307-How-many-crit-stars-do-I-get-in-combat) -}
 starsPer : Servant -> Card -> Float
@@ -346,6 +355,84 @@ npDamage addSkills special maxOver s =
             + ( servantAtk * busterChainMod )
             + directDamage
 
+
+gaugeUp : Bool -> Servant -> Float
+gaugeUp excludeSelf s =
+    let
+        include t =
+            allied t && not (excludeSelf && t == Self)
+
+        npStrength =
+            if s.free then
+                toMax
+            else
+                toMin
+
+        getter toAmount a =
+            case simplify a of
+                To t GaugeUp amt ->
+                    if include t then
+                        toAmount amt
+                    else
+                        0
+
+                Grant t turns GaugePerTurn amt ->
+                    if include t then
+                        toFloat turns * toAmount amt
+                    else
+                        0
+                _ ->
+                    0
+    in
+    List.map (getter toMax) (List.concatMap .effect s.skills)
+        ++ List.map (getter npStrength) s.phantasm.effect
+        ++ List.map (getter toMin) s.phantasm.over
+        |> List.sum
+
+
+gaugePerTurn : Bool -> Bool -> Servant -> Float
+gaugePerTurn excludeSelf owned s =
+    let
+        include t =
+            allied t && not (excludeSelf && t == Self)
+
+        getter cd a =
+            case simplify a of
+                To t GaugeUp amt ->
+                    if include t then
+                        toMax amt / toFloat cd
+                    else
+                        0
+
+                Grant t 0 GaugePerTurn amt ->
+                    if include t then
+                        toMax amt
+                    else
+                        0
+
+                Grant t turns GaugePerTurn amt ->
+                    if include t then
+                        toMax amt * toFloat turns / toFloat cd
+                    else
+                        0
+                _ ->
+                    0
+
+        cdOffset =
+            if owned then
+                0
+            else
+                2
+
+        average skill =
+            skill.effect
+                |> List.map (getter <| skill.cd - cdOffset)
+                >> List.sum
+
+    in
+    List.map average s.skills
+        ++ List.map (getter 1) (List.concatMap .effect s.passives)
+        |> List.sum
 
 {-| Formula source: [Beast's Lair: Mining for Bits, by Kyte](http://blogs.nrvnqsr.com/entry.php/3309-How-is-damage-calculated) -}
 effects : Bool -> Bool -> Bool -> Servant

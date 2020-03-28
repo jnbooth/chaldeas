@@ -126,6 +126,7 @@ toSort addBonus sortBy s =
         NPSpecOver   -> npDamage addBonus True True s
         NPRefund     -> npRefund addBonus False s
         NPRefundOver -> npRefund addBonus True s
+        NPInstant    -> gaugeUp addBonus s
 
 
 mapSort : MyServant -> MyServant
@@ -133,7 +134,8 @@ mapSort ms =
     let
         go sorter =
             let
-                doSort addBonus = toSort addBonus sorter ms.servant
+                doSort addBonus =
+                    toSort addBonus sorter ms.servant
             in
             (ordSortBy sorter, (doSort True, doSort False))
     in

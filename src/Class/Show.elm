@@ -879,7 +879,7 @@ preference : Preference -> String
 preference a =
     case a of
         AddExtra     -> "Sort with Extra card in deck"
-        AddSkills    -> "Add skills to NP damage"
+        AddSkills    -> "Add skills to NP"
         Artorify     -> "Artorify"
         ExcludeSelf  -> "Exclude self-applied effects"
         HideClasses  -> "Hide (Class) in names"

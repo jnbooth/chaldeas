@@ -65,7 +65,7 @@ assassins =
     , death     = 55
     , align     = [Neutral, Evil]
     , limited   = False
-    , free      = False
+    , free      = True
     , ascendUp  = Ascension
                   [(Piece Assassin, 2)]
                   [(Piece Assassin, 4), (ProofOfHero, 8)]
@@ -132,7 +132,7 @@ assassins =
     , death     = 44
     , align     = [Lawful, Evil]
     , limited   = False
-    , free      = False
+    , free      = True
     , ascendUp  = Ascension
                   [(Piece Assassin, 3)]
                   [(Piece Assassin, 6), (EvilBone, 11)]
@@ -276,7 +276,7 @@ assassins =
     , death     = 55
     , align     = [Chaotic, Good]
     , limited   = False
-    , free      = False
+    , free      = True
     , ascendUp  = Ascension
                   [(Piece Assassin, 4)]
                   [(EvilBone, 15), (Piece Assassin, 8)]
@@ -345,7 +345,7 @@ assassins =
     , death     = 49.5
     , align     = [Lawful, Evil]
     , limited   = False
-    , free      = False
+    , free      = True
     , ascendUp  = Ascension
                   [(Piece Assassin, 3)]
                   [(Piece Assassin, 6), (EvilBone, 11)]
@@ -414,7 +414,7 @@ assassins =
     , death     = 49.5
     , align     = [Chaotic, Evil]
     , limited   = False
-    , free      = False
+    , free      = True
     , ascendUp  = Ascension
                   [(Piece Assassin, 3)]
                   [(Piece Assassin, 6), (GhostLantern, 4)]
@@ -485,7 +485,7 @@ assassins =
     , death     = 55
     , align     = [Chaotic, Balanced]
     , limited   = False
-    , free      = False
+    , free      = True
     , ascendUp  = Ascension
                   [(Piece Assassin, 2)]
                   [(Piece Assassin, 4), (PhoenixFeather, 2)]
@@ -986,7 +986,7 @@ assassins =
     , death     = 44
     , align     = [Lawful, Evil]
     , limited   = False
-    , free      = False
+    , free      = True
     , ascendUp  = Ascension
                   [(Piece Assassin, 4)]
                   [(Piece Assassin, 8), (VoidsDust, 10)]
@@ -1133,7 +1133,7 @@ assassins =
     , death     = 38.5
     , align     = [Chaotic, Evil]
     , limited   = False
-    , free      = False
+    , free      = True
     , ascendUp  = Ascension
                   [(Piece Assassin, 4)]
                   [(Piece Assassin, 8), (EvilBone, 15)]
@@ -1209,7 +1209,7 @@ assassins =
     , death     = 44
     , align     = [Lawful, Evil]
     , limited   = False
-    , free      = False
+    , free      = True
     , ascendUp  = Ascension
                   [(Piece Assassin, 4)]
                   [(Piece Assassin, 8), (EvilBone, 15)]

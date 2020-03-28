@@ -398,7 +398,7 @@ sabers =
     , death     = 31.5
     , align     = [Neutral, Balanced]
     , limited   = False
-    , free      = False
+    , free      = True
     , ascendUp  = Ascension
                   [(Piece Saber, 4)]
                   [(Piece Saber, 8), (ProofOfHero, 15)]
@@ -535,7 +535,7 @@ sabers =
     , death     = 31.5
     , align     = [Lawful, Good]
     , limited   = False
-    , free      = False
+    , free      = True
     , ascendUp  = Ascension
                   [(Piece Saber, 4)]
                   [(Piece Saber, 8), (ProofOfHero, 15)]
@@ -748,7 +748,7 @@ sabers =
     , death     = 35
     , align     = [Lawful, Balanced]
     , limited   = False
-    , free      = False
+    , free      = True
     , ascendUp  = Ascension
                   [(Piece Saber, 4)]
                   [(Piece Saber, 8), (ProofOfHero, 15)]
@@ -1245,7 +1245,7 @@ sabers =
     , death     = 28
     , align     = [Lawful, Good]
     , limited   = False
-    , free      = True
+    , free      = False
     , ascendUp  = Ascension
                   [(Piece Saber, 4)]
                   [(Piece Saber, 8), (ProofOfHero, 15)]

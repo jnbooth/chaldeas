@@ -64,7 +64,7 @@ lancers =
     , death     = 32
     , align     = [Lawful, Balanced]
     , limited   = False
-    , free      = False
+    , free      = True
     , ascendUp  = Ascension
                   [(Piece Lancer, 4)]
                   [(Piece Lancer, 8), (ClawOfChaos, 3)]
@@ -200,7 +200,7 @@ lancers =
     , death     = 36
     , align     = [Chaotic, Good]
     , limited   = False
-    , free      = False
+    , free      = True
     , ascendUp  = Ascension
                   [(Piece Lancer, 3)]
                   [(Piece Lancer, 6), (EvilBone, 11)]
@@ -273,7 +273,7 @@ lancers =
     , death     = 28
     , align     = [Lawful, Balanced]
     , limited   = False
-    , free      = False
+    , free      = True
     , ascendUp  = Ascension
                   [(Piece Lancer, 4)]
                   [(Piece Lancer, 8), (VoidsDust, 10)]
@@ -342,7 +342,7 @@ lancers =
     , death     = 32
     , align     = [Lawful, Balanced]
     , limited   = False
-    , free      = False
+    , free      = True
     , ascendUp  = Ascension
                   [(Piece Lancer, 3)]
                   [(Piece Lancer, 6), (ClawOfChaos, 3)]
@@ -414,7 +414,7 @@ lancers =
     , death     = 32
     , align     = [Chaotic, Balanced]
     , limited   = False
-    , free      = False
+    , free      = True
     , ascendUp  = Ascension
                   [(Piece Lancer, 4)]
                   [(Piece Lancer, 8), (OctupletCrystals, 5)]
@@ -483,7 +483,7 @@ lancers =
     , death     = 28
     , align     = [Lawful, Balanced]
     , limited   = False
-    , free      = False
+    , free      = True
     , ascendUp  = Ascension
                   [(Piece Lancer, 4)]
                   [(Piece Lancer, 8), (MeteorHorseshoe, 5)]
@@ -626,7 +626,7 @@ lancers =
     , death     = 36
     , align     = [Lawful, Balanced]
     , limited   = False
-    , free      = False
+    , free      = True
     , ascendUp  = Ascension
                   [(Piece Lancer, 4)]
                   [(Piece Lancer, 10), (SeedOfYggdrasil, 6)]
@@ -1571,7 +1571,7 @@ lancers =
                   , first  = False
                   }
     , limited   = False
-    , free      = True
+    , free      = False
     , ascendUp  = Ascension
                   [(Piece Lancer, 4)]
                   [(Piece Lancer, 8), (SeedOfYggdrasil, 6)]
@@ -1793,7 +1793,7 @@ lancers =
                   , first  = False
                   }
     , limited   = False
-    , free      = False
+    , free      = True
     , ascendUp  = Ascension
                   [(Piece Lancer, 4)]
                   [(Piece Lancer, 8), (WarhorsesYoungHorn, 3)]

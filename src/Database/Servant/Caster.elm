@@ -62,7 +62,7 @@ casters =
     , death     = 34.5
     , align     = [Neutral, Evil]
     , limited   = False
-    , free      = False
+    , free      = True
     , ascendUp  = Ascension
                   [(Piece Caster, 4)]
                   [(Piece Caster, 8), (DragonFang, 12)]
@@ -200,7 +200,7 @@ casters =
     , death     = 30
     , align     = [Lawful, Balanced]
     , limited   = False
-    , free      = False
+    , free      = True
     , ascendUp  = Ascension
                   [(Piece Caster, 3)]
                   [(Piece Caster, 6), (ForbiddenPage, 4)]
@@ -269,7 +269,7 @@ casters =
     , death     = 45
     , align     = [Neutral, Balanced]
     , limited   = False
-    , free      = False
+    , free      = True
     , ascendUp  = Ascension
                   [(Piece Caster, 3)]
                   [(Piece Caster, 6), (GhostLantern, 4)]
@@ -338,7 +338,7 @@ casters =
     , death     = 36
     , align     = [Chaotic, Evil]
     , limited   = False
-    , free      = False
+    , free      = True
     , ascendUp  = Ascension
                   [(Piece Caster, 4)]
                   [(Piece Caster, 8), (VoidsDust, 10)]
@@ -406,7 +406,7 @@ casters =
     , death     = 40.5
     , align     = [Neutral, Good]
     , limited   = False
-    , free      = False
+    , free      = True
     , ascendUp  = Ascension
                   [(Piece Caster, 2)]
                   [(Piece Caster, 4), (EvilBone, 8)]
@@ -556,7 +556,7 @@ casters =
     , death     = 42
     , align     = [Lawful, Balanced]
     , limited   = False
-    , free      = True
+    , free      = False
     , ascendUp  = Ascension
                   [(Piece Caster, 4)]
                   [(Piece Caster, 8), (SeedOfYggdrasil, 6)]
@@ -828,7 +828,7 @@ casters =
     , death     = 36
     , align     = [Chaotic, Good]
     , limited   = False
-    , free      = False
+    , free      = True
     , ascendUp  = Ascension
                   [(Piece Caster, 4)]
                   [(Piece Caster, 8), (ForbiddenPage, 5)]
@@ -974,7 +974,7 @@ casters =
     , death     = 36
     , align     = [Chaotic, Balanced]
     , limited   = False
-    , free      = False
+    , free      = True
     , ascendUp  = Ascension
                   [(Piece Caster, 4)]
                   [(Piece Caster, 8), (EternalGear, 5)]
@@ -2197,7 +2197,7 @@ casters =
                   , first  = False
                   }
     , limited   = False
-    , free      = False
+    , free      = True
     , ascendUp  = Ascension
                   [(Piece Caster, 4)]
                   [(Piece Caster, 8), (OctupletCrystals, 5)]

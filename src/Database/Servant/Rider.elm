@@ -60,7 +60,7 @@ riders =
     , death     = 35
     , align     = [Chaotic, Good]
     , limited   = False
-    , free      = False
+    , free      = True
     , ascendUp  = Ascension
                   [(Piece Rider, 4)]
                   [(Piece Rider, 8), (SerpentJewel, 4)]
@@ -131,7 +131,7 @@ riders =
     , death     = 45
     , align     = [Lawful, Good]
     , limited   = False
-    , free      = False
+    , free      = True
     , ascendUp  = Ascension
                   [(Piece Rider, 3)]
                   [(Piece Rider, 6), (ProofOfHero, 11)]
@@ -206,7 +206,7 @@ riders =
     , death     = 45
     , align     = [Chaotic, Evil]
     , limited   = False
-    , free      = False
+    , free      = True
     , ascendUp  = Ascension
                   [(Piece Rider, 3)]
                   [(Piece Rider, 6), (EvilBone, 11)]
@@ -340,7 +340,7 @@ riders =
     , death     = 35
     , align     = [Chaotic, Balanced]
     , limited   = False
-    , free      = False
+    , free      = True
     , ascendUp  = Ascension
                   [(Piece Rider, 4)]
                   [(Piece Rider, 8), (ProofOfHero, 15)]
@@ -405,7 +405,7 @@ riders =
     , death     = 40
     , align     = [Neutral, Good]
     , limited   = False
-    , free      = False
+    , free      = True
     , ascendUp  = Ascension
                   [(Piece Rider, 4)]
                   [(Piece Rider, 8), (MeteorHorseshoe, 5)]

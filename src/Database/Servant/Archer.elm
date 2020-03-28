@@ -204,7 +204,7 @@ archers =
     , death     = 31.5
     , align     = [Neutral, Good]
     , limited   = False
-    , free      = False
+    , free      = True
     , ascendUp  = Ascension
                   [(Piece Archer, 4)]
                   [(Piece Archer, 8), (SeedOfYggdrasil, 6)]
@@ -341,7 +341,7 @@ archers =
     , death     = 22.5
     , align     = [Chaotic, Good]
     , limited   = False
-    , free      = False
+    , free      = True
     , ascendUp  = Ascension
                   [(Piece Archer, 4)]
                   [(Piece Archer, 8), (SerpentJewel, 4)]
@@ -412,7 +412,7 @@ archers =
     , death     = 45
     , align     = [Chaotic, Balanced]
     , limited   = False
-    , free      = False
+    , free      = True
     , ascendUp  = Ascension
                   [(Piece Archer, 2)]
                   [(Piece Archer, 4), (SeedOfYggdrasil, 3)]
@@ -840,7 +840,7 @@ archers =
     , death     = 36
     , align     = [Chaotic, Good]
     , limited   = False
-    , free      = False
+    , free      = True
     , ascendUp  = Ascension
                   [(Piece Archer, 4)]
                   [(Piece Archer, 8), (SeedOfYggdrasil, 6)]
@@ -909,7 +909,7 @@ archers =
     , death     = 45
     , align     = [Chaotic, Balanced]
     , limited   = False
-    , free      = False
+    , free      = True
     , ascendUp  = Ascension
                   [(Piece Archer, 4)]
                   [(Piece Archer, 8), (MeteorHorseshoe, 5)]
@@ -1052,7 +1052,7 @@ archers =
     , death     = 36
     , align     = [Neutral, Good]
     , limited   = False
-    , free      = False
+    , free      = True
     , ascendUp  = Ascension
                   [(Piece Archer, 4)]
                   [(Piece Archer, 10), (SeedOfYggdrasil, 6)]

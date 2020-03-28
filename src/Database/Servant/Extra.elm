@@ -66,7 +66,7 @@ extras =
     , death     = 24.5
     , align     = [Lawful, Good]
     , limited   = False
-    , free      = False
+    , free      = True
     , ascendUp  = Clear
                   "Septem"
                   "London pt. 4, Arrow II"

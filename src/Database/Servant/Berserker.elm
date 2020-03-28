@@ -201,7 +201,7 @@ berserkers =
     , death     = 50.3
     , align     = [Chaotic, Evil]
     , limited   = False
-    , free      = False
+    , free      = True
     , ascendUp  = Ascension
                   [(Piece Berserker, 4)]
                   [(Piece Berserker, 8), (MeteorHorseshoe, 5)]
@@ -270,7 +270,7 @@ berserkers =
     , death     = 65
     , align     = [Neutral, Balanced]
     , limited   = False
-    , free      = False
+    , free      = True
     , ascendUp  = Ascension
                   [(Piece Berserker, 2)]
                   [(Piece Berserker, 4), (OctupletCrystals, 3)]
@@ -478,7 +478,7 @@ berserkers =
     , death     = 58.5
     , align     = [Chaotic, Evil]
     , limited   = False
-    , free      = False
+    , free      = True
     , ascendUp  = Ascension
                   [(Piece Berserker, 2)]
                   [(OctupletCrystals, 3), (Piece Berserker, 4)]
@@ -550,7 +550,7 @@ berserkers =
     , death     = 56.8
     , align     = [Chaotic, Evil]
     , limited   = False
-    , free      = False
+    , free      = True
     , ascendUp  = Ascension
                   [(Piece Berserker, 3)]
                   [(Piece Berserker, 6), (OctupletCrystals, 4)]
@@ -619,7 +619,7 @@ berserkers =
     , death     = 65
     , align     = [Lawful, Balanced]
     , limited   = False
-    , free      = False
+    , free      = True
     , ascendUp  = Ascension
                   [(Piece Berserker, 4)]
                   [(Piece Berserker, 8), (OctupletCrystals, 5)]
@@ -761,7 +761,7 @@ berserkers =
     , death     = 58.5
     , align     = [Chaotic, Balanced]
     , limited   = False
-    , free      = False
+    , free      = True
     , ascendUp  = Ascension
                   [(Piece Berserker, 3)]
                   [(Piece Berserker, 6), (EvilBone, 11)]

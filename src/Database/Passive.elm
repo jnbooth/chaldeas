@@ -176,7 +176,7 @@ oblivionCorrection =
 
 negaSaver =
     passive "Nega Saver" Icon.DamageUp
-    [ Give Self (Special AttackUp <| VsClass Ruler) [ (A, 1500) ] ]
+    [ Give Self (Special AttackUp <| VsClass Ruler) [ (A, 500) ] ]
 
 
 onTheBoundary =

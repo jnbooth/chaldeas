@@ -109,8 +109,6 @@ siteView prefs st sorts nav content =
                     render prefs x st sorts nav
             in
             [ H.div [P.id "bg"] []
-            , H.footer [] << flip List.map enumSection <| \section ->
-                button_ (Show.section section) True << ToSection <| Just section
             , H.aside [] <|
               [ h_ 1 "Links"
               , H.a
@@ -128,6 +126,8 @@ siteView prefs st sorts nav content =
               ++ renderSection SectionInclude
               , content
             , H.aside [] <| h_ 1 "Browse" :: nav ++ renderSection SectionFilter
+            , H.footer [] << flip List.map enumSection <| \section ->
+                button_ (Show.section section) True << ToSection <| Just section
             ]
 
 

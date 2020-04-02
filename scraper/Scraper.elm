@@ -208,7 +208,6 @@ testServant getWiki s =
     match = Wiki.match wiki
     matchInt x = match x << String.fromInt
     showAttr a = case a of
-      Man -> "Human"
       Sky -> "Heaven"
       _   -> Show.attribute a
     showAlign xs = case (s.name, xs) of

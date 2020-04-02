@@ -83,7 +83,7 @@ casters =
     , id        = 32
     , rarity    = 3
     , class     = Caster
-    , attr      = Man
+    , attr      = Human
     , deck      = Deck Quick Arts Arts Arts Buster
     , curve     = 13
     , stats     = { base  = { atk = 1209, hp = 1711 }
@@ -150,7 +150,7 @@ casters =
     , id        = 33
     , rarity    = 2
     , class     = Caster
-    , attr      = Man
+    , attr      = Human
     , deck      = Deck Quick Arts Arts Arts Buster
     , curve     = 12
     , stats     = { base  = { atk = 1021, hp = 1597 }
@@ -221,7 +221,7 @@ casters =
     , id        = 34
     , rarity    = 2
     , class     = Caster
-    , attr      = Man
+    , attr      = Human
     , deck      = Deck Quick Arts Arts Arts Buster
     , curve     = 12
     , stats     = { base  = { atk = 1028, hp = 1520 }
@@ -427,7 +427,7 @@ casters =
     , id        = 37
     , rarity    = 5
     , class     = Caster
-    , attr      = Man
+    , attr      = Human
     , deck      = Deck Quick Arts Arts Arts Buster
     , curve     = 15
     , stats     = { base  = { atk = 1637,  hp = 2091 }
@@ -577,7 +577,7 @@ casters =
     , id        = 61
     , rarity    = 4
     , class     = Caster
-    , attr      = Man
+    , attr      = Human
     , deck      = Deck Quick Arts Arts Arts Buster
     , curve     = 4
     , stats     = { base  = { atk = 1436,  hp = 1824 }
@@ -784,7 +784,7 @@ casters =
     , id        = 79
     , rarity    = 3
     , class     = Caster
-    , attr      = Man
+    , attr      = Human
     , deck      = Deck Quick Arts Arts Arts Buster
     , curve     = 3
     , stats     = { base  = { atk = 1246, hp = 1711 }
@@ -849,7 +849,7 @@ casters =
     , id        = 74
     , rarity    = 4
     , class     = Caster
-    , attr      = Man
+    , attr      = Human
     , deck      = Deck Quick Arts Arts Arts Buster
     , curve     = 4
     , stats     = { base  = { atk = 1438,  hp = 1901 }
@@ -924,7 +924,7 @@ casters =
     , id        = 80
     , rarity    = 3
     , class     = Caster
-    , attr      = Man
+    , attr      = Human
     , deck      = Deck Quick Arts Arts Buster Buster
     , curve     = 13
     , stats     = { base  = { atk = 1113, hp = 1959 }
@@ -995,7 +995,7 @@ casters =
     , id        = 100
     , rarity    = 4
     , class     = Caster
-    , attr      = Man
+    , attr      = Human
     , deck      = Deck Quick Arts Arts Arts Buster
     , curve     = 4
     , stats     = { base  = { atk = 1438,  hp = 1901 }
@@ -1068,7 +1068,7 @@ casters =
     , id        = 103
     , rarity    = 4
     , class     = Caster
-    , attr      = Man
+    , attr      = Human
     , deck      = Deck Quick Arts Arts Arts Buster
     , curve     = 24
     , stats     = { base  = { atk = 1325, hp = 1901 }
@@ -1142,7 +1142,7 @@ casters =
     , id        = 104
     , rarity    = 3
     , class     = Caster
-    , attr      = Man
+    , attr      = Human
     , deck      = Deck Quick Arts Arts Buster Buster
     , curve     = 3
     , stats     = { base  = { atk = 1273, hp = 1642 }
@@ -1274,7 +1274,7 @@ casters =
     , id        = 113
     , rarity    = 5
     , class     = Caster
-    , attr      = Man
+    , attr      = Human
     , deck      = Deck Quick Arts Arts Arts Buster
     , curve     = 15
     , stats     = { base  = { atk = 1801,  hp = 1901 }
@@ -1493,7 +1493,7 @@ casters =
     , id        = 130
     , rarity    = 4
     , class     = Caster
-    , attr      = Man
+    , attr      = Human
     , deck      = Deck Quick Arts Arts Arts Buster
     , curve     = 9
     , stats     = { base  = { atk = 1510,  hp = 1824 }
@@ -1566,7 +1566,7 @@ casters =
     , id        = 136
     , rarity    = 5
     , class     = Caster
-    , attr      = Man
+    , attr      = Human
     , deck      = Deck Quick Arts Arts Arts Buster
     , curve     = 10
     , stats     = { base  = { atk = 1677,  hp = 2027 }
@@ -1648,7 +1648,7 @@ casters =
     , gen       = { starWeight = 51, starRate = 10.9, npAtk = 0.32, npDef = 3 }
     , death     = 42
     , curve     = 29
-    , attr      = Man
+    , attr      = Human
     , align     = [Lawful, Good]
     , gender    = Male
     , traits    = [Humanoid, Divine, LovedOne, King]
@@ -1792,7 +1792,7 @@ casters =
     , gen       = { starWeight = 52, starRate = 10.8, npAtk = 0.51, npDef = 3 }
     , death     = 48
     , curve     = 30
-    , attr      = Man
+    , attr      = Human
     , align     = [Lawful, Balanced]
     , gender    = Female
     , traits    = [Humanoid, EnumaElish]
@@ -1863,7 +1863,7 @@ casters =
     , gen       = { starWeight = 51, starRate = 11.1, npAtk = 0.4, npDef = 3 }
     , death     = 42
     , curve     = 15
-    , attr      = Man
+    , attr      = Human
     , align     = [Chaotic, Summer]
     , gender    = Female
     , traits    = [Humanoid, Riding, Saberface, EnumaElish, King]
@@ -2008,7 +2008,7 @@ casters =
     , gen       = { starWeight = 51, starRate = 10.8, npAtk = 0.81, npDef = 3 }
     , death     = 36
     , curve     = 24
-    , attr      = Man
+    , attr      = Human
     , align     = [Neutral, Good]
     , gender    = Female
     , traits    = [Humanoid, King, EnumaElish]
@@ -2081,13 +2081,13 @@ casters =
     , gen       = { starWeight = 49, starRate = 10.8, npAtk = 0.51, npDef = 3 }
     , death     = 36
     , curve     = 15
-    , attr      = Man
+    , attr      = Human
     , align     = [Neutral, Balanced]
     , gender    = Female
     , traits    = [Humanoid, EnumaElish]
     , deck      = Deck Quick Arts Arts Arts Buster
     , hits      = { quick = 4, arts = 3, buster = 3, ex = 5 }
-    , skills    = [ { name   = "Mystic Eyes of Clairvoyance"
+    , skills    = [ { name   = "Mystic Eyes of Penetration"
                     , rank   = D
                     , icon   = Icon.ShieldBreak
                     , cd     = 7
@@ -2096,7 +2096,7 @@ casters =
                                , Debuff Enemy 1 DebuffVuln <| Range 50 100
                                ]
                     }
-                  , { name   = "Charisma of Frostbite"
+                  , { name   = "Frigid Charisma"
                     , rank   = B
                     , icon   = Icon.SwordUp
                     , cd     = 7
@@ -2104,7 +2104,7 @@ casters =
                                , Debuff Enemies 3 AttackDown <| Range 10 20
                                ]
                     }
-                  , { name   = "Shvibzik"
+                  , { name   = "Schwipsig"
                     , rank   = B
                     , icon   = Icon.Noble
                     , cd     = 9
@@ -2155,7 +2155,7 @@ casters =
     , gen       = { starWeight = 50, starRate = 10.7, npAtk = 0.61, npDef = 3 }
     , death     = 36
     , curve     = 13
-    , attr      = Man
+    , attr      = Human
     , align     = [Neutral, Balanced]
     , gender    = Male
     , traits    = [Humanoid, EnumaElish]

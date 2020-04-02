@@ -155,7 +155,7 @@ extras =
     , id        = 93
     , rarity    = 5
     , class     = Ruler
-    , attr      = Man
+    , attr      = Human
     , deck      = Deck Quick Arts Arts Buster Buster
     , curve     = 10
     , stats     = { base  = { atk = 1695,  hp = 2069 }
@@ -227,7 +227,7 @@ extras =
     , id        = 96
     , rarity    = 5
     , class     = Avenger
-    , attr      = Man
+    , attr      = Human
     , deck      = Deck Quick Quick Arts Buster Buster
     , curve     = 15
     , stats     = { base  = { atk = 1953,  hp = 1785 }
@@ -300,7 +300,7 @@ extras =
     , id        = 106
     , rarity    = 5
     , class     = Avenger
-    , attr      = Man
+    , attr      = Human
     , deck      = Deck Quick Arts Arts Buster Buster
     , curve     = 15
     , stats     = { base  = { atk = 2046,  hp = 1724 }
@@ -374,7 +374,7 @@ extras =
     , id        = 107
     , rarity    = 0
     , class     = Avenger
-    , attr      = Man
+    , attr      = Human
     , deck      = Deck Quick Quick Arts Arts Buster
     , curve     = 2
     , stats     = { base  = { atk = 1008, hp = 1502 }
@@ -450,7 +450,7 @@ extras =
     , id        = 135
     , rarity    = 4
     , class     = Ruler
-    , attr      = Man
+    , attr      = Human
     , deck      = Deck Quick Arts Buster Buster Buster
     , curve     = 4
     , stats     = { base  = { atk = 1591,  hp = 1800 }
@@ -817,7 +817,7 @@ extras =
     , gen       = { starWeight = 52, starRate = 14.7, npAtk = 0.61, npDef = 3 }
     , death     = 0.6
     , curve     = 4
-    , attr      = Man
+    , attr      = Human
     , align     = [Chaotic, Good]
     , gender    = Female
     , traits    = [Humanoid, EnumaElish]
@@ -1040,7 +1040,7 @@ extras =
     , gen       = { starWeight = 97, starRate = 9.7, npAtk = 0.9, npDef = 4 }
     , death     = 50
     , curve     = 4
-    , attr      = Man
+    , attr      = Human
     , align     = [Lawful, Good]
     , gender    = Female
     , traits    = [Humanoid, EnumaElish, ThreatToHumanity]
@@ -1113,7 +1113,7 @@ extras =
     , gen       = { starWeight = 97, starRate = 9.7, npAtk = 0.9, npDef = 4 }
     , death     = 50
     , curve     = 4
-    , attr      = Man
+    , attr      = Human
     , align     = [Lawful, Good]
     , gender    = Female
     , traits    = [Humanoid, EnumaElish, ThreatToHumanity]
@@ -1259,7 +1259,7 @@ extras =
     , gen       = { starWeight = 153, starRate = 7, npAtk = 0.33, npDef = 3 }
     , death     = 15
     , curve     = 15
-    , attr      = Man
+    , attr      = Human
     , align     = [Chaotic, Balanced]
     , gender    = Female
     , traits    = [Humanoid, Divine, EnumaElish, ThreatToHumanity]
@@ -1297,7 +1297,7 @@ extras =
                   , kind   = "Anti-Army"
                   , hits   = 5
                   , effect = [ To Enemies Damage <| Range 450 750 ]
-                  , over   = [ To Enemies (SpecialDamage <| VsAttribute Man) <| Range 150 200 ]
+                  , over   = [ To Enemies (SpecialDamage <| VsAttribute Human) <| Range 150 200 ]
                   , first  = False
                   }
     , limited   = True
@@ -1329,7 +1329,7 @@ extras =
     , gen       = { starWeight = 30, starRate = 6.1, npAtk = 0.7, npDef = 5 }
     , death     = 8
     , curve     = 3
-    , attr      = Man
+    , attr      = Human
     , align     = [Chaotic, Evil]
     , gender    = Male
     , traits    = [Humanoid, EnumaElish]

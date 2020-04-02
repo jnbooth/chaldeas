@@ -18,7 +18,6 @@ module Class.Show exposing (..)
 
 import List.Extra as List
 
-import StandardLibrary     exposing (..)
 import Database.Base       exposing (..)
 import Database.Skill      exposing (..)
 import Database.Servant    exposing (Deck(..), PhantasmType(..))
@@ -38,7 +37,7 @@ import Database.Icon as Icon exposing (Icon)
 attribute : Attribute -> String
 attribute a =
     case a of
-        Man   -> "Man"
+        Human -> "Human"
         Sky   -> "Sky"
         Earth -> "Earth"
         Star  -> "Star"
@@ -90,17 +89,16 @@ trait a =
         Male -> "Male"
         Female -> "Female"
         Nonbinary -> "Nonbinary"
-        Lawful   -> "Lawful"
-        Neutral  -> "Neutral"
-        Chaotic  -> "Chaotic"
-        Good     -> "Good"
+        Lawful -> "Lawful"
+        Neutral -> "Neutral"
+        Chaotic -> "Chaotic"
+        Good -> "Good"
         Balanced -> "Balanced"
-        Evil     -> "Evil"
-        Mad      -> "Mad"
-        Summer   -> "Summer"
-        Bride    -> "Bride"
+        Evil -> "Evil"
+        Mad -> "Mad"
+        Summer -> "Summer"
+        Bride -> "Bride"
         Servant -> "Servant"
-        Human -> "Human"
         DemonBeast -> "Demon Beast"
         DivineBeast -> "Divine Beast"
         Undead -> "Undead"

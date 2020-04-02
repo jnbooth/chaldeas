@@ -106,7 +106,7 @@ translate a =
         "Blessing of Kur" ->
             "Protection of the Underworld"
 
-        "Charisma of Frostbite" ->
+        "Frigid Charisma" ->
             "Freezing Charisma"
 
         "Cheerful-Type Mystic Code" ->
@@ -151,7 +151,7 @@ translate a =
         "Logic of Wild Beasts" ->
             "Wild Beast's Logic"
 
-        "Mystic Eyes of Clairvoyance" ->
+        "Mystic Eyes of Penetration" ->
             "Clairvoyant Mystic Eyes"
 
         "Mystic Eyes of Distortion (Skill)" ->

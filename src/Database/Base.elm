@@ -10,7 +10,7 @@ module Database.Base exposing
 
 {-| Basic Enum datatypes to represent game information. -}
 
-import StandardLibrary exposing (..)
+import StandardLibrary exposing (enumToOrd)
 
 
 {-| Determines the "attribute modifier" in `Database.Calculator`.
@@ -18,7 +18,7 @@ Currently used only for filters. -}
 -- Note: There is a fifth category in the game, "Beast",
 -- which is not represented here because only enemies can have it.
 type Attribute
-    = Man
+    = Human
     | Sky
     | Earth
     | Star
@@ -27,7 +27,7 @@ type Attribute
 
 enumAttribute : List Attribute
 enumAttribute =
-    [ Man
+    [ Human
     , Sky
     , Earth
     , Star
@@ -95,7 +95,6 @@ type Trait
     | Male | Female | Nonbinary
     -- category
     | Servant
-    | Human
     | DemonBeast
     | DivineBeast
     | Undead
@@ -138,7 +137,6 @@ enumTrait =
     , Male , Female , Nonbinary
     -- category
     , Servant
-    , Human
     , DemonBeast
     , DivineBeast
     , Undead

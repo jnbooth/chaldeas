@@ -85,7 +85,7 @@ lancers =
     , id        = 18
     , rarity    = 4
     , class     = Lancer
-    , attr      = Man
+    , attr      = Human
     , deck      = Deck Quick Quick Arts Buster Buster
     , curve     = 4
     , stats     = { base  = { atk = 1520,  hp = 1899 }
@@ -154,7 +154,7 @@ lancers =
     , id        = 19
     , rarity    = 2
     , class     = Lancer
-    , attr      = Man
+    , attr      = Human
     , deck      = Deck Quick Quick Arts Arts Buster
     , curve     = 7
     , stats     = { base  = { atk = 1029, hp = 1722 }
@@ -294,7 +294,7 @@ lancers =
     , id        = 21
     , rarity    = 2
     , class     = Lancer
-    , attr      = Man
+    , attr      = Human
     , deck      = Deck Quick Quick Arts Buster Buster
     , curve     = 7
     , stats     = { base  = { atk = 1168, hp = 1498 }
@@ -435,7 +435,7 @@ lancers =
     , id        = 64
     , rarity    = 3
     , class     = Lancer
-    , attr      = Man
+    , attr      = Human
     , deck      = Deck Quick Quick Arts Buster Buster
     , curve     = 3
     , stats     = { base  = { atk = 1334, hp = 1726 }
@@ -936,7 +936,7 @@ lancers =
     , id        = 102
     , rarity    = 4
     , class     = Lancer
-    , attr      = Man
+    , attr      = Human
     , deck      = Deck Quick Quick Arts Arts Buster
     , curve     = 14
     , stats     = { base  = { atk = 1608,  hp = 1817 }
@@ -1300,7 +1300,7 @@ lancers =
     , id        = 141
     , rarity    = 4
     , class     = Lancer
-    , attr      = Man
+    , attr      = Human
     , deck      = Deck Quick Quick Arts Buster Buster
     , curve     = 9
     , stats     = { base  = { atk = 1543,  hp = 1899 }
@@ -1746,7 +1746,7 @@ lancers =
     , gen       = { starWeight = 90, starRate = 12.2, npAtk = 1.06, npDef = 4 }
     , death     = 36
     , curve     = 8
-    , attr      = Man
+    , attr      = Human
     , align     = [Neutral, Balanced]
     , gender    = Male
     , traits    = [Humanoid, EnumaElish]

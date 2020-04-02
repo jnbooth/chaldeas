@@ -150,7 +150,7 @@ berserkers =
     , id        = 49
     , rarity    = 3
     , class     = Berserker
-    , attr      = Man
+    , attr      = Human
     , deck      = Deck Quick Arts Buster Buster Buster
     , curve     = 8
     , stats     = { base  = { atk = 1507,  hp = 1494 }
@@ -222,7 +222,7 @@ berserkers =
     , id        = 50
     , rarity    = 1
     , class     = Berserker
-    , attr      = Man
+    , attr      = Human
     , deck      = Deck Quick Arts Buster Buster Buster
     , curve     = 6
     , stats     = { base  = { atk = 922,  hp = 1544 }
@@ -291,7 +291,7 @@ berserkers =
     , id        = 51
     , rarity    = 5
     , class     = Berserker
-    , attr      = Man
+    , attr      = Human
     , deck      = Deck Quick Arts Buster Buster Buster
     , curve     = 9
     , stats     = { base  = { atk = 1964,  hp = 1782 }
@@ -499,7 +499,7 @@ berserkers =
     , id        = 54
     , rarity    = 2
     , class     = Berserker
-    , attr      = Man
+    , attr      = Human
     , deck      = Deck Quick Arts Buster Buster Buster
     , curve     = 12
     , stats     = { base  = { atk = 1374, hp = 1211 }
@@ -571,7 +571,7 @@ berserkers =
     , id        = 55
     , rarity    = 3
     , class     = Berserker
-    , attr      = Man
+    , attr      = Human
     , deck      = Deck Quick Arts Buster Buster Buster
     , curve     = 3
     , stats     = { base  = { atk = 1412,  hp = 1577 }
@@ -711,7 +711,7 @@ berserkers =
     , id        = 57
     , rarity    = 2
     , class     = Berserker
-    , attr      = Man
+    , attr      = Human
     , deck      = Deck Quick Arts Buster Buster Buster
     , curve     = 2
     , stats     = { base  = { atk = 1116, hp = 1447 }
@@ -989,7 +989,7 @@ berserkers =
     , id        = 97
     , rarity    = 5
     , class     = Berserker
-    , attr      = Man
+    , attr      = Human
     , deck      = Deck Quick Arts Arts Buster Buster
     , curve     = 30
     , stats     = { base  = { atk = 1573,  hp = 2232 }
@@ -1350,7 +1350,7 @@ berserkers =
     , gen       = { starWeight = 9, starRate = 4.9, npAtk = 1.08, npDef = 5 }
     , death     = 65
     , curve     = 5
-    , attr      = Man
+    , attr      = Human
     , align     = [Lawful, Evil]
     , gender    = Male
     , traits    = [Humanoid, EnumaElish]
@@ -1423,7 +1423,7 @@ berserkers =
     , gen       = { starWeight = 10, starRate = 4.9, npAtk = 1.03, npDef = 5 }
     , death     = 52
     , curve     = 24
-    , attr      = Man
+    , attr      = Human
     , align     = [Chaotic, Balanced]
     , gender    = Female
     , traits    = [Humanoid, EnumaElish]
@@ -1633,7 +1633,7 @@ berserkers =
     , gen       = { starWeight = 10, starRate = 5, npAtk = 0.93, npDef = 5 }
     , death     = 52
     , curve     = 14
-    , attr      = Man
+    , attr      = Human
     , align     = [Chaotic, Summer]
     , gender    = Female
     , traits    = [Humanoid, EnumaElish, King]
@@ -1706,7 +1706,7 @@ berserkers =
     , gen       = { starWeight = 9, starRate = 5.1, npAtk = 1.05, npDef = 5 }
     , death     = 45.5
     , curve     = 4
-    , attr      = Man
+    , attr      = Human
     , align     = [Chaotic, Evil]
     , gender    = Female
     , traits    = [Humanoid, EnumaElish]

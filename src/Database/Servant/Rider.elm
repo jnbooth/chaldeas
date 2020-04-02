@@ -81,7 +81,7 @@ riders =
     , id        = 24
     , rarity    = 2
     , class     = Rider
-    , attr      = Man
+    , attr      = Human
     , deck      = Deck Quick Quick Arts Arts Buster
     , curve     = 2
     , stats     = { base  = { atk = 929,  hp = 1731 }
@@ -152,7 +152,7 @@ riders =
     , id        = 25
     , rarity    = 2
     , class     = Rider
-    , attr      = Man
+    , attr      = Human
     , deck      = Deck Quick Arts Arts Buster Buster
     , curve     = 12
     , stats     = { base  = { atk = 1097,  hp = 1488 }
@@ -227,7 +227,7 @@ riders =
     , id        = 26
     , rarity    = 3
     , class     = Rider
-    , attr      = Man
+    , attr      = Human
     , deck      = Deck Quick Quick Arts Arts Buster
     , curve     = 3
     , stats     = { base  = { atk = 1168,  hp = 1823 }
@@ -294,7 +294,7 @@ riders =
     , id        = 27
     , rarity    = 3
     , class     = Rider
-    , attr      = Man
+    , attr      = Human
     , deck      = Deck Quick Quick Arts Arts Buster
     , curve     = 8
     , stats     = { base  = { atk = 1314, hp = 1625 }
@@ -361,7 +361,7 @@ riders =
     , id        = 28
     , rarity    = 3
     , class     = Rider
-    , attr      = Man
+    , attr      = Human
     , deck      = Deck Quick Quick Arts Arts Buster
     , curve     = 3
     , stats     = { base  = { atk = 1366, hp = 1979 }
@@ -378,7 +378,7 @@ riders =
                     , rank   = B
                     , icon   = Icon.Heart
                     , cd     = 9
-                    , effect = [ Chances 50 80 <| Debuff (EnemyType Human) 1 Charm Full ]
+                    , effect = [ Chances 50 80 <| Debuff (EnemyType Humanoid) 1 Charm Full ]
                     }
                   , { name   = "Omen of the Conqueror"
                     , rank   = A
@@ -426,7 +426,7 @@ riders =
     , id        = 29
     , rarity    = 4
     , class     = Rider
-    , attr      = Man
+    , attr      = Human
     , deck      = Deck Quick Quick Arts Arts Buster
     , curve     = 9
     , stats     = { base  = { atk = 1382,  hp = 1975 }
@@ -498,7 +498,7 @@ riders =
     , id        = 30
     , rarity    = 4
     , class     = Rider
-    , attr      = Man
+    , attr      = Human
     , deck      = Deck Quick Arts Arts Arts Buster
     , curve     = 4
     , stats     = { base  = { atk = 1335,  hp = 2090 }
@@ -640,7 +640,7 @@ riders =
     , id        = 66
     , rarity    = 4
     , class     = Rider
-    , attr      = Man
+    , attr      = Human
     , deck      = Deck Quick Quick Arts Arts Buster
     , curve     = 29
     , stats     = { base  = { atk = 1504,  hp = 1805 }
@@ -707,7 +707,7 @@ riders =
     , id        = 73
     , rarity    = 4
     , class     = Rider
-    , attr      = Man
+    , attr      = Human
     , deck      = Deck Quick Arts Arts Buster Buster
     , curve     = 29
     , stats     = { base  = { atk = 1543,  hp = 1805 }
@@ -914,7 +914,7 @@ riders =
     , id        = 108
     , rarity    = 5
     , class     = Rider
-    , attr      = Man
+    , attr      = Human
     , deck      = Deck Quick Arts Arts Buster Buster
     , curve     = 10
     , stats     = { base  = { atk = 1786,  hp = 1938 }
@@ -1268,7 +1268,7 @@ riders =
     , gen       = { starWeight = 208, starRate = 8.9, npAtk = 0.55, npDef = 3 }
     , death     = 50
     , curve     = 13
-    , attr      = Man
+    , attr      = Human
     , align     = [Neutral, Evil]
     , gender    = Male
     , traits    = [Humanoid, EnumaElish]
@@ -1339,7 +1339,7 @@ riders =
     , gen       = { starWeight = 200, starRate = 9, npAtk = 0.59, npDef = 3 }
     , death     = 30
     , curve     = 5
-    , attr      = Man
+    , attr      = Human
     , align     = [Lawful, Evil]
     , gender    = Female
     , traits    = [Humanoid, Arthur, Dragon, Riding, Saberface, EnumaElish, King]

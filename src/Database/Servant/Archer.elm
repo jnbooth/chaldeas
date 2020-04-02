@@ -14,7 +14,7 @@ archers =
     , id        = 11
     , rarity    = 4
     , class     = Archer
-    , attr      = Man
+    , attr      = Human
     , deck      = Deck Quick Arts Arts Arts Buster
     , curve     = 14
     , stats     = { base  = { atk = 1566,  hp = 1843 }
@@ -155,7 +155,7 @@ archers =
     , id        = 13
     , rarity    = 3
     , class     = Archer
-    , attr      = Man
+    , attr      = Human
     , deck      = Deck Quick Quick Arts Arts Buster
     , curve     = 3
     , stats     = { base  = { atk = 1247, hp = 1833 }
@@ -578,7 +578,7 @@ archers =
     , id        = 69
     , rarity    = 4
     , class     = Archer
-    , attr      = Man
+    , attr      = Human
     , deck      = Deck Quick Arts Arts Buster Buster
     , curve     = 14
     , stats     = { base  = { atk = 1862,  hp = 1582 }
@@ -810,7 +810,7 @@ archers =
                     , rank   = C
                     , icon   = Icon.Heart
                     , cd     = 9
-                    , effect = [ Chances 45 75 <| Debuff (EnemyType Human) 1 Charm Full ]
+                    , effect = [ Chances 45 75 <| Debuff (EnemyType Humanoid) 1 Charm Full ]
                     }
                   , { name   = "Golden Rule"
                     , rank   = A
@@ -861,7 +861,7 @@ archers =
     , id        = 105
     , rarity    = 3
     , class     = Archer
-    , attr      = Man
+    , attr      = Human
     , deck      = Deck Quick Quick Arts Arts Buster
     , curve     = 3
     , stats     = { base  = { atk = 1279, hp = 1711 }
@@ -1004,7 +1004,7 @@ archers =
     , id        = 125
     , rarity    = 3
     , class     = Archer
-    , attr      = Man
+    , attr      = Human
     , deck      = Deck Quick Arts Arts Buster Buster
     , curve     = 28
     , stats     = { base  = { atk = 1306, hp = 1764 }
@@ -1146,7 +1146,7 @@ archers =
     , id        = 131
     , rarity    = 4
     , class     = Archer
-    , attr      = Man
+    , attr      = Human
     , deck      = Deck Quick Arts Arts Buster Buster
     , curve     = 29
     , stats     = { base  = { atk = 1574,  hp = 1843 }
@@ -1370,7 +1370,7 @@ archers =
     , gen       = { starWeight = 153, starRate = 8, npAtk = 0.38, npDef = 3 }
     , death     = 31.5
     , curve     = 10
-    , attr      = Man
+    , attr      = Human
     , align     = [Chaotic, Evil]
     , gender    = Male
     , traits    = [Humanoid, EnumaElish]
@@ -1442,7 +1442,7 @@ archers =
     , gen       = { starWeight = 145, starRate = 7.9, npAtk = 0.43, npDef = 3 }
     , death     = 31.5
     , curve     = 4
-    , attr      = Man
+    , attr      = Human
     , align     = [Chaotic, Evil]
     , gender    = Male
     , traits    = [Humanoid, EnumaElish]
@@ -1512,7 +1512,7 @@ archers =
     , gen       = { starWeight = 153, starRate = 8, npAtk = 0.38, npDef = 3 }
     , death     = 27
     , curve     = 4
-    , attr      = Man
+    , attr      = Human
     , align     = [Chaotic, Good]
     , gender    = Female
     , traits    = [Humanoid, EnumaElish]
@@ -1727,7 +1727,7 @@ archers =
     , gen       = { starWeight = 148, starRate = 7.9, npAtk = 0.59, npDef = 3 }
     , death     = 27
     , curve     = 9
-    , attr      = Man
+    , attr      = Human
     , align     = [Lawful, Evil]
     , gender    = Female
     , traits    = [Humanoid]

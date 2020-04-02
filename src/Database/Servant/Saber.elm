@@ -79,7 +79,7 @@ sabers =
     , id        = 3
     , rarity    = 4
     , class     = Saber
-    , attr      = Man
+    , attr      = Human
     , deck      = Deck Quick Arts Arts Buster Buster
     , curve     = 14
     , stats     = { base  = { atk = 1708,  hp = 1854 }
@@ -209,7 +209,7 @@ sabers =
     , id        = 5
     , rarity    = 4
     , class     = Saber
-    , attr      = Man
+    , attr      = Human
     , deck      = Deck Quick Arts Arts Buster Buster
     , curve     = 15
     , stats     = { base  = { atk = 1574,  hp = 1880 }
@@ -351,7 +351,7 @@ sabers =
     , id        = 7
     , rarity    = 3
     , class     = Saber
-    , attr      = Man
+    , attr      = Human
     , deck      = Deck Quick Quick Arts Buster Buster
     , curve     = 13
     , stats     = { base  = { atk = 1392,  hp = 1727 }
@@ -419,7 +419,7 @@ sabers =
     , id        = 8
     , rarity    = 5
     , class     = Saber
-    , attr      = Man
+    , attr      = Human
     , deck      = Deck Quick Arts Arts Buster Buster
     , curve     = 5
     , stats     = { base  = { atk = 1907,  hp = 2039 }
@@ -489,7 +489,7 @@ sabers =
     , id        = 9
     , rarity    = 3
     , class     = Saber
-    , attr      = Man
+    , attr      = Human
     , deck      = Deck Quick Arts Arts Buster Buster
     , curve     = 13
     , stats     = { base  = { atk = 1228, hp = 1889 }
@@ -556,7 +556,7 @@ sabers =
     , id        = 10
     , rarity    = 4
     , class     = Saber
-    , attr      = Man
+    , attr      = Human
     , deck      = Deck Quick Arts Arts Buster Buster
     , curve     = 9
     , stats     = { base  = { atk = 1734,  hp = 2121 }
@@ -629,7 +629,7 @@ sabers =
     , id        = 68
     , rarity    = 5
     , class     = Saber
-    , attr      = Man
+    , attr      = Human
     , deck      = Deck Quick Quick Arts Buster Buster
     , curve     = 10
     , stats     = { base  = { atk = 1865,  hp = 1939 }
@@ -839,7 +839,7 @@ sabers =
     , id        = 90
     , rarity    = 5
     , class     = Saber
-    , attr      = Man
+    , attr      = Human
     , deck      = Deck Quick Arts Arts Buster Buster
     , curve     = 30
     , stats     = { base  = { atk = 1793,  hp = 2089 }
@@ -911,7 +911,7 @@ sabers =
     , id        = 91
     , rarity    = 5
     , class     = Saber
-    , attr      = Man
+    , attr      = Human
     , deck      = Deck Quick Arts Arts Buster Buster
     , curve     = 15
     , stats     = { base  = { atk = 1656,  hp = 2266 }
@@ -1347,7 +1347,7 @@ sabers =
     , gen       = { starWeight = 100, starRate = 10, npAtk = 0.87, npDef = 3 }
     , death     = 35
     , curve     = 5
-    , attr      = Man
+    , attr      = Human
     , align     = [Chaotic, Good]
     , gender    = Female
     , traits    = [Humanoid, EnumaElish]
@@ -1633,7 +1633,7 @@ sabers =
     , gen       = { starWeight = 100, starRate = 10.3, npAtk = 0.81, npDef = 3 }
     , death     = 35
     , curve     = 4
-    , attr      = Man
+    , attr      = Human
     , align     = [Lawful, Balanced]
     , gender    = Male
     , traits    = [Humanoid, EnumaElish]

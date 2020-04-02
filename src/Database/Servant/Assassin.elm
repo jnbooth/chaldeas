@@ -14,7 +14,7 @@ assassins =
     , id        = 39
     , rarity    = 1
     , class     = Assassin
-    , attr      = Man
+    , attr      = Human
     , deck      = Deck Quick Quick Quick Arts Buster
     , curve     = 6
     , stats     = { base  = { atk = 1042, hp = 1244 }
@@ -86,7 +86,7 @@ assassins =
     , id        = 40
     , rarity    = 2
     , class     = Assassin
-    , attr      = Man
+    , attr      = Human
     , deck      = Deck Quick Quick Quick Arts Buster
     , curve     = 2
     , stats     = { base  = { atk = 1114, hp = 1429 }
@@ -224,7 +224,7 @@ assassins =
     , id        = 42
     , rarity    = 3
     , class     = Assassin
-    , attr      = Man
+    , attr      = Human
     , deck      = Deck Quick Quick Quick Arts Buster
     , curve     = 8
     , stats     = { base  = { atk = 1338, hp = 1492 }
@@ -297,7 +297,7 @@ assassins =
     , id        = 43
     , rarity    = 2
     , class     = Assassin
-    , attr      = Man
+    , attr      = Human
     , deck      = Deck Quick Quick Quick Arts Buster
     , curve     = 12
     , stats     = { base  = { atk = 968,  hp = 1568 }
@@ -322,7 +322,7 @@ assassins =
                     , rank   = B
                     , icon   = Icon.DamageUp
                     , cd     = 7
-                    , effect = [ Grant Self 3 (Special AttackUp <| VsTrait Human) <| Range 40 60 ]
+                    , effect = [ Grant Self 3 (Special AttackUp <| VsAttribute Human) <| Range 40 60 ]
                     }
                   ]
     , passives  = [presenceConcealment D]
@@ -435,7 +435,7 @@ assassins =
     , id        = 45
     , rarity    = 1
     , class     = Assassin
-    , attr      = Man
+    , attr      = Human
     , deck      = Deck Quick Quick Quick Arts Buster
     , curve     = 6
     , stats     = { base  = { atk = 977,  hp = 1313 }
@@ -792,7 +792,7 @@ assassins =
     , id        = 92
     , rarity    = 4
     , class     = Assassin
-    , attr      = Man
+    , attr      = Human
     , deck      = Deck Quick Quick Arts Arts Buster
     , curve     = 4
     , stats     = { base  = { atk = 1477,  hp = 1768 }
@@ -860,7 +860,7 @@ assassins =
     , id        = 109
     , rarity    = 4
     , class     = Assassin
-    , attr      = Man
+    , attr      = Human
     , deck      = Deck Quick Quick Arts Arts Buster
     , curve     = 24
     , stats     = { base  = { atk = 1493,  hp = 1786 }
@@ -932,7 +932,7 @@ assassins =
     , id        = 110
     , rarity    = 3
     , class     = Assassin
-    , attr      = Man
+    , attr      = Human
     , deck      = Deck Quick Quick Arts Arts Buster
     , curve     = 28
     , stats     = { base  = { atk = 1241, hp = 1675 }
@@ -1083,7 +1083,7 @@ assassins =
     , id        = 117
     , rarity    = 3
     , class     = Assassin
-    , attr      = Man
+    , attr      = Human
     , deck      = Deck Quick Quick Quick Arts Buster
     , curve     = 8
     , stats     = { base  = { atk = 1316,  hp = 1592 }
@@ -1154,7 +1154,7 @@ assassins =
     , id        = 124
     , rarity    = 3
     , class     = Assassin
-    , attr      = Man
+    , attr      = Human
     , deck      = Deck Quick Quick Arts Arts Buster
     , curve     = 23
     , stats     = { base  = { atk = 1232, hp = 1675 }
@@ -1297,7 +1297,7 @@ assassins =
     , id        = 139
     , rarity    = 5
     , class     = Assassin
-    , attr      = Man
+    , attr      = Human
     , deck      = Deck Quick Quick Arts Buster Buster
     , curve     = 5
     , stats     = { base  = { atk = 1713,  hp = 1965 }
@@ -1380,7 +1380,7 @@ assassins =
     , gen       = { starWeight = 98, starRate = 25.5, npAtk = 1, npDef = 4 }
     , death     = 49.5
     , curve     = 15
-    , attr      = Man
+    , attr      = Human
     , align     = [Lawful, Evil]
     , gender    = Male
     , traits    = [Humanoid, LovedOne, EnumaElish]
@@ -1451,7 +1451,7 @@ assassins =
     , gen       = { starWeight = 100, starRate = 25.6, npAtk = 0.71, npDef = 4 }
     , death     = 49.5
     , curve     = 9
-    , attr      = Man
+    , attr      = Human
     , align     = [Chaotic, Evil]
     , gender    = Male
     , traits    = [Humanoid, EnumaElish]
@@ -1520,7 +1520,7 @@ assassins =
     , gen       = { starWeight = 102, starRate = 25.5, npAtk = 0.87, npDef = 4 }
     , death     = 38.5
     , curve     = 9
-    , attr      = Man
+    , attr      = Human
     , align     = [Lawful, Evil]
     , gender    = Female
     , traits    = [Humanoid, EnumaElish, King]

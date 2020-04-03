@@ -12,6 +12,7 @@ import StandardLibrary exposing (enumToOrd)
 type Preference
     = Artorify
     | HideSpoilers
+    | HideClasses
     | NightMode
     | Thumbnails
     | ShowTables
@@ -19,13 +20,14 @@ type Preference
     | MaxAscension
     | AddSkills
     | AddExtra
-    | HideClasses
+    | MaxReinforce
 
 
 enum : List Preference
 enum =
     [ Artorify
     , HideSpoilers
+    , HideClasses
     , NightMode
     , Thumbnails
     , ShowTables
@@ -33,7 +35,7 @@ enum =
     , MaxAscension
     , AddSkills
     , AddExtra
-    , HideClasses
+    , MaxReinforce
     ]
 
 
@@ -70,3 +72,4 @@ show a =
         NightMode    -> "Night Mode"
         ShowTables   -> "Show skill and NP tables"
         Thumbnails   -> "Thumbnails"
+        MaxReinforce -> "Restrict skill wishlist by level"

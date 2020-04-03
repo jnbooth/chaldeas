@@ -13,6 +13,8 @@ import StandardLibrary exposing (flip)
 import Model.Material as Material exposing (Material)
 import Model.Servant as Servant exposing (Servant)
 import Model.MyServant exposing (MyServant)
+import Persist.Preference exposing (Preference(..))
+import Persist.Preferences exposing (Preferences, prefers)
 
 
 maxLevel : Servant -> Int
@@ -80,10 +82,15 @@ reduceMats =
         >> List.map reduce
 
 
-skillWishlist : List MyServant -> List (Material, Int)
-skillWishlist xs =
+skillWishlist : Preferences -> List MyServant -> List (Material, Int)
+skillWishlist prefs xs =
     let
         bind = flip List.concatMap
+        mxs =
+            if prefers prefs MaxReinforce then
+                List.filter (\ms -> ms.level >= maxLevel ms.servant) xs
+            else
+                xs
     in
     reduceMats <<
     {- poor man's do-notation, i.e. do
@@ -91,7 +98,7 @@ skillWishlist xs =
            let reinforce = getReinforcements ms.base
            skillLvl <- ms.skills
            drop (skillLvl - 1) reinforce -}
-    bind xs <| \ms ->
+    bind mxs <| \ms ->
     let reinforce = Servant.getReinforcements ms.base in
     bind ms.skills <| \skillLvl ->
     List.drop (skillLvl - 1) reinforce

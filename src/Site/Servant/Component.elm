@@ -166,11 +166,11 @@ component store =
                     if mineOnly then
                         xs
                             ++ getMats "Ascension" Leveling.ascendWishlist
-                            ++ getMats "Skill" Leveling.skillWishlist
+                            ++ getMats "Skill" (Leveling.skillWishlist prefs)
                             ++ [ ( "I/O"
                                 , H.div [P.id "io"]
-                                  [ button_ "Export" True <| Export True
-                                  , button_ "Import" True <| Export False
+                                  [ button_ "Export" True Export
+                                  , button_ "Import" True <| ReceiveCompress ""
                                   ]
                                 )
                               ]
@@ -221,7 +221,7 @@ component store =
                             | extra = { extra | mine = mine }
                             , focus = Maybe.next st.focus <| Just ms
                             }
-                        , Flags.storeMine store mine
+                        , Flags.storeMine ports.store mine
                         )
 
                 Entry x ->

@@ -6,21 +6,27 @@ import Browser.Navigation as Navigation
 import Dict
 import Html as H
 import Html.Attributes as P
-import Json.Decode as D exposing (Value)
+import Json.Decode as D
+import Json.Encode as E exposing (Value)
 import List.Extra as List
 import Task
 import Time
 import Url exposing (Url)
 
 import StandardLibrary exposing (pure)
+import Class.ToJSON as Export
 import Date
 import Model.Class as Class
 import Model.Servant as Servant
 import Persist.Flags as Flags
 import Persist.Preference exposing (Preference(..))
 import Persist.Preferences as Preferences exposing (Preferences, prefers)
+import Ports exposing (Ports)
 import Print
 import Site.Algebra exposing (Component, SiteModel, SiteMsg(..))
+
+import Database.CraftEssences as CraftEssences
+import Database.Servants as Servants
 
 import Site.CraftEssence.Component as CraftEssences
 import Site.Servant.Component as Servants
@@ -51,11 +57,11 @@ type alias Model =
 
 
 type Msg
-    = RequestUrl       UrlRequest
-    | ChangeUrl        Url
-    | CraftEssencesMsg CraftEssences.Msg
-    | ServantsMsg      Servants.Msg
-    | OnError          (Result Dom.Error ())
+    = RequestUrl        UrlRequest
+    | ChangeUrl         Url
+    | CraftEssencesMsg  CraftEssences.Msg
+    | ServantsMsg       Servants.Msg
+    | OnError           (Result Dom.Error ())
 
 
 printError : Dom.Error -> String
@@ -146,22 +152,19 @@ resetPopup =
     Task.attempt OnError <| Dom.setViewportOf "focus" 0 0
 
 
-app onInit analytics title store =
+app : Ports Msg -> Program Value Model Msg
+app ports =
     let
-        child constr unMsg =
-            constr ((<<) (Cmd.map unMsg) << store)
-
         ceChild : Component CraftEssences.Model CraftEssences.Msg
         ceChild =
-            child CraftEssences.component <| \a -> case a of
-                CraftEssencesMsg x -> x
-                _                  -> DoNothing
+            CraftEssences.component
 
         sChild : Component Servants.Model Servants.Msg
         sChild =
-            child Servants.component <| \a -> case a of
-                ServantsMsg x -> x
-                _             -> DoNothing
+            Servants.component << Ports.map ports ServantsMsg <| \a ->
+                 case a of
+                    ServantsMsg x -> x
+                    _             -> DoNothing
 
         init : Value -> Url -> Navigation.Key -> (Model, Cmd Msg)
         init val url key =
@@ -191,8 +194,17 @@ app onInit analytics title store =
                     , ceModel = ceChild.init flags key
                     , sModel  = sChild.init flags key
                     }
+
+
+                cmds =
+                    [ ports.title newTitle
+                    , ports.export "servants" <|
+                      E.list Export.servant Servants.db
+                    , ports.export "craftEssences" <|
+                      E.list Export.craftEssence CraftEssences.db
+                    ]
             in
-            (st, Cmd.batch [onInit, title newTitle])
+            (st, Cmd.batch cmds)
 
         view : Model -> Document Msg
         view st =
@@ -230,7 +242,7 @@ app onInit analytics title store =
               , sModel  = sModel
               }
             , Cmd.batch
-              [ Flags.storePreferences store prefs
+              [ Flags.storePreferences ports.store prefs
               , Cmd.map CraftEssencesMsg ceCmd
               , Cmd.map ServantsMsg sCmd
               ]
@@ -260,7 +272,10 @@ app onInit analytics title store =
                     (newSt, newTitle) =
                         stateFromPath path st
                 in
-                (newSt, Cmd.batch [analytics path, title newTitle, resetPopup])
+                ( newSt
+                , Cmd.batch
+                  [ports.analytics path, ports.title newTitle, resetPopup]
+                )
 
             CraftEssencesMsg (SetPref k v) ->
                 setPref st k v
@@ -282,10 +297,14 @@ app onInit analytics title store =
                 in
                 ({ st | sModel = model }, Cmd.map ServantsMsg cmd)
     in
+    Browser.application
     { init          = init
     , view          = view
     , update        = update
-    , subscriptions = always Sub.none
+    , subscriptions = always <| Sub.batch
+                      [ ports.receiveCompress <| ServantsMsg << ReceiveCompress
+                      , ports.receiveDecompress <| ServantsMsg << ReceiveDecompress
+                      ]
     , onUrlRequest  = RequestUrl
     , onUrlChange   = ChangeUrl
     }

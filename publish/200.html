@@ -160,6 +160,7 @@
       .materials div
         { display: inline-block
         ; text-align: left
+        ; margin: auto
         }
       .materials span
         { display: inline-block
@@ -441,7 +442,9 @@
       #myservant td:first-child strong
         { text-align: left }
       #myservant span
-        { opacity: 0.75 }
+        { opacity: 0.75
+        ; margin-left: 1em
+        }
       article footer button, article #myservant button
         { font-family: unset
         ; background: none
@@ -672,14 +675,106 @@
   </head>
   <body>
       <script type="text/javascript">
+        "use strict";
+        const dictOffset = 32;
+
+        var LZW = {
+            compress: function (uncompressed) {
+                let dictionary = {},
+                    c,
+                    wc,
+                    w = "",
+                    result = [],
+                    dictSize = 256
+                for (let i = 0; i < dictSize; i += 1) {
+                    dictionary[String.fromCharCode(i + dictOffset)] = i
+                }
+
+                for (const c of uncompressed) {
+                    wc = w + c
+                    if (dictionary.hasOwnProperty(wc)) {
+                        w = wc
+                    } else {
+                        result.push(dictionary[w])
+                        dictionary[wc] = dictSize++
+                        w = String(c)
+                    }
+                }
+
+                if (w !== "") {
+                    result.push(dictionary[w])
+                }
+                return result
+            },
+
+
+            decompress: function (compressed) {
+                let dictionary = [],
+                    w,
+                    result,
+                    k,
+                    entry = "",
+                    dictSize = 256
+                for (let i = 0; i < dictSize; i += 1) {
+                    dictionary[i] = String.fromCharCode(i + dictOffset)
+                }
+
+                w = String.fromCharCode(compressed[0] + dictOffset)
+                result = w
+                for (let i = 1; i < compressed.length; i += 1) {
+                    k = compressed[i]
+                    if (dictionary[k]) {
+                        entry = dictionary[k]
+                    } else {
+                        if (k === dictSize) {
+                            entry = w + w.charAt(0)
+                        } else {
+                            return null
+                        }
+                    }
+
+                    result += entry
+
+                    dictionary[dictSize++] = w + entry.charAt(0)
+
+                    w = entry
+                }
+                return result
+            }
+        }
+        const to64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
+
+        let from64 = {}
+        for (let i = 0; i < to64.length; i++) {
+            from64[to64[i]] = i
+        }
+
+        function char64(sym) {
+            return [to64[sym >> 6], to64[sym & 63]]
+        }
+        function decode64(s) {
+            let results = []
+            for (let i = 1; i < s.length; i += 2) {
+                const quot = from64[s[i - 1]]
+                const rem = from64[s[i]]
+                if (quot === undefined || rem === undefined) {
+                    return results
+                }
+                results.push(quot * 64 + rem)
+            }
+            return results
+        }
+        function encode64(syms) {
+            return syms.flatMap(char64).join("")
+        }
         function getValue(key) {
-          var stored = localStorage.getItem(key);
+          var stored = localStorage.getItem(key)
           if (stored !== null) {
             try {
-              return JSON.parse(stored);
+              return JSON.parse(stored)
             } catch (e) {}
           }
-          return null;
+          return null
         }
         var app = Elm.Main.init({
           flags: {
@@ -688,20 +783,26 @@
             teams:       getValue("teams") || [],
             today:       Date.now()
           }
-        });
+        })
         app.ports.store.subscribe(function(pair) {
-          localStorage.setItem(pair[0], JSON.stringify(pair[1]));
-        });
+          localStorage.setItem(pair[0], JSON.stringify(pair[1]))
+        })
         app.ports.analytics.subscribe(function(page) {
-          gtag('config', 'UA-46060275-3', {'page_path': page});
-        });
+          gtag('config', 'UA-46060275-3', {'page_path': page})
+        })
         app.ports.title.subscribe(function(title) {
-          document.title = title + " - CHALDEAS";
-        });
-        var Export = {};
+          document.title = title + " - CHALDEAS"
+        })
+        var Export = {}
         app.ports.export.subscribe(function(pair) {
-          Export[pair[0]] = pair[1];
-        });
+          Export[pair[0]] = pair[1]
+        })
+        app.ports.sendCompress.subscribe(function(text) {
+            app.ports.receiveCompress.send(encode64(LZW.compress(text)))
+        })
+        app.ports.sendDecompress.subscribe(function(text) {
+            app.ports.receiveDecompress.send(LZW.decompress(decode64(text)))
+        })
       </script>
   </body>
 </html>

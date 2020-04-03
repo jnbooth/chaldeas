@@ -1,12 +1,9 @@
 port module Main exposing (main)
 
-import Browser
-import Json.Encode as E exposing (Value)
+import Json.Encode exposing (Value)
 
-import Database.CraftEssences as CraftEssences
-import Database.Servants as Servants
-import Site.Application exposing (app)
-import Class.ToJSON as Export
+import Site.Application as Site
+import Ports exposing (Ports)
 
 
 {-| Updates the analytics webtracker with a new pageview on URL change. -}
@@ -14,31 +11,42 @@ port analytics : String -> Cmd msg
 
 
 {-| Exports data to a global JavaScript object. -}
-port export    : (String, Value) -> Cmd msg
+port export : (String, Value) -> Cmd msg
 
 
 {-| Sets the page title. -}
-port title     : String -> Cmd msg
+port title : String -> Cmd msg
 
 
 {-| Saves data to LocalStorage. -}
-port store     : (String, Value) -> Cmd msg
+port store : (String, Value) -> Cmd msg
 
 
-curryStore : String -> Value -> Cmd msg
-curryStore x y =
-    store (x, y)
+port sendCompress : String -> Cmd msg
 
 
-{-| Exports `servants` to `Export.servants`
-and `craftEssences` to `Export.craftEssences`. -}
-runExports : Cmd msg
-runExports =
-    Cmd.batch
-    [ export ("servants",      E.list Export.servant Servants.db)
-    , export ("craftEssences", E.list Export.craftEssence CraftEssences.db)
-    ]
+port receiveCompress : (String -> msg) -> Sub msg
+
+
+port sendDecompress : String -> Cmd msg
+
+
+port receiveDecompress : (String -> msg) -> Sub msg
+
+
+ports : Ports msg
+ports =
+    { analytics = analytics
+    , export = \x y -> export (x, y)
+    , store = \x y -> store (x, y)
+    , title = title
+    , sendCompress = sendCompress
+    , receiveCompress = receiveCompress
+    , sendDecompress = sendDecompress
+    , receiveDecompress = receiveDecompress
+    }
 
 
 {-| Runs the website interface. -}
-main = Browser.application <| app runExports analytics title curryStore
+main =
+    Site.app ports

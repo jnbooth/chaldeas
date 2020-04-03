@@ -39,9 +39,11 @@ type SiteMsg filt focus
     | Ascend    focus Int
     | OnMine    Bool focus
     | OnTeam    Int Int
-    | Export    Bool
+    | Export
     | Import
     | Entry     String
+    | ReceiveCompress String
+    | ReceiveDecompress String
     | DoNothing
 
 

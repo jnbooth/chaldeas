@@ -3,7 +3,7 @@ module Site.Servant.Component exposing (Model, Msg, component, setRoot)
 import Browser.Navigation as Navigation
 import Dict exposing (Dict)
 import Json.Decode as D
-import Json.Encode as E exposing (Value)
+import Json.Encode as E
 import Html as H exposing (Html)
 import Html.Attributes as P
 import Html.Events as E
@@ -27,6 +27,7 @@ import Model.Skill.SkillEffect as SkillEffect
 import Persist.Flags as Flags exposing (Flags)
 import Persist.Preference exposing (Preference(..))
 import Persist.Preferences exposing (Preferences, prefers)
+import Ports exposing (Ports)
 import Print
 import Model.MyServant as MyServant exposing (MyServant)
 import Model.MyServant.Leveling as Leveling
@@ -36,7 +37,6 @@ import Site.Filtering as Filtering
 import Site.Rendering as Rendering
 import Site.SortBy as SortBy exposing (SortBy(..))
 import Site.Update as Update
-import LZW
 
 import Class.Has as Has
 import Class.ToImage as ToImage exposing (ImagePath)
@@ -89,8 +89,8 @@ setRoot st =
     { st | root = getRoot st.extra.mineOnly }
 
 
-component : (String -> Value -> Cmd Msg) -> Component Model Msg
-component store =
+component : Ports Msg -> Component Model Msg
+component ports =
     let
         init : Flags -> Navigation.Key -> Model
         init flags navKey =
@@ -227,21 +227,18 @@ component store =
                 Entry x ->
                     pure { st | extra = { extra | entry = x }}
 
-                Import  ->
-                    let
-                        decoded =
-                            st.extra.entry
-                                |> LZW.decompress
-                                >> D.decodeString Flags.decodeMine
-                    in
-                    case decoded of
+                Import ->
+                    (st, ports.sendDecompress st.extra.entry)
+
+                ReceiveDecompress de  ->
+                    case D.decodeString Flags.decodeMine de of
                         Ok mine ->
                             ( relist << reSort prefs <| reMine
                                 { st
                                 | extra =
                                     { extra | mine = mine, export = Nothing }
                                 }
-                            , Flags.storeMine store mine
+                            , Flags.storeMine ports.store mine
                             )
 
                         Err err ->
@@ -252,19 +249,18 @@ component store =
                                     }
                                  }
 
-                Export actual ->
+                Export ->
                     let
-                        export =
-                            if actual then
-                                st.extra.mine
+                        cmd =
+                            st.extra.mine
                                 |> Flags.encodeMine
                                 >> E.encode 0
-                                >> LZW.compress
-                                >> Just
-                            else
-                                Just ""
+                                >> ports.sendCompress
                     in
-                    pure  { st | extra = { extra | export = export } }
+                    (st, cmd)
+
+                ReceiveCompress x ->
+                    pure { st | extra = { extra | export = Just x } }
 
                 _ ->
                     Update.siteUpdate .base

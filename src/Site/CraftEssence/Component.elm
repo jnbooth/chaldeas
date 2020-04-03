@@ -7,7 +7,6 @@ import Html.Events as E
 import Html.Keyed as Keyed
 import Html.Lazy exposing (lazy3)
 import Html.Attributes as P
-import Json.Encode exposing (Value)
 
 import StandardLibrary exposing (flip)
 import Class.ToImage as ToImage
@@ -40,8 +39,8 @@ reSort : Model -> Model
 reSort st = { st | sorted = Sorting.get st.sortBy }
 
 
-component : (String -> Value -> Cmd Msg) -> Component Model Msg
-component = always <|
+component : Component Model Msg
+component =
     let
         init : Flags -> Navigation.Key -> Model
         init flags navKey =

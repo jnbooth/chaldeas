@@ -1,28 +1,26 @@
 module Persist.Flags exposing
   ( Team
-  , Flags, decodeFlags
+  , Flags, decode
   , storePreferences, storeMine, storeTeams
   , encodeMine, decodeMine
   )
 
 import Json.Decode as D
-import Json.Encode as E
-import List.Extra  as List
-import Maybe.Extra as Maybe
-import Set         as Set
+import Json.Encode as E exposing (Value)
+import List.Extra as List
+import Set
 import Date exposing (Date)
 import Dict exposing (Dict)
 import Time
 
-import StandardLibrary       exposing (..)
-import Database              exposing (..)
-import Database.Base         exposing (..)
-import Database.CraftEssence exposing (..)
-import Database.Servant      exposing (..)
-import MyServant             exposing (..)
-import Persist.Preferences   exposing (..)
-
-import Class.Show as Show
+import Database.CraftEssences as CraftEssences
+import Database.Servants as Servants
+import Model.Stat exposing (Stat)
+import Model.CraftEssence exposing (CraftEssence)
+import Model.Servant as Servant exposing (Servant)
+import Model.MyServant as MyServant exposing (MyServant)
+import Persist.Preference as Preference
+import Persist.Preferences as Preferences exposing (Preferences)
 
 
 type alias Team =
@@ -34,7 +32,7 @@ type alias Team =
 type alias Flags =
     { today       : Date
     , preferences : Preferences
-    , mine        : Dict OrdServant MyServant
+    , mine        : Dict Servant.Ord MyServant
     , teams       : List Team
     }
 
@@ -46,8 +44,8 @@ encodeMaybe f a =
         Nothing -> E.null
 
 
-decodeFlags : D.Decoder Flags
-decodeFlags =
+decode : D.Decoder Flags
+decode =
     D.map4 Flags
     (D.field "today" decodeDate)
     (D.field "preferences" decodePreferences)
@@ -63,14 +61,7 @@ decodeDate =
 
 encodePreferences : Preferences -> Value
 encodePreferences =
-    let
-        encodePref x =
-            List.find (ordPreference >> (==) x) enumPreference
-    in
     Set.toList
-        >> List.map encodePref
-        >> Maybe.values
-        >> List.map Show.preference
         >> E.list E.string
 
 
@@ -82,13 +73,13 @@ decodePreferences =
                 Just prefs ->
                     let
                         acc pref =
-                            setPreference pref <|
-                            List.member (Show.preference pref) prefs
+                            Preferences.set pref <|
+                            List.member (Preference.show pref) prefs
                     in
-                    List.foldr acc Set.empty enumPreference
+                    List.foldr acc Set.empty Preference.enum
 
                 Nothing ->
-                    noPreferences
+                    Preferences.empty
     in
     D.list D.string
         |> D.nullable
@@ -119,7 +110,7 @@ decodeCraftEssence : D.Decoder CraftEssence
 decodeCraftEssence =
     let
         fromId id =
-            case List.find (.id >> (==) id) craftEssences of
+            case List.find (.id >> (==) id) CraftEssences.db of
                 Just s ->
                     D.succeed s
 
@@ -138,7 +129,7 @@ decodeServant : D.Decoder Servant
 decodeServant =
     let
         fromId id =
-            case List.find (.id >> (==) id) servants of
+            case List.find (.id >> (==) id) Servants.db of
                 Just s ->
                     D.succeed s
 
@@ -147,7 +138,7 @@ decodeServant =
 
     -- Backward compatibility
         fromName name =
-            case List.find (.name >> (==) name) servants of
+            case List.find (.name >> (==) name) Servants.db of
                 Just s ->
                     D.succeed s
 
@@ -185,16 +176,16 @@ decodeMyServant =
     (D.succeed Dict.empty)
 
 
-decodeMine : D.Decoder (Dict OrdServant MyServant)
+decodeMine : D.Decoder (Dict Servant.Ord MyServant)
 decodeMine =
     let
-        keyPair ms = (ordServant ms.base, recalc ms)
+        keyPair ms = (Servant.ord ms.base, MyServant.recalc ms)
     in
     D.list decodeMyServant
         |> D.andThen (List.map keyPair >> Dict.fromList >> D.succeed)
 
 
-encodeMine : Dict OrdServant MyServant -> E.Value
+encodeMine : Dict Servant.Ord MyServant -> Value
 encodeMine =
     Dict.toList
         >> List.map Tuple.second
@@ -237,7 +228,7 @@ storePreferences store =
         >> store "preferences"
 
 
-storeMine : (String -> Value -> Cmd msg) -> Dict OrdServant MyServant -> Cmd msg
+storeMine : (String -> Value -> Cmd msg) -> Dict Servant.Ord MyServant -> Cmd msg
 storeMine store =
     encodeMine
         >> store "team"

@@ -1,10 +1,10 @@
-module Database.Passive exposing (..)
+module Database.Passives exposing (..)
 
 {- This module defines passive skills. Unlike active skills, passives with
 the same name and rank will always have identical effects. In other words,
 a `Passive` is a function of type `Rank -> Skill`: it accepts a Rank
 (such as `EX` or `APlus`) and returns a 'Skill'.
-Passive effects use the `BuffEffects` defined in `Database.Skill`. -}
+Passive effects use the `BuffEffects` defined in `Model.Skill`. -}
 
 -- The easiest way to define a `Passive` is to use the `passive` helper
 -- function, which accepts a name, an icon, and a mapping of `Skill` effects
@@ -17,11 +17,21 @@ Passive effects use the `BuffEffects` defined in `Database.Skill`. -}
 
 import List.Extra as List
 
-import Database.Base  exposing (..)
-import Database.Skill exposing (..)
+import Model.Card exposing (Card(..))
+import Model.Class exposing (Class(..))
+import Model.Trait exposing (Trait(..))
+import Model.Skill exposing (Skill)
+import Model.Skill.Amount exposing (Amount(..))
+import Model.Skill.BuffEffect exposing (BuffEffect(..))
+import Model.Skill.DebuffEffect exposing (DebuffEffect(..))
+import Model.Skill.InstantEffect exposing (InstantEffect(..))
+import Model.Skill.Rank exposing (Rank(..))
+import Model.Skill.SkillEffect exposing (SkillEffect(..))
+import Model.Skill.Special exposing (Special(..))
+import Model.Skill.Target exposing (Target(..))
 
 
-import Database.Icon as Icon exposing (Icon)
+import Model.Icon as Icon exposing (Icon)
 
 
 altreactor =

@@ -2,7 +2,7 @@ module Date exposing (Date, compare, today)
 
 import Time
 
-import StandardLibrary exposing (..)
+import StandardLibrary exposing (compareThen, alwaysEq)
 
 
 type alias Date =

@@ -1,30 +1,33 @@
 module Site.CraftEssence.Component exposing (Model, Msg, component)
 
-import Html.Keyed         as Keyed
+
 import Browser.Navigation as Navigation
+import Html as H exposing (Html)
+import Html.Events as E
+import Html.Keyed as Keyed
 import Html.Lazy exposing (lazy3)
-
-import Html.Events     as E
-import Html            as H exposing (Html)
 import Html.Attributes as P
+import Json.Encode exposing (Value)
 
-import StandardLibrary       exposing (..)
-import Database.CraftEssence exposing (..)
-import Database.Skill        exposing (..)
-import Persist.Flags         exposing (..)
-import Persist.Preferences   exposing (..)
-import Printing              exposing (..)
-import Site.Algebra          exposing (..)
-import Site.Common           exposing (..)
-import Site.Filtering        exposing (..)
-import Site.Rendering        exposing (..)
-import Site.Update           exposing (..)
-import Sorting               exposing (..)
-
+import StandardLibrary exposing (flip)
 import Class.ToImage as ToImage
+import Model.CraftEssence exposing (CraftEssence)
+import Model.Skill.Amount exposing (Amount(..))
+import Model.Skill.SkillEffect as SkillEffect
+import Persist.Flags exposing (Flags)
+import Persist.Preference exposing (Preference(..))
+import Persist.Preferences exposing (Preferences, prefers)
+import Print
+import Site.Algebra as Site exposing (Component, SiteModel, SiteMsg(..))
+import Site.Common exposing (..)
+import Site.Filtering as Filtering
+import Site.Rendering as Rendering
+import Site.Update as Update
+import Site.SortBy exposing (SortBy(..))
+import Database.CraftEssences as CraftEssences
 
-import Site.CraftEssence.Filters exposing (..)
-import Site.CraftEssence.Sorting exposing (..)
+import Site.CraftEssence.Filters as Filters
+import Site.CraftEssence.Sorting as Sorting
 
 
 type alias Model = SiteModel CraftEssence CraftEssence ()
@@ -34,7 +37,7 @@ type alias Msg = SiteMsg CraftEssence CraftEssence
 
 
 reSort : Model -> Model
-reSort st = { st | sorted = getSort st.sortBy }
+reSort st = { st | sorted = Sorting.get st.sortBy }
 
 
 component : (String -> Value -> Cmd Msg) -> Component Model Msg
@@ -42,9 +45,9 @@ component = always <|
     let
         init : Flags -> Navigation.Key -> Model
         init flags navKey =
-            siteInit (collectFilters getFilters) flags navKey ()
+            Site.init (Filtering.collectFilters Filters.get) flags navKey ()
                 |> reSort
-                >> updateListing flags.preferences identity
+                >> Filtering.updateListing flags.preferences identity
                 >> \st -> { st | root = "CraftEssences" }
 
         view : Preferences -> Model -> Html Msg
@@ -58,7 +61,7 @@ component = always <|
                     ]
             in
             lazy3 unlazyView prefs st.listing st.sortBy
-                |> siteView prefs st [Rarity, ID, ATK, HP] nav
+                |> Rendering.siteView prefs st [Rarity, ID, ATK, HP] nav
                 >> popup prefs st.focus
 
         unlazyView prefs listing sortBy =
@@ -69,16 +72,16 @@ component = always <|
 
         update : Preferences -> Msg -> Model -> (Model, Cmd Msg)
         update =
-            siteUpdate identity .name reSort
+            Update.siteUpdate identity .name reSort
   in
     { init = init, view = view, update = update }
 
 portrait : Bool -> Preferences -> (String, CraftEssence) -> Html Msg
 portrait big prefs (label, ce) =
-    if not big && prefer prefs Thumbnails then
+    if not big && prefers prefs Thumbnails then
         H.a
         [ P.class "thumb"
-        , P.href <| "/CraftEssences/" ++ urlName ce.name
+        , P.href <| "/CraftEssences/" ++ Print.url ce.name
         , E.onClick << Focus <| Just ce
         ]
         [ToImage.ceThumb ce]
@@ -94,14 +97,14 @@ portrait big prefs (label, ce) =
                     H.a
                     [ class
                     , E.onClick << Focus <| Just ce
-                    , P.href <| "/CraftEssences/" ++ urlName ce.name
+                    , P.href <| "/CraftEssences/" ++ Print.url ce.name
                     ]
 
             noBreak =
                 noBreakName big False
 
             artorify =
-                if prefer prefs Artorify then
+                if prefers prefs Artorify then
                     String.replace "Altria" "Artoria"
                 else
                     identity
@@ -117,7 +120,7 @@ portrait big prefs (label, ce) =
         , H.header [] << addLabel <|
             [text_ H.span << noBreak <| artorify ce.name]
         , H.footer []
-            [text_ H.span <| stars True ce.rarity]
+            [text_ H.span <| Print.stars True ce.rarity]
         ]
 
 
@@ -157,8 +160,8 @@ popup prefs a =
                 effectsEl f =
                     H.section [] << (++) bondMsg <<
                     flip List.map ce.effect <|
-                    mapAmount f
-                        >> effectEl craftEssences (Just .effect)
+                    SkillEffect.mapAmount f
+                        >> effectEl CraftEssences.db (Just .effect)
 
                 mlbEl =
                     if base == max then
@@ -168,7 +171,7 @@ popup prefs a =
 
                 showInt =
                     toFloat
-                        >> commas
+                        >> Print.commas
                         >> H.text
                         >> List.singleton
             in

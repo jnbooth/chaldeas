@@ -1,29 +1,29 @@
 module Site.Application exposing (app)
 
-import Html            as H
-import Html.Attributes as P
-
-import List.Extra         as List
-import Browser.Dom        as Dom
-import Browser.Navigation as Navigation
-import Json.Decode        as Json
-
 import Browser exposing (Document, UrlRequest)
-import Date
+import Browser.Dom as Dom
+import Browser.Navigation as Navigation
 import Dict
-import Url     exposing (Url)
+import Html as H
+import Html.Attributes as P
+import Json.Decode as D exposing (Value)
+import List.Extra as List
 import Task
 import Time
+import Url exposing (Url)
 
-import StandardLibrary     exposing (..)
-import Persist.Flags       exposing (..)
-import Persist.Preferences exposing (..)
-import Printing            exposing (..)
-import Site.Algebra        exposing (..)
+import StandardLibrary exposing (pure)
+import Date
+import Model.Class as Class
+import Model.Servant as Servant
+import Persist.Flags as Flags
+import Persist.Preference exposing (Preference(..))
+import Persist.Preferences as Preferences exposing (Preferences, prefers)
+import Print
+import Site.Algebra exposing (Component, SiteModel, SiteMsg(..))
 
 import Site.CraftEssence.Component as CraftEssences
-import Site.Servant.Component      as Servants
-import Class.Show                  as Show
+import Site.Servant.Component as Servants
 
 
 {-| The page currently being shown. -}
@@ -91,7 +91,7 @@ stateFromPath fullPath st =
         "CraftEssences" ->
             let
                 ceModel =
-                    focusFromPath (.name >> urlName >> (==) sub) st.ceModel
+                    focusFromPath (.name >> Print.url >> (==) sub) st.ceModel
             in
             ( { st
               | viewing = CraftEssences
@@ -103,16 +103,16 @@ stateFromPath fullPath st =
 
         _ ->
             let
-                show = Show.servant <| prefer st.prefs HideSpoilers
+                show = Servant.show <| prefers st.prefs HideSpoilers
 
                 match {base} =
                     case base.spoiler of
                         Just x ->
-                            sub == urlName base.name
-                                || sub == urlName
-                                   (Show.class base.class ++ " of " ++ x)
+                            sub == Print.url base.name
+                                || sub == Print.url
+                                   (Class.show base.class ++ " of " ++ x)
                         Nothing ->
-                            sub == urlName base.name
+                            sub == Print.url base.name
 
                 sModel =
                     focusFromPath match st.sModel
@@ -167,16 +167,16 @@ app onInit analytics title store =
         init val url key =
             let
                 (error, flags) =
-                    case Json.decodeValue decodeFlags val of
+                    case D.decodeValue Flags.decode val of
                         Ok ok ->
                             (Nothing, ok)
 
                         Err err ->
-                            ( Just <| Json.errorToString err
+                            ( Just <| D.errorToString err
                             , { today       = 0
                                                   |> Time.millisToPosix
                                                   >> Date.today
-                              , preferences = noPreferences
+                              , preferences = Preferences.empty
                               , mine        = Dict.empty
                               , teams       = []
                               }
@@ -213,7 +213,7 @@ app onInit analytics title store =
         setPref st k v =
             let
                 prefs =
-                    setPreference k v st.prefs
+                    Preferences.set k v st.prefs
 
                 msg =
                     SetPref k v
@@ -230,7 +230,7 @@ app onInit analytics title store =
               , sModel  = sModel
               }
             , Cmd.batch
-              [ storePreferences store prefs
+              [ Flags.storePreferences store prefs
               , Cmd.map CraftEssencesMsg ceCmd
               , Cmd.map ServantsMsg sCmd
               ]

@@ -1,8 +1,7 @@
 module MaybeRank exposing (MaybeRank(..), show)
 
-import Database.Servant exposing (..)
-import Database.Skill   exposing (..)
-import Class.Show as Show
+import Model.Servant exposing (Servant)
+import Model.Skill.Rank as Rank exposing (Rank(..))
 
 type MaybeRank
     = Unranked
@@ -16,13 +15,13 @@ show a =
         Unranked ->
             "--"
         Pure x ->
-            "Rank" ++ Show.rank x
+            "Rank" ++ Rank.show x
 
         Upgrade Unknown ->
             "NP"
 
         Upgrade x ->
-            "Rank '" ++ String.trim (Show.rank x) ++ "'"
+            "Rank '" ++ String.trim (Rank.show x) ++ "'"
 
         Unique s Unknown ->
             s.name
@@ -33,16 +32,16 @@ show a =
                     "Lord Camelot"
 
                 "Frankenstein" ->
-                    "D~" ++ Show.rank x
+                    "D~" ++ Rank.show x
 
                 "EMIYA" ->
-                    "E~" ++ Show.rank x
+                    "E~" ++ Rank.show x
 
                 "EMIYA (Alter)" ->
-                    "E~" ++ Show.rank x
+                    "E~" ++ Rank.show x
 
                 "Henry Jekyll & Hyde" ->
-                    "Rank" ++ Show.rank x ++ " (Hyde)"
+                    "Rank" ++ Rank.show x ++ " (Hyde)"
 
                 _ ->
                     s.name

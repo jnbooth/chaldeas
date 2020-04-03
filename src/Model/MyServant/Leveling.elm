@@ -1,4 +1,4 @@
-module MyServant.Leveling exposing
+module Model.MyServant.Leveling exposing
   ( maxLevel
   , ascendCost, skillCost
   , ascendWishlist, skillWishlist
@@ -7,11 +7,12 @@ module MyServant.Leveling exposing
 {-| Fixed rates for leveling `Servant`s based on their rarity. -}
 
 import Array
+import List.Extra as List
 
-import StandardLibrary  exposing (..)
-import Database.Base    exposing (..)
-import Database.Servant exposing (..)
-import MyServant        exposing (..)
+import StandardLibrary exposing (flip)
+import Model.Material as Material exposing (Material)
+import Model.Servant as Servant exposing (Servant)
+import Model.MyServant exposing (MyServant)
 
 
 maxLevel : Servant -> Int
@@ -64,6 +65,21 @@ atAscension x =
         ascension
 
 
+reduceMats : List (List (Material, Int)) -> List (Material, Int)
+reduceMats =
+    let
+        reduce ((x, y), xs) =
+            (x, List.sum <| y :: List.map Tuple.second xs)
+
+        eqFirst (x, _) (y, _) =
+            x == y
+    in
+    List.concat
+        >> List.sortBy (Tuple.first >> Material.ord)
+        >> List.groupWhile eqFirst
+        >> List.map reduce
+
+
 skillWishlist : List MyServant -> List (Material, Int)
 skillWishlist xs =
     let
@@ -76,7 +92,7 @@ skillWishlist xs =
            skillLvl <- ms.skills
            drop (skillLvl - 1) reinforce -}
     bind xs <| \ms ->
-    let reinforce = getReinforcements ms.base in
+    let reinforce = Servant.getReinforcements ms.base in
     bind ms.skills <| \skillLvl ->
     List.drop (skillLvl - 1) reinforce
 
@@ -86,7 +102,7 @@ ascendWishlist xs =
     reduceMats <<
     flip List.concatMap xs <| \ms ->
         List.drop (atAscension ms) <|
-        getAscensions ms.base
+        Servant.getAscensions ms.base
 
 
 skillCost : Servant -> Int -> Int

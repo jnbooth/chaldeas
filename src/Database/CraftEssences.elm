@@ -1,7 +1,7 @@
-module Database.CraftEssence exposing
-  ( CraftEssence
-  , craftEssences
+module Database.CraftEssences exposing
+  ( db
   , getBond
+  , getAll
   )
 
 {-| All Craft Essences. -}
@@ -12,12 +12,28 @@ module Database.CraftEssence exposing
 import Dict exposing (Dict)
 import Maybe.Extra as Maybe
 
-import Database.Base    exposing (..)
-import Database.Skill   exposing (..)
-import Database.Servant exposing (..)
+import Class.Has exposing (Has)
+import Model.Icon as Icon
+import Model.Card exposing (Card(..))
+import Model.Class as Class exposing (Class(..))
+import Model.CraftEssence exposing (CraftEssence)
+import Model.Trait exposing (Trait(..))
+import Model.Servant exposing (Servant)
+import Model.Skill.Amount exposing (Amount(..))
+import Model.Skill.BonusEffect exposing (BonusEffect(..), BonusType(..))
+import Model.Skill.BuffEffect exposing (BuffEffect(..))
+import Model.Skill.DebuffEffect exposing (DebuffEffect(..))
+import Model.Skill.InstantEffect exposing (InstantEffect(..))
+import Model.Skill.SkillEffect exposing (SkillEffect(..))
+import Model.Skill.Special exposing (Special(..))
+import Model.Skill.Target exposing (Target(..))
 
-import Class.Show as Show
-import Database.Icon as Icon exposing (Icon)
+import Database
+
+
+getAll : Has CraftEssence a -> List a
+getAll =
+    Database.genericGetAll db
 
 
 {-| All Craft Essences available in EN. -}
@@ -25,8 +41,8 @@ import Database.Icon as Icon exposing (Icon)
 -- GrandOrder.Wiki is only trustworthy for CEs that have been in the game
 -- for a while. Craft Essences introduced during events and the like should be
 -- checked against the official announcement.
-craftEssences : List CraftEssence
-craftEssences =
+db : List CraftEssence
+db =
     let
         gutsPercent =
             Times 1 <<
@@ -3613,7 +3629,7 @@ craftEssences =
 
 equipped : Class -> SkillEffect -> SkillEffect
 equipped =
-    When << (++) "equipped by a " << Show.class
+    When << (++) "equipped by a " << Class.show
 
 
 {-| Retrieves the corresponding Bond CE. Memoized for performance. -}
@@ -3629,19 +3645,7 @@ bondMap =
         go ce =
             Maybe.map (\bond -> (bond, ce)) ce.bond
     in
-    craftEssences
+    db
         |> List.map go
         >> Maybe.values
         >> Dict.fromList
-
-
-type alias CraftEssence =
-    { name  : String
-    , id  : Int
-    , rarity  : Int
-    , icon  : Icon
-    , stats  : { base : Stat, max : Stat }
-    , effect : List SkillEffect
-    , bond : Maybe String
-    , limited : Bool
-    }

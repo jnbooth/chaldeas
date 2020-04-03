@@ -1,15 +1,14 @@
-module Site.Servant.Sorting exposing (getSort)
+module Site.Servant.Sorting exposing (get)
 
 import Dict
 
-import StandardLibrary     exposing  (..)
-import MyServant           exposing (..)
-import Sorting             exposing (..)
-import Persist.Preferences exposing (..)
+import Model.MyServant exposing (MyServant)
+import Site.SortBy as SortBy exposing (SortBy(..))
+import Persist.Preferences exposing (Preferences)
 
 
-getSort : Preferences -> SortBy -> List MyServant -> List (String, MyServant)
-getSort prefs a = case a of
+get : Preferences -> SortBy -> List MyServant -> List (String, MyServant)
+get prefs a = case a of
     Rarity ->
         let
             sortOn {base} =
@@ -23,9 +22,9 @@ getSort prefs a = case a of
     _ ->
         let
             sortOn ms =
-                Dict.get (ordSortBy a) ms.sorted
+                Dict.get (SortBy.ord a) ms.sorted
                     |> Maybe.withDefault (1/0, 1/0)
-                    >> if addToSort prefs a then
+                    >> if SortBy.addToSort prefs a then
                            Tuple.first
                        else
                            Tuple.second
@@ -43,7 +42,7 @@ getSort prefs a = case a of
                 ms
                     |> sortOn
                     >> abs
-                    >> formatSort a
+                    >> SortBy.format a
                     >> showNP ms.npLvl
 
             showSort ms = ( showFormat ms, ms )

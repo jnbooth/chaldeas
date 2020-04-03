@@ -1,15 +1,15 @@
-module Database.Servant exposing
-  ( Servant, eqServant, OrdServant, ordServant
-  , Deck(..)
+module Model.Servant exposing
+  ( Servant
+  , show, eq
+  , Ord, ord
   , Ratings
   , NoblePhantasm
   , Hits, hits
   , Gen
-  , PhantasmType(..), phantasmType
+  , phantasmType
   , Ascension(..)
   , Reinforcement(..)
-  , getDeck
-  , reduceMats, getAscensions, getReinforcements, getMaterials
+  , getAscensions, getReinforcements
   )
 
 {-| This module defines the data structure of Servants. -}
@@ -19,9 +19,19 @@ module Database.Servant exposing
 
 import List.Extra as List
 
-import StandardLibrary exposing (..)
-import Database.Base   exposing (..)
-import Database.Skill  exposing (..)
+import Model.Attribute exposing (Attribute)
+import Model.Card exposing (Card(..))
+import Model.Class as Class exposing (Class)
+import Model.Deck exposing (Deck)
+import Model.Material exposing (Material(..))
+import Model.PhantasmType exposing (PhantasmType(..))
+import Model.Stat exposing (Stat)
+import Model.Trait exposing (Trait)
+import Model.Skill exposing (Skill)
+import Model.Skill.Rank exposing (Rank)
+import Model.Skill.SkillEffect exposing (SkillEffect(..))
+import Model.Skill.InstantEffect exposing (InstantEffect(..))
+import Model.Skill.Target exposing (Target(..))
 
 
 type alias Servant =
@@ -50,22 +60,28 @@ type alias Servant =
     }
 
 
-type alias OrdServant =
-    Int
-
-
-ordServant : Servant -> OrdServant
-ordServant =
-    .id
-
-
-eqServant : Servant -> Servant -> Bool
-eqServant x y =
+eq : Servant -> Servant -> Bool
+eq x y =
     x.id == y.id
 
 
-type Deck =
-    Deck Card Card Card Card Card
+show : Bool -> Servant -> String
+show hide x =
+    if hide then
+        case x.spoiler of
+            Just y  -> Class.show x.class ++ " of " ++ y
+            Nothing -> x.name
+    else
+        x.name
+
+
+type alias Ord =
+    Int
+
+
+ord : Servant -> Int
+ord =
+    .id
 
 
 type alias Ratings =
@@ -107,12 +123,6 @@ type alias Gen =
     }
 
 
-type PhantasmType
-    = SingleTarget
-    | MultiTarget
-    | Support
-
-
 type Ascension
     = Welfare String
     | Clear String String String String
@@ -136,15 +146,6 @@ type Reinforcement
       -- 9 is always [ (CrystallizedLore: 1) ]
 
 
-{-| Returns all `Card`s in a `Servant`'s `Deck`. Does not include NP card. -}
-getDeck : Servant -> List Card
-getDeck {deck} =
-    let
-        (Deck a b c d e) = deck
-    in
-    [a, b, c, d, e]
-
-
 hits : Card -> Servant -> Int
 hits card s =
     case card of
@@ -152,21 +153,6 @@ hits card s =
         Quick  -> s.hits.quick
         Buster -> s.hits.buster
         Extra  -> s.hits.ex
-
-
-reduceMats : List (List (Material, Int)) -> List (Material, Int)
-reduceMats =
-    let
-        reduce ((x, y), xs) =
-            (x, List.sum <| y :: List.map Tuple.second xs)
-
-        eqFirst (x, _) (y, _) =
-            x == y
-    in
-    List.concat
-        >> List.sortBy (Tuple.first >> ordMaterial)
-        >> List.groupWhile eqFirst
-        >> List.map reduce
 
 
 getAscensions : Servant -> List (List (Material, Int))
@@ -185,14 +171,6 @@ getReinforcements {skillUp} =
         (Reinforcement a b c d e f g h) = skillUp
     in
     [a, b, c, d, e, f, g, h, [ (CrystallizedLore, 1) ]]
-
-
-getMaterials : Servant -> List Material
-getMaterials s =
-    getAscensions s ++ getReinforcements s
-        |> List.concat
-        >> List.map Tuple.first
-        >> List.uniqueBy ordMaterial
 
 
 phantasmType : NoblePhantasm -> PhantasmType

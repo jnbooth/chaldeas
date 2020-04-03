@@ -2,16 +2,31 @@ module Class.ToJSON exposing (craftEssence, servant)
 
 {-| Exports internal data to JSON values. -}
 
-import Json.Encode as E
-import List.Extra  as List
+import Json.Encode as E exposing (Value)
+import List.Extra as List
 
-import StandardLibrary       exposing (..)
-import Database.Base         exposing (..)
-import Database.Skill        exposing (..)
-import Database.CraftEssence exposing (..)
-import Database.Servant      exposing (..)
+import StandardLibrary exposing (flip)
 
-import Class.Show as Show
+import Model.Attribute as Attribute
+import Model.Card as Card
+import Model.Class as Class
+import Model.CraftEssence exposing (CraftEssence)
+import Model.Deck as Deck
+import Model.Stat exposing (Stat)
+import Model.Trait as Trait
+import Model.Icon as Icon
+import Model.Servant exposing (Hits, NoblePhantasm, Servant)
+import Model.Skill exposing (Skill)
+import Model.Skill.Amount as Amount exposing (Amount(..))
+import Model.Skill.BonusEffect as BonusEffect
+import Model.Skill.BuffEffect as BuffEffect
+import Model.Skill.DebuffEffect as DebuffEffect
+import Model.Skill.InstantEffect as InstantEffect
+import Model.Skill.Rank as Rank
+import Model.Skill.SkillEffect exposing (SkillEffect(..))
+import Model.Skill.Target as Target exposing (Target(..))
+
+import Database.CraftEssences as CraftEssences
 
 
 nullable : (a -> Value) -> Maybe a -> Value
@@ -49,7 +64,7 @@ stat x =
 
 target : Target -> Value
 target =
-    Show.possessiveAndSubject
+    Target.possessiveAndSubject
         >> .s
         >> String.trim
         >> E.string
@@ -81,7 +96,7 @@ skillEffect =
                 [ ("target",   target targ)
                 , ("duration", E.int duration)
                 , ("effect"
-                  , E.string <| Show.buffEffect Someone Placeholder effect
+                  , E.string <| BuffEffect.show Someone Placeholder effect
                   )
                 ]
 
@@ -90,7 +105,7 @@ skillEffect =
                 [ ("target",   target targ)
                 , ("duration", E.int duration)
                 , ("effect"
-                  , E.string <| Show.debuffEffect Someone Placeholder effect
+                  , E.string <| DebuffEffect.show Someone Placeholder effect
                   )
                 ]
 
@@ -98,14 +113,14 @@ skillEffect =
                 withAmount amount <|
                 [ ("target",   target targ)
                 , ("effect"
-                  , E.string <| Show.instantEffect Someone Placeholder effect
+                  , E.string <| InstantEffect.show Someone Placeholder effect
                   )
                 ]
 
             Bonus effect isPerc amount ->
                 withAmount amount <|
                 [ ("effect"
-                  , E.string <| Show.bonusEffect isPerc Placeholder effect
+                  , E.string <| BonusEffect.show isPerc Placeholder effect
                   )
                 ]
 
@@ -122,7 +137,7 @@ skillEffect =
             ToMax x effect ->
                 go effect
                     |> modEffect
-                       (flip (++) <| " every turn up to " ++ Show.amount x)
+                       (flip (++) <| " every turn up to " ++ Amount.show x)
 
             When x effect ->
                 go effect ++ [("condition", E.string x)]
@@ -143,7 +158,7 @@ skill : Skill -> Value
 skill x =
     E.object
     [ ("name",   E.string x.name)
-    , ("icon",   E.string <| Show.icon x.icon)
+    , ("icon",   E.string <| Icon.show x.icon)
     , ("cd",     E.int x.cd)
     , ("effect", E.list skillEffect x.effect)
     ]
@@ -154,8 +169,8 @@ noblePhantasm x =
     E.object
     [ ("name",           E.string x.name)
     , ("desc",           E.string x.desc)
-    , ("rank",           E.string <| Show.rank x.rank)
-    , ("card",           E.string <| Show.card x.card)
+    , ("rank",           E.string <| Rank.show x.rank)
+    , ("card",           E.string <| Card.show x.card)
     , ("classification", E.string x.kind)
     , ("hits",           E.int x.hits)
     , ("effect",         E.list skillEffect x.effect)
@@ -187,7 +202,7 @@ craftEssence ce =
     [ ("name",    E.string ce.name)
     , ("id",      E.int ce.id)
     , ("rarity",  E.int ce.rarity)
-    , ("icon",    E.string <| Show.icon ce.icon)
+    , ("icon",    E.string <| Icon.show ce.icon)
     , ("stats",   stats ce.stats)
     , ("effect",  E.list skillEffect ce.effect)
     , ("limited", E.bool ce.limited)
@@ -209,9 +224,9 @@ servant s =
     [ ("name",          E.string s.name)
     , ("id",            E.int s.id)
     , ("rarity",        E.int s.rarity)
-    , ("class",         E.string <| Show.class s.class)
-    , ("attribute",     E.string <| Show.attribute s.attr)
-    , ("deck",          E.list (E.string << Show.card) <| getDeck s)
+    , ("class",         E.string <| Class.show s.class)
+    , ("attribute",     E.string <| Attribute.show s.attr)
+    , ("deck",          E.list (E.string << Card.show) <| Deck.toList s.deck)
     , ("curve",         E.int s.curve)
     , ("stats",         stats s.stats)
     , ("skills",        E.list skill s.skills)
@@ -222,11 +237,11 @@ servant s =
     , ("npAtk",         E.float s.gen.npAtk)
     , ("npDef",         E.int s.gen.npDef)
     , ("hits",          hits s.hits)
-    , ("traits",        E.list (Show.trait >> E.string) s.traits)
+    , ("traits",        E.list (Trait.show >> E.string) s.traits)
     , ("deathRate",     E.float s.death)
-    , ("gender",        E.string <| Show.trait s.gender)
-    , ("alignment",     E.list (Show.trait >> E.string) s.align)
+    , ("gender",        E.string <| Trait.show s.gender)
+    , ("alignment",     E.list (Trait.show >> E.string) s.align)
     , ("limited",       E.bool s.limited)
     , ("free",          E.bool s.free)
-    , ("bond",          nullable craftEssence <| getBond s)
+    , ("bond",          nullable craftEssence <| CraftEssences.getBond s)
     ]

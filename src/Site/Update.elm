@@ -2,13 +2,14 @@ module Site.Update exposing (siteUpdate)
 
 import List.Extra as List
 
-import StandardLibrary     exposing (..)
-import Site.Algebra        exposing (..)
-import Site.Base           exposing (..)
-import Site.Common         exposing (..)
-import Site.Filtering      exposing (..)
-import Persist.Flags       exposing (..)
-import Persist.Preferences exposing (..)
+import StandardLibrary exposing (pure, removeWith)
+import Site.Algebra exposing (SiteModel, SiteMsg(..))
+import Site.FilterTab as FilterTab
+import Site.Common exposing (..)
+import Site.Filter as Filter
+import Site.Filtering as Filtering
+import Persist.Preferences exposing (Preferences)
+
 
 siteUpdate : (focus -> filt)
           -> (filt -> String)
@@ -20,14 +21,14 @@ siteUpdate : (focus -> filt)
 siteUpdate transform show reSort prefs msg st =
     let
         relist =
-            updateListing prefs transform
+            Filtering.updateListing prefs transform
 
         goUp x =
             (x, scrollToTop "content")
 
         toggleIn x xs =
-            if List.any (eqFilter x) xs then
-                removeWith eqFilter x xs
+            if List.any (Filter.eq x) xs then
+                removeWith Filter.eq x xs
             else
                 x :: xs
     in
@@ -50,7 +51,7 @@ siteUpdate transform show reSort prefs msg st =
                         >> Maybe.withDefault []
             in
             goUp <| relist
-            { st | exclude = List.uniqueBy ordFilter <| filters ++ st.exclude }
+            { st | exclude = List.uniqueBy Filter.ord <| filters ++ st.exclude }
 
         SetSort sortBy ->
             goUp << relist <| reSort { st | sortBy = sortBy }
@@ -69,7 +70,7 @@ siteUpdate transform show reSort prefs msg st =
                     (x, Cmd.batch [y, setPath st.navKey [st.root]])
             in
             resetPath << goUp << relist <|
-            if List.any (.tab >> exclusive) filters then
+            if List.any (.tab >> FilterTab.exclusive) filters then
                 { st
                 | exclude = filters
                 , filters = []
@@ -87,7 +88,7 @@ siteUpdate transform show reSort prefs msg st =
 
         Toggle filter ->
             goUp << relist <|
-            if exclusive filter.tab then
+            if FilterTab.exclusive filter.tab then
                 { st | exclude = toggleIn filter st.exclude }
             else
                 { st | filters = toggleIn filter st.filters }

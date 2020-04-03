@@ -2,25 +2,24 @@ module Site.Common exposing (..)
 
 {-| Utility functions for rendering to HTML. -}
 
-import Browser.Dom        as Dom
-import Json.Decode        as Json
+import Browser.Dom as Dom
 import Browser.Navigation as Navigation
-import Url.Builder        as Url
-import Task
-
-import Html            as H exposing (Html)
-import Html.Events     as E
+import Html as H exposing (Html)
 import Html.Attributes as P
+import Html.Events as E
+import Json.Decode as Json
+import Task
+import Url.Builder as Url
 
-import StandardLibrary     exposing (..)
-import Printing            exposing (..)
-import Database.Base       exposing (..)
-import Database.Skill      exposing (..)
-import Persist.Preferences exposing (..)
-import Site.Algebra        exposing (..)
-import Site.Filtering      exposing (..)
-
-import Class.Show as Show
+import StandardLibrary exposing (flip, stripSuffix)
+import Model.Class as Class
+import Model.Skill.RangeInfo exposing (RangeInfo)
+import Model.Skill.SkillEffect as SkillEffect exposing (SkillEffect)
+import Print
+import Persist.Preference exposing (Preference(..))
+import Persist.Preferences exposing (Preferences, prefers)
+import Site.Algebra exposing (SiteMsg(..))
+import Site.Filtering as Filtering
 
 
 {-| Scrolls an HTML element to its top.
@@ -34,7 +33,7 @@ scrollToTop id =
 {-| Updates the URL in the address bar and adds an entry to browser history. -}
 setPath : Navigation.Key -> List String -> Cmd msg
 setPath key path =
-    Url.absolute (List.map urlName path) []
+    Url.absolute (List.map Print.url path) []
         |> Navigation.pushUrl key
 
 
@@ -42,7 +41,7 @@ setPath key path =
 setFocus : Navigation.Key -> String -> Maybe String -> Cmd (SiteMsg a b)
 setFocus key root a =
     case a of
-        Just name -> setPath key [root, urlName name]
+        Just name -> setPath key [root, Print.url name]
         Nothing   -> setPath key [root]
 
 
@@ -56,7 +55,7 @@ toCell isPercent =
             else
                 xs
     in
-    places 0
+    Print.places 0
         >> addPercent
         >> text_ H.td
 
@@ -85,7 +84,7 @@ noBreakName : Bool -> Bool -> String -> String
 noBreakName shouldPrettify hideClasses =
     let
         classNames =
-            List.map Show.class enumClass
+            List.map Class.show Class.enum
 
         replaceSpaces =
             String.replace " " " "
@@ -121,13 +120,13 @@ noBreakName shouldPrettify hideClasses =
     String.split " ("
         >> unBreak
         >> replacePirates
-        >> if shouldPrettify then prettify else identity
+        >> if shouldPrettify then Print.pretty else identity
 
 
 {-| `"light"` or `"dark"` depending on `NightMode` preference. -}
 mode : Preferences -> String
 mode prefs =
-    if prefer prefs NightMode then
+    if prefers prefs NightMode then
         "dark"
     else
         "light"
@@ -137,11 +136,11 @@ mode prefs =
 effectEl : List a -> Maybe (a -> List SkillEffect) -> SkillEffect
         -> Html (SiteMsg a b)
 effectEl xs getEffects ef =
-    flip H.p [H.text <| Show.skillEffect ef] <|
-    if demerit ef then
+    flip H.p [H.text <| SkillEffect.show ef] <|
+    if SkillEffect.demerit ef then
         [P.class "demerit"]
     else
-        case getEffects |> Maybe.andThen (skillFilter xs ef) of
+        case getEffects |> Maybe.andThen (Filtering.skill xs ef) of
             Just filter -> [P.class "link", E.onClick <| FilterBy [filter]]
             Nothing     -> []
 
@@ -156,8 +155,8 @@ a_ path =
                 >> List.head
                 >> Maybe.withDefault ""
     in
-    H.a [P.href << (++) "/" << String.join "/" <| List.map urlName path]
-    [H.text <| prettify last]
+    H.a [P.href << (++) "/" << String.join "/" <| List.map Print.url path]
+    [H.text <| Print.pretty last]
 
 
 {-| `<h[1-6]>` -}

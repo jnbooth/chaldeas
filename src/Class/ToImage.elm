@@ -4,30 +4,30 @@ module Class.ToImage exposing (..)
 
 # Usage
 @docs ImagePath, ToImage, image, thumbnail, link
-# `Database.Base`
+# `Model`
 @docs card, class, icon, material
 # `Database.CraftEssence`
 @docs craftEssence
 # `Database.Servant`
 @docs servant
-# `Database.Skill`
+# `Model.Skill`
 @docs buffEffect, debuffEffect
 # `MyServant`
 @docs myServant
 -}
 
-import Html            as H exposing (Html)
+import Html as H exposing (Html)
 import Html.Attributes as P
 
-import MyServant             exposing (..)
-import Printing              exposing (..)
-import Database.Base         exposing (..)
-import Database.CraftEssence exposing (..)
-import Database.Icon         exposing (Icon)
-import Database.Servant      exposing (..)
-import Database.Skill        exposing (..)
-
-import Class.Show as Show
+import Print
+import Model.Card as Card exposing (Card)
+import Model.Class as Class exposing (Class)
+import Model.Material as Material exposing (Material)
+import Model.CraftEssence exposing (CraftEssence)
+import Model.Icon as Icon exposing (Icon)
+import Model.Servant exposing (Servant)
+import Model.Skill.BuffEffect as BuffEffect exposing (BuffEffect(..))
+import Model.Skill.DebuffEffect as DebuffEffect exposing (DebuffEffect(..))
 
 
 type alias ImagePath =
@@ -42,7 +42,7 @@ type alias ToImage a =
 
 src : ImagePath -> H.Attribute a
 src {dir, file} =
-    P.src <| "/img/" ++ dir ++ "/" ++ fileName file ++ ".png"
+    P.src <| "/img/" ++ dir ++ "/" ++ Print.file file ++ ".png"
 
 
 image : ImagePath -> Html a
@@ -52,13 +52,13 @@ image path = H.img [src path] []
 card : ToImage Card
 card =
     ImagePath "Card" <<
-    Show.card
+    Card.show
 
 
 class : ToImage Class
 class =
     ImagePath "Class" <<
-    Show.class
+    Class.show
 
 
 servant : ToImage Servant
@@ -76,13 +76,13 @@ craftEssence =
 icon : ToImage Icon
 icon =
     ImagePath "Skill" <<
-    Show.icon
+    Icon.show
 
 
 material : ToImage Material
 material =
     ImagePath "Material" <<
-    Show.material
+    Material.show
 
 
 buffEffect : ToImage BuffEffect
@@ -91,13 +91,13 @@ buffEffect a =
         Resist _     -> buffEffect DebuffResist
         Special ef _ -> buffEffect ef
         Success _    -> buffEffect DebuffUp
-        _            -> ImagePath "Effect" <| Show.nameBuffEffect a
+        _            -> ImagePath "Effect" <| BuffEffect.name a
 
 
 debuffEffect : ToImage DebuffEffect
 debuffEffect =
     ImagePath "Effect" <<
-    Show.nameDebuffEffect
+    DebuffEffect.name
 
 
 ceThumb : CraftEssence -> Html a

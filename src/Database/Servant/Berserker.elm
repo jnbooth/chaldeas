@@ -1,11 +1,23 @@
 module Database.Servant.Berserker exposing (berserkers)
 
-import Database.Base exposing (..)
-import Database.Passive exposing (..)
-import Database.Servant exposing (..)
-import Database.Skill exposing (..)
+import Model.Attribute exposing (Attribute(..))
+import Model.Card exposing (Card(..))
+import Model.Class exposing (Class(..))
+import Model.Deck exposing (Deck(..))
+import Model.Material exposing (Material(..))
+import Model.Trait exposing (Trait(..))
+import Database.Passives exposing (..)
+import Model.Servant exposing (Servant, Ascension(..), Reinforcement(..))
+import Model.Skill.Amount exposing (Amount(..))
+import Model.Skill.BuffEffect exposing (BuffEffect(..))
+import Model.Skill.DebuffEffect exposing (DebuffEffect(..))
+import Model.Skill.InstantEffect exposing (InstantEffect(..))
+import Model.Skill.Rank exposing (Rank(..))
+import Model.Skill.SkillEffect exposing (SkillEffect(..))
+import Model.Skill.Special exposing (Special(..))
+import Model.Skill.Target exposing (Target(..))
 
-import Database.Icon as Icon
+import Model.Icon as Icon
 
 berserkers : List Servant
 berserkers =

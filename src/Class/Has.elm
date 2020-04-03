@@ -1,12 +1,24 @@
 module Class.Has exposing (..)
 
 import Maybe.Extra as Maybe
+import List.Extra as List
 
-import Database.Base  exposing (..)
-import Database.Skill exposing (..)
-import Database.Servant as Servant exposing (Deck, PhantasmType, Servant, getMaterials)
-
-import Class.Show as Show
+import Model.Attribute as Attribute exposing (Attribute)
+import Model.Card as Card exposing (Card)
+import Model.Class as Class exposing (Class)
+import Model.Deck as Deck exposing (Deck)
+import Model.Material as Material exposing (Material)
+import Model.PhantasmType as PhantasmType exposing (PhantasmType)
+import Model.Trait as Trait exposing (Trait)
+import Model.Skill.Amount exposing (Amount(..))
+import Model.Skill exposing (Skill)
+import Model.Skill.BonusEffect as BonusEffect exposing (BonusEffect, BonusType(..))
+import Model.Skill.BuffEffect as BuffEffect exposing (BuffEffect)
+import Model.Skill.DebuffEffect as DebuffEffect exposing (DebuffEffect)
+import Model.Skill.InstantEffect as InstantEffect exposing (InstantEffect(..))
+import Model.Skill.SkillEffect as SkillEffect exposing (SkillEffect(..))
+import Model.Skill.Target exposing (Target(..))
+import Model.Servant as Servant exposing (Servant)
 
 
 type alias Has a b =
@@ -17,31 +29,34 @@ type alias Has a b =
 
 material : Has Servant Material
 material =
-    Has Show.material << always <|
-    getMaterials
-        >> List.filter (not << ignoreMat)
+    Has Material.show << always <| \s ->
+    Servant.getAscensions s ++ Servant.getReinforcements s
+        |> List.concat
+        >> List.map Tuple.first
+        >> List.uniqueBy Material.show
+        >> List.filter (not << Material.ignore)
 
 
 alignment : Has Servant Trait
 alignment =
-    Has Show.trait << always <|
+    Has Trait.show << always <|
     .align
 
 gender : Has Servant Trait
 gender =
-    Has Show.trait << always <|
+    Has Trait.show << always <|
     .gender
         >> List.singleton
 
 trait : Has Servant Trait
 trait =
-    Has Show.trait << always <|
+    Has Trait.show << always <|
     .traits
 
 
 phantasmType : Has Servant PhantasmType
 phantasmType =
-    Has Show.phantasmType << always <|
+    Has PhantasmType.show << always <|
     .phantasm
         >> Servant.phantasmType
         >> List.singleton
@@ -49,28 +64,28 @@ phantasmType =
 
 class : Has Servant Class
 class =
-    Has Show.class << always <|
+    Has Class.show << always <|
     .class
         >> List.singleton
 
 
 attribute : Has Servant Attribute
 attribute =
-    Has Show.attribute << always <|
+    Has Attribute.show << always <|
     .attr
         >> List.singleton
 
 
 deck : Has Servant Deck
 deck =
-    Has Show.deck << always <|
+    Has Deck.show << always <|
     .deck
         >> List.singleton
 
 
 card : Has Servant Card
 card =
-    Has Show.card << always <|
+    Has Card.show << always <|
     .phantasm
         >> .card
         >> List.singleton
@@ -94,15 +109,15 @@ effect : (b -> String) -> (Bool -> SkillEffect -> Maybe b)
 effect show match f =
     Has show <| \noSelf x ->
         f x
-            |> List.map simplify
-            >> List.filter (not << demerit)
+            |> List.map SkillEffect.simplify
+            >> List.filter (not << SkillEffect.demerit)
             >> List.map (match noSelf)
             >> Maybe.values
 
 
 buffEffect : (a -> List SkillEffect) -> Has a BuffEffect
 buffEffect =
-    effect (Show.buffEffect Someone Placeholder) <| \noSelf a ->
+    effect (BuffEffect.show Someone Placeholder) <| \noSelf a ->
         case a of
             Grant t _ y _ ->
                 if not noSelf || t /= Self then
@@ -116,7 +131,7 @@ buffEffect =
 
 debuffEffect : (a -> List SkillEffect) -> Has a DebuffEffect
 debuffEffect =
-    effect (Show.debuffEffect Someone Placeholder) <| \_ a ->
+    effect (DebuffEffect.show Someone Placeholder) <| \_ a ->
         case a of
             Debuff _ _ y _ ->
                 Just y
@@ -127,7 +142,7 @@ debuffEffect =
 
 instantEffect : (a -> List SkillEffect) -> Has a InstantEffect
 instantEffect =
-    effect (Show.instantEffect Someone Placeholder) <| \noSelf a ->
+    effect (InstantEffect.show Someone Placeholder) <| \noSelf a ->
         case a of
             To _ ApplyAtRandom _ ->
                 Nothing
@@ -150,7 +165,7 @@ instantEffect =
 
 bonusEffect : (a -> List SkillEffect) -> Has a BonusEffect
 bonusEffect =
-    effect (Show.bonusEffect Units Placeholder) <| \_ a ->
+    effect (BonusEffect.show Units Placeholder) <| \_ a ->
         case a of
             Bonus y _ _ ->
                 Just y

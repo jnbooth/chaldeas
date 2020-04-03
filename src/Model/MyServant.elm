@@ -1,4 +1,4 @@
-module MyServant exposing
+module Model.MyServant exposing
   ( MyServant
   , recalc
   , unowned, newServant, owned
@@ -10,14 +10,18 @@ user info such as Fou stats and skill levels. -}
 
 import Dict exposing (Dict)
 
-import StandardLibrary        exposing (..)
-import Database               exposing (..)
-import Database.Base          exposing (..)
-import Database.Calculator    exposing (..)
-import Database.Skill         exposing (..)
-import Database.Servant       exposing (..)
-import Sorting                exposing (..)
-import MyServant.GrowthCurves exposing (..)
+import StandardLibrary exposing (dict)
+import Database.Servants as Servants
+import Model.Card exposing (Card(..))
+import Model.Deck as Deck
+import Model.Stat as Stat exposing (Stat)
+import Database.Calculator as Calculator
+import Model.Servant as Servant exposing (Servant)
+import Model.Skill.Amount exposing (Amount(..))
+import Model.Skill.SkillEffect as SkillEffect
+import Site.SortBy as SortBy exposing (SortBy(..))
+import Model.MyServant.GrowthCurves as GrowthCurves
+
 
 type alias MyServant =
     { level   : Int
@@ -27,7 +31,7 @@ type alias MyServant =
     , ascent  : Int
     , base    : Servant
     , servant : Servant
-    , sorted  : Dict OrdSortBy (Float, Float)
+    , sorted  : Dict SortBy.Ord (Float, Float)
     }
 
 
@@ -38,7 +42,7 @@ recalc ms =
             ms.base
 
         calcStats =
-            addStats ms.fou <| lvlStats s ms.level
+            Stat.add ms.fou <| GrowthCurves.lvlStats s ms.level
 
         calcNP minAmount maxAmount =
             Flat <| minAmount + (maxAmount - minAmount) * case ms.npLvl of
@@ -75,7 +79,7 @@ recalc ms =
                                 / 10
             in
             { skill
-            | effect = List.map (mapAmount calc) skill.effect
+            | effect = List.map (SkillEffect.mapAmount calc) skill.effect
             , cd     = skill.cd - (max 2 lvl - 2) // 4
             }
     in
@@ -91,10 +95,12 @@ recalc ms =
                        phantasm = s.phantasm
                    in
                    { phantasm
-                   | effect = List.map (mapAmount calcNP) phantasm.effect
+                   | effect = List.map (SkillEffect.mapAmount calcNP)
+                              phantasm.effect
                    , over   = case ms.level of
                          0 -> phantasm.over
-                         _ -> List.map (mapAmount calcOver) phantasm.over
+                         _ -> List.map (SkillEffect.mapAmount calcOver)
+                              phantasm.over
                    }
       , skills   = List.map2 calcActives ms.skills s.skills
       }
@@ -103,8 +109,17 @@ recalc ms =
 
 deckSum : Bool -> (Servant -> Card -> Float) -> Servant -> Float
 deckSum addExtra f s =
-    (if addExtra then Extra :: getDeck s else getDeck s)
-        |> List.map (f s)
+    let
+        withExtra xs =
+            if addExtra then
+                Extra :: xs
+            else
+                xs
+    in
+        s.deck
+        |> Deck.toList
+        >> withExtra
+        >> List.map (f s)
         >> List.sum
 
 
@@ -116,17 +131,17 @@ toSort addBonus sortBy s =
         ATK          -> toFloat s.stats.max.atk
         HP           -> toFloat s.stats.max.hp
         StarWeight   -> toFloat s.gen.starWeight
-        NPArts       -> npPer s Arts
-        NPDeck       -> deckSum addBonus npPer s
-        StarQuick    -> starsPer s Quick
-        StarDeck     -> deckSum addBonus starsPer s
-        NPDmg        -> npDamage addBonus False False s
-        NPDmgOver    -> npDamage addBonus False True s
-        NPSpec       -> npDamage addBonus True False s
-        NPSpecOver   -> npDamage addBonus True True s
-        NPRefund     -> npRefund addBonus False s
-        NPRefundOver -> npRefund addBonus True s
-        NPInstant    -> gaugeUp addBonus s
+        NPArts       -> Calculator.npPer s Arts
+        NPDeck       -> deckSum addBonus Calculator.npPer s
+        StarQuick    -> Calculator.starsPer s Quick
+        StarDeck     -> deckSum addBonus Calculator.starsPer s
+        NPDmg        -> Calculator.npDamage addBonus False False s
+        NPDmgOver    -> Calculator.npDamage addBonus False True s
+        NPSpec       -> Calculator.npDamage addBonus True False s
+        NPSpecOver   -> Calculator.npDamage addBonus True True s
+        NPRefund     -> Calculator.npRefund addBonus False s
+        NPRefundOver -> Calculator.npRefund addBonus True s
+        NPInstant    -> Calculator.gaugeUp addBonus s
 
 
 mapSort : MyServant -> MyServant
@@ -137,9 +152,9 @@ mapSort ms =
                 doSort addBonus =
                     toSort addBonus sorter ms.servant
             in
-            (ordSortBy sorter, (doSort True, doSort False))
+            (SortBy.ord sorter, (doSort True, doSort False))
     in
-    { ms | sorted = dict enumSortBy go }
+    { ms | sorted = dict SortBy.enum go }
 
 
 makeUnowned : Servant -> MyServant
@@ -156,15 +171,15 @@ makeUnowned s =
     }
 
 
-unowneds : Dict OrdServant MyServant
+unowneds : Dict Servant.Ord MyServant
 unowneds =
-    dict servants <| \x ->
-        (ordServant x, makeUnowned x)
+    dict Servants.db <| \x ->
+        (Servant.ord x, makeUnowned x)
 
 
 unowned : Servant -> MyServant
 unowned s =
-    case Dict.get (ordServant s) unowneds of
+    case Dict.get (Servant.ord s) unowneds of
         Just ms -> ms
         Nothing -> makeUnowned s -- But if this actually happens, something is weird
 
@@ -182,8 +197,8 @@ newServant s =
     }
 
 
-owned : Dict OrdServant MyServant -> Servant -> MyServant
+owned : Dict Servant.Ord MyServant -> Servant -> MyServant
 owned mine s =
-    case Dict.get (ordServant s) mine of
+    case Dict.get (Servant.ord s) mine of
         Just ms -> ms
         Nothing -> unowned s

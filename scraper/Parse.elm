@@ -2,16 +2,20 @@ module Parse exposing (..)
 
 import List.Extra as List
 
-import Database.Base         exposing (..)
-import Database.CraftEssence exposing (..)
-import Database.Icon         exposing (Icon)
-import Database.Servant      exposing (..)
-import Database.Skill        exposing (..)
-import MaybeRank             exposing (MaybeRank(..))
-import Printing              exposing (..)
+import Model.Card exposing (Card(..))
+import Model.Icon as Icon exposing (Icon)
+import Model.Servant exposing (Servant)
+import Model.Skill exposing (Skill)
+import Model.Skill.BonusEffect exposing (BonusEffect(..))
+import Model.Skill.BuffEffect exposing (BuffEffect(..))
+import Model.Skill.DebuffEffect exposing (DebuffEffect(..))
+import Model.Skill.InstantEffect exposing (InstantEffect(..))
+import Model.Skill.SkillEffect exposing (SkillEffect(..))
+import Model.Skill.Target exposing (Target(..))
+import MaybeRank exposing (MaybeRank(..))
+import Print
 
-import Class.Show as Show
-import Database.Icon as Icon
+import Database.CraftEssences as CraftEssences
 
 
 upgradeNP : List String
@@ -64,7 +68,7 @@ npRank s =
 
 ceNames : List String
 ceNames =
-    List.map .name craftEssences
+    List.map .name CraftEssences.db
 
 
 skillNames : Servant -> List Skill
@@ -282,7 +286,7 @@ translate a =
             "\"Heaven's Feel\""
 
         _ ->
-            prettify a
+            Print.pretty a
 
 
 printIcon : Icon -> String
@@ -392,8 +396,8 @@ printIcon a =
 
         _ ->
             a
-                |> Show.icon
-                >> unCamel
+                |> Icon.show
+                >> Print.unCamel
 
 
 effects : List SkillEffect -> List String
@@ -659,7 +663,7 @@ readEffect s =
             words =
                 s
                     |> String.toLower
-                    >> filterOut ".|[]#,'"
+                    >> Print.filterOut ".|[]#,'"
                     >> String.trim
                     >> String.split " "
 

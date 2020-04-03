@@ -1,13 +1,11 @@
 port module Sitemap exposing (main)
 
-import Browser
-
 import Platform exposing (worker)
 
-import StandardLibrary       exposing (..)
-import Database              exposing (..)
-import Database.CraftEssence exposing (..)
-import Printing              exposing (..)
+import StandardLibrary exposing (pure)
+import Print
+import Database.CraftEssences as CraftEssences
+import Database.Servants as Servants
 
 output : String
 output =
@@ -15,8 +13,8 @@ output =
     List.sort <<
     List.map ((++) "https://chaldeas.surge.sh/") <|
     ["Servants", "CraftEssences", "MyServants"]
-    ++ List.map (.name >> urlName >> ((++) "Servants/")) servants
-    ++ List.map (.name >> urlName >> ((++) "CraftEssences/")) craftEssences
+    ++ List.map (.name >> Print.url >> (++) "Servants/") Servants.db
+    ++ List.map (.name >> Print.url >> (++) "CraftEssences/") CraftEssences.db
 
 port print : String -> Cmd msg
 

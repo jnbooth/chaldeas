@@ -1,19 +1,19 @@
-module Printing exposing
+module Print exposing
   ( stars
   , places, commas
   , filterOut
-  , fileName, urlName
+  , file, url
   , unCamel
-  , prettify
+  , pretty
   )
 
 {-| Helper functions for outputting to `String`s. -}
 
-import Regex                exposing (Regex)
-import FormatNumber         exposing (format)
+import Regex exposing (Regex)
+import FormatNumber exposing (format)
 import FormatNumber.Locales exposing (usLocale)
 
-import StandardLibrary exposing (..)
+import StandardLibrary exposing (flip)
 
 
 {-| Some number of `"★"`s. -}
@@ -48,14 +48,14 @@ filterOut pattern =
 
 
 {-| Removes characters which are illegal for file names. -}
-fileName : String -> String
-fileName =
+file : String -> String
+file =
     filterOut "?:/"
 
 
 {-| Removes spaces from names in order to use them in URLs. -}
-urlName : String -> String
-urlName =
+url : String -> String
+url =
     filterOut " -/\""
 
 
@@ -82,8 +82,8 @@ camel =
         |> Maybe.withDefault Regex.never
 
 {-| Adds in fancy diacritics to `Servant` and `CraftEssence` names. -}
-prettify : String -> String
-prettify a =
+pretty : String -> String
+pretty a =
     case a of
         "Fergus mac Roich" ->
             "Fergus mac Róich"

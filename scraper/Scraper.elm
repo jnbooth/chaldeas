@@ -4,24 +4,29 @@ import Browser
 import Dict exposing (Dict)
 import Http
 import Url.Builder as Url
-import List.Extra  as List
+import List.Extra as List
 import Maybe.Extra as Maybe
 
-import Html            as H exposing (Html)
+import Html as H exposing (Html)
 import Html.Attributes as P
 
-import StandardLibrary       exposing (..)
-import Database              exposing (..)
-import Database.Base         exposing (..)
-import Database.CraftEssence exposing (..)
-import Database.Servant      exposing (..)
-import Site.Common           exposing (..)
-import Class.Show as Show
+import StandardLibrary exposing (maybeDo)
+import Model.Attribute as Attribute exposing (Attribute(..))
+import Model.Class as Class
+import Model.Card as Card
+import Model.CraftEssence exposing (CraftEssence)
+import Model.Deck as Deck
+import Model.Material as Material exposing (Material)
+import Model.Servant exposing (Servant, Ascension(..), Reinforcement(..))
+import Model.Trait as Trait exposing (Trait(..))
+import Site.Common exposing (..)
+import Database.CraftEssences as CraftEssences
+import Database.Servants as Servants
 
-import Wiki      exposing (Wiki)
+import Wiki exposing (Wiki)
 import MaybeRank exposing (MaybeRank(..))
-import Parse     exposing (..)
-import Test      exposing (Test(..), Outcome(..))
+import Parse as Parse
+import Test exposing (Test(..), Outcome(..))
 
 
 main =
@@ -59,9 +64,10 @@ renderTest a =
 
 pageTitles : List String
 pageTitles =
-    List.map .name craftEssences
-        ++ List.map .name servants
-        ++ List.unique (List.concatMap skillNames servants |> List.map .name)
+    List.map .name CraftEssences.db
+        ++ List.map .name Servants.db
+        ++ List.unique
+           (List.concatMap Parse.skillNames Servants.db |> List.map .name)
 
 
 numPages : Int
@@ -165,7 +171,7 @@ pageUrl : Bool -> String -> String
 pageUrl raw title =
     Url.crossOrigin "http://grandorder.wiki"
     ["index.php"]
-    [ Url.string "title"  <| translate title
+    [ Url.string "title"  <| Parse.translate title
     , Url.string "action" <| if raw then "raw" else "view"
     ]
 
@@ -180,8 +186,8 @@ requestAll = Cmd.batch <| List.map requestPage pageTitles
 
 runTests : Dict String String -> List Test
 runTests pages =
-    List.map (Wiki.suite pages testCraftEssence) craftEssences
-    ++ List.map (Wiki.suite pages testServant) servants
+    List.map (Wiki.suite pages testCraftEssence) CraftEssences.db
+    ++ List.map (Wiki.suite pages testServant) Servants.db
 
 testCraftEssence : (MaybeRank -> Wiki) -> CraftEssence -> List Test
 testCraftEssence getWiki ce =
@@ -191,14 +197,14 @@ testCraftEssence getWiki ce =
     matchInt x = match x << String.fromInt
   in
     (if Maybe.isJust ce.bond then identity else
-    ((::) << Wiki.matchEffects wiki "effect" (0, 6) <| effects ce.effect))
+    ((::) << Wiki.matchEffects wiki "effect" (0, 6) <| Parse.effects ce.effect))
     [ matchInt "id"           ce.id
     , matchInt "maxatk"       ce.stats.max.atk
     , matchInt "maxhp"        ce.stats.max.hp
     , matchInt "minatk"       ce.stats.base.atk
     , matchInt "minhp"        ce.stats.base.hp
     , matchInt "rarity"       ce.rarity
-    , match    "imagetype" <| printIcon ce.icon
+    , match    "imagetype" <| Parse.printIcon ce.icon
     , match    "limited"   <| Wiki.printBool ce.limited
     ]
 testServant : (MaybeRank -> Wiki) -> Servant -> List Test
@@ -209,18 +215,18 @@ testServant getWiki s =
     matchInt x = match x << String.fromInt
     showAttr a = case a of
       Sky -> "Heaven"
-      _   -> Show.attribute a
+      _   -> Attribute.show a
     showAlign xs = case (s.name, xs) of
       ("Nursery Rhyme", _) -> "Changes per Master"
-      (_, [x, Mad])        -> Show.trait x ++ " Madness"
-      _                    -> String.join " " <| List.map Show.trait xs
+      (_, [x, Mad])        -> Trait.show x ++ " Madness"
+      _                    -> String.join " " <| List.map Trait.show xs
     showHitcount a = case a of
       0 -> "－"
       _ -> String.fromInt a
   in
     [ Suite "Profile"
       [ matchInt "id"          s.id
-      , match "class"       <| Show.class s.class
+      , match "class"       <| Class.show s.class
       , matchInt "rarity"      s.rarity
       , match "attribute"   <| showAttr s.attr
       , match "alignment"   <| showAlign s.align
@@ -248,30 +254,30 @@ testServant getWiki s =
       , matchInt "npchargedefense" s.gen.npDef
       ]
     , Suite "Deck"
-      [ match "commandcard" <| Show.deck s.deck
-      , match "icon"        <| Show.card s.phantasm.card
+      [ match "commandcard" <| Deck.show s.deck
+      , match "icon"        <| Card.show s.phantasm.card
       , match "hitcount"    <| showHitcount s.phantasm.hits
       ]
     , Wiki.matchList wiki "Ascension" <| showAscension s.ascendUp
     , Wiki.matchList wiki "Skill Reinforcement" <| showReinforcement s.skillUp
     , Suite "Noble Phantasm" <|
       let
-        npWiki = getWiki <| npRank s
+        npWiki = getWiki <| Parse.npRank s
       in
         [ {-Wiki.matchOne npWiki "Name" 0 s.phantasm.name
         , Wiki.matchOne npWiki "Description" 1 s.phantasm.desc
         , -}
           Wiki.matchEffects npWiki "effect" (0, 6) <|
-          effects s.phantasm.effect
+          Parse.effects s.phantasm.effect
         , Wiki.matchEffects npWiki "oceffect" (0, 6) <|
-          effects s.phantasm.over
+          Parse.effects s.phantasm.over
         ]
     ]
 
 showMaterials : List (List (Material, Int)) -> List (List String)
 showMaterials =
     List.map << List.map <| \(mat, count) ->
-        Show.material mat ++ "*" ++ String.fromInt count
+        Material.show mat ++ "*" ++ String.fromInt count
 
 showAscension : Ascension -> List (List String)
 showAscension z = case z of

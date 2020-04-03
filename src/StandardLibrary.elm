@@ -1,6 +1,5 @@
 module StandardLibrary exposing
-  ( Value
-  , compareThen, alwaysEq
+  ( compareThen, alwaysEq
   , dict
   , duplicates
   , enumToOrd
@@ -16,11 +15,14 @@ module StandardLibrary exposing
 including several functions that were removed in Elm 0.19. -}
 
 import Dict exposing (Dict)
-import Json.Encode as E
-import List.Extra  as List
+import List.Extra as List
 
 
-type alias Value = E.Value
+{-| Creates a comparable projection function for enumerated types. -}
+enumToOrd : List a -> (a -> Int)
+enumToOrd xs x =
+    List.findIndex ((==) x) xs
+        |> Maybe.withDefault (-1)
 
 
 compareThen : (a -> comparable) -> (a -> a -> Order) -> (a -> a -> Order)
@@ -50,13 +52,6 @@ duplicates xs =
     xs
         |> List.unique
         >> List.filter (\x -> List.member x <| List.remove x xs)
-
-
-{-| Creates a comparable projection function for enumerated types. -}
-enumToOrd : List a -> (a -> Int)
-enumToOrd xs x =
-    List.findIndex ((==) x) xs
-        |> Maybe.withDefault (-1)
 
 
 {-| Flips the arguments of a function. -}

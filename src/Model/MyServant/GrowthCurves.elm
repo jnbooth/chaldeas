@@ -1,9 +1,9 @@
-module MyServant.GrowthCurves exposing (lvlStats)
+module Model.MyServant.GrowthCurves exposing (lvlStats)
 
 import Array exposing (Array)
 
-import Database.Base    exposing (..)
-import Database.Servant exposing (..)
+import Model.Stat exposing (Stat)
+import Model.Servant exposing (Servant)
 
 
 lvlStats : Servant -> Int -> Stat

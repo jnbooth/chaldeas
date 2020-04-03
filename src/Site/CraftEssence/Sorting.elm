@@ -1,10 +1,11 @@
-module Site.CraftEssence.Sorting exposing (getSort)
+module Site.CraftEssence.Sorting exposing (get)
 
 import Dict exposing (Dict)
 
-import StandardLibrary       exposing (..)
-import Database.CraftEssence exposing (..)
-import Sorting               exposing (..)
+import StandardLibrary exposing (dict)
+import Model.CraftEssence exposing (CraftEssence)
+import Database.CraftEssences as CraftEssences
+import Site.SortBy as SortBy exposing (SortBy(..))
 
 
 toSort : SortBy -> CraftEssence -> Float
@@ -42,7 +43,7 @@ doSort a = case a of
             showFormat =
                 sortOn
                     >> abs
-                    >> formatSort a
+                    >> SortBy.format a
 
             showSort ce =
                 (showFormat ce, ce)
@@ -51,13 +52,13 @@ doSort a = case a of
             >> List.map showSort
 
 
-sorted : Dict OrdSortBy (List (String, CraftEssence))
+sorted : Dict SortBy.Ord (List (String, CraftEssence))
 sorted =
-    dict enumSortBy <| \sorter ->
-        (ordSortBy sorter, doSort sorter craftEssences)
+    dict SortBy.enum <| \sorter ->
+        (SortBy.ord sorter, doSort sorter CraftEssences.db)
 
 
-getSort : SortBy -> List (String, CraftEssence)
-getSort sorter =
-    Dict.get (ordSortBy sorter) sorted
+get : SortBy -> List (String, CraftEssence)
+get sorter =
+    Dict.get (SortBy.ord sorter) sorted
         |> Maybe.withDefault []

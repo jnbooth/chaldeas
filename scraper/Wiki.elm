@@ -5,17 +5,17 @@ module Wiki exposing
   , printBool
   )
 
-import List.Extra  as List
+import List.Extra as List
 import Maybe.Extra as Maybe
-import Dict  exposing (Dict)
-import Regex exposing (Match, Regex)
+import Dict exposing (Dict)
+import Regex exposing (Regex)
 import Set exposing (Set)
 
-import StandardLibrary exposing (..)
-import MaybeRank       exposing (..)
-import Printing        exposing (..)
-import Test            exposing (Test(..), Outcome(..))
-import Parse           exposing (..)
+import StandardLibrary exposing (flip, maybeDo, stripPrefix)
+import MaybeRank exposing (MaybeRank(..))
+import Print
+import Test exposing (Test(..), Outcome(..))
+import Parse
 
 type alias Wiki =
     { fields : Dict String (List String)
@@ -33,7 +33,7 @@ suite pages test x = case Dict.get x.name pages of
 match : Wiki -> String -> String -> Test
 match wiki k obj =
   let
-    cleanup = List.map <| filterOut "%,{}[]()'" >> trim0s
+    cleanup = List.map <| Print.filterOut "%,{}[]()'" >> trim0s
   in
     Test k <| case Maybe.map cleanup (Dict.get k wiki.fields) of
       Nothing -> Failure <| "Missing property"
@@ -161,7 +161,7 @@ matchOne wiki k i x =
         else
             Just x
   in
-    if x_ == y || Maybe.map translate x_ == y then
+    if x_ == y || Maybe.map Parse.translate x_ == y then
       Test k <| Success
     else
       Suite k
@@ -171,7 +171,7 @@ matchOne wiki k i x =
 
 matchEffects : Wiki -> String -> (Int, Int) -> List String -> Test
 matchEffects wiki k span xs =
-    shouldMatch k xs <| List.concatMap readEffect (range wiki k span)
+    shouldMatch k xs <| List.concatMap Parse.readEffect (range wiki k span)
 
 printBool : Bool -> String
 printBool a = if a then "Yes" else "No"
@@ -208,7 +208,7 @@ range wiki k (from, to) =
     >> (++) k
     >> flip Dict.get wiki.fields
     >> Maybe.withDefault []
-    >> List.map (filterOut "%,{}[]()'")
+    >> List.map (Print.filterOut "%,{}[]()'")
 
 wikiLink : Regex
 wikiLink =
@@ -255,7 +255,7 @@ bind : Maybe a -> (a -> Maybe b) -> Maybe b
 bind = flip Maybe.andThen
 
 guard : Bool -> (() -> Maybe a) -> Maybe a
-guard continue = if continue then ((|>) ()) else always Nothing
+guard continue = if continue then (|>) () else always Nothing
 
 parseCol : Int -> Int -> List String -> Maybe (List String)
 parseCol row col lines =

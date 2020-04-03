@@ -1,138 +1,140 @@
-module Site.Servant.Filters exposing (getFilters, singleFilter, errors)
+module Site.Servant.Filters exposing (get, single, errors)
 
-import List.Extra  as List
+import List.Extra as List
 import Date exposing (Date)
 import Time exposing (Month(..))
 
-import StandardLibrary  exposing (..)
-import Database         exposing (..)
-import Database.Base    exposing (..)
-import Database.Servant exposing (..)
-import Database.Skill   exposing (..)
-import Printing         exposing (..)
-import Site.Algebra     exposing (..)
-import Site.Base        exposing (..)
-import Site.Filtering   exposing (..)
-
-import Class.Has     as Has     exposing (Has)
+import StandardLibrary exposing (flip)
+import Class.Has as Has exposing (Has)
 import Class.ToImage as ToImage
+import Database.Servants as Database
+import Model.Class exposing (Class(..))
+import Model.Servant exposing (Servant)
+import Model.Skill.BuffEffect as BuffEffect
+import Model.Skill.InstantEffect as InstantEffect
+import Print
+import Site.FilterTab as FilterTab exposing (FilterTab)
+import Site.Filter exposing (Filter)
+import Site.Filtering as Filtering exposing (ScheduledFilter)
 
 
-extraFilters : List (Filter Servant)
-extraFilters = List.concat
-    [ [ nameFilter FilterAvailability "New"
+
+extra : List (Filter Servant)
+extra = List.concat
+    [ [ Filtering.name FilterTab.Availability "New"
         [ "Anastasia Nikolaevna Romanova"
         , "Atalante (Alter)"
         , "Avicebron"
         , "Antonio Salieri"
         ]
-      , Filter [] Nothing FilterAvailability "Free" <| \_ s ->
+      , Filter [] Nothing FilterTab.Availability "Free" <| \_ s ->
             s.free
-      , Filter [] Nothing FilterSource "Limited" <| \_ s ->
+      , Filter [] Nothing FilterTab.Source "Limited" <| \_ s ->
             s.limited
-      , Filter [] Nothing FilterSource "Non-Limited" <| \_ s ->
+      , Filter [] Nothing FilterTab.Source "Non-Limited" <| \_ s ->
             not s.limited
     ]
     , flip List.map (List.range 1 5) <| \rarity ->
-        Filter [] Nothing FilterRarity (stars False rarity) <| \_ s ->
+        Filter [] Nothing FilterTab.Rarity (Print.stars False rarity) <| \_ s ->
             rarity == s.rarity
     ]
 
 
-scheduledFilters : List (ScheduledFilter Servant)
-scheduledFilters =
+scheduled : List (ScheduledFilter Servant)
+scheduled =
     [ ScheduledFilter (Date 2020 Mar 26) (Date 2020 Apr 9) <|
-        nameFilter FilterAvailability "Rate-Up"
+        Filtering.name FilterTab.Availability "Rate-Up"
         [ "Anastasia Nikolaevna Romanova"
         , "Atalante (Alter)"
         , "Avicebron"
         , "Antonio Salieri"
         ]
     , ScheduledFilter (Date 2020 Mar 26) (Date 2020 Mar 27) <|
-        Filter [] Nothing FilterAvailability "Class Summon" <| \_ s ->
+        Filter [] Nothing FilterTab.Availability "Class Summon" <| \_ s ->
         s.class == Saber && not s.limited
     ]
 
 
-singleFilter : Has Servant a -> FilterTab -> a -> List (Filter Servant)
-singleFilter has tab x =
-    if exclusive tab then
-        getAll has
+single : Has Servant a -> FilterTab -> a -> List (Filter Servant)
+single has tab x =
+    if FilterTab.exclusive tab then
+        Database.getAll has
             |> List.remove x
-            >> List.map (matchFilter Nothing has tab)
+            >> List.map (Filtering.has Nothing has tab)
     else
-        [matchFilter Nothing has tab x]
+        [Filtering.has Nothing has tab x]
 
 
-getExtraFilters : Date -> FilterTab -> List (Filter Servant)
-getExtraFilters today tab =
-    getScheduled scheduledFilters today ++ extraFilters
+getExtra : Date -> FilterTab -> List (Filter Servant)
+getExtra today tab =
+    Filtering.getScheduled scheduled today ++ extra
         |> List.filter (.tab >> (==) tab)
 
 
-getFilters : Date -> FilterTab -> List (Filter Servant)
-getFilters today tab =
+get : Date -> FilterTab -> List (Filter Servant)
+get today tab =
     let
         allEffects has toImage pred =
-            getAll (has Has.servant)
+            Database.getAll (has Has.servant)
                 |> List.filter pred
-                >> List.map (matchFilter toImage (has Has.servant) tab)
+                >> List.map (Filtering.has toImage (has Has.servant) tab)
 
         all has toImage =
-            getAll has
-                |> List.map (matchFilter toImage has tab)
+            Database.getAll has
+                |> List.map (Filtering.has toImage has tab)
     in
     case tab of
-        FilterAlignment ->
+        FilterTab.Alignment ->
             all Has.alignment Nothing
 
-        FilterAttribute ->
+        FilterTab.Attribute ->
             all Has.attribute Nothing
 
-        FilterCard ->
+        FilterTab.Card ->
             all Has.card <| Just ToImage.card
 
-        FilterClass ->
+        FilterTab.Class ->
             all Has.class <| Just ToImage.class
 
-        FilterDeck ->
+        FilterTab.Deck ->
             all Has.deck Nothing
 
-        FilterGender ->
+        FilterTab.Gender ->
             all Has.gender Nothing
 
-        FilterPhantasm ->
+        FilterTab.Phantasm ->
             all Has.phantasmType Nothing
 
-        FilterTrait ->
+        FilterTab.Trait ->
             all Has.trait Nothing
 
-        FilterPassiveSkill ->
+        FilterTab.PassiveSkill ->
             all Has.passive << Just <| ToImage.icon << .icon
 
-        FilterMaterial ->
+        FilterTab.Material ->
             all Has.material <| Just ToImage.material
 
-        FilterDebuff ->
+        FilterTab.Debuff ->
             allEffects Has.debuffEffect (Just ToImage.debuffEffect) <|
             always True
 
-        FilterBuff c ->
+        FilterTab.Buff c ->
             allEffects Has.buffEffect (Just ToImage.buffEffect) <|
-            buffCategory >> (==) c
+            BuffEffect.category >> (==) c
 
-        FilterAction ->
+        FilterTab.Action ->
             allEffects Has.instantEffect Nothing <|
-            not << isDamage
+            not << InstantEffect.isDamage
 
-        FilterDamage ->
+        FilterTab.Damage ->
             allEffects Has.instantEffect Nothing <|
-            isDamage
+            InstantEffect.isDamage
 
         _ ->
-            getExtraFilters today tab
+            getExtra today tab
+
 
 errors : List String
 errors =
-    extraFilters ++ List.map .filter scheduledFilters
+    extra ++ List.map .filter scheduled
         |> List.concatMap .errors

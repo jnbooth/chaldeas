@@ -9,11 +9,16 @@ module Database.Calculator exposing
 
 {-| Calculates information for sorting based on datamined formulas. -}
 
-import StandardLibrary  exposing (..)
-import Database.Base    exposing (..)
-import Database.Skill   exposing (..)
-import Database.Servant exposing (..)
-
+import Model.Card exposing (Card(..))
+import Model.Class as Class exposing (Class(..))
+import Model.Servant as Servant exposing (Servant)
+import Model.Skill.Amount as Amount
+import Model.Skill.BuffEffect exposing (BuffEffect(..))
+import Model.Skill.DebuffEffect exposing (DebuffEffect(..))
+import Model.Skill.InstantEffect exposing (InstantEffect(..))
+import Model.Skill.SkillEffect as SkillEffect exposing (SkillEffect(..))
+import Model.Skill.Special as Special exposing (Special(..))
+import Model.Skill.Target as Target exposing (Target(..))
 
 
 {-| Formula source: [Beast's Lair: Mining for Bits, by Kyte](http://blogs.nrvnqsr.com/entry.php/3306-How-much-NP-do-I-get-in-combat) -}
@@ -51,7 +56,7 @@ npPer s card =
         buffs =
             passiveBuffs s
     in
-    toFloat (hits card s)
+    toFloat (Servant.hits card s)
         * offensiveNPRate
         * (firstCardBonus + (cardNpValue * (1 + cardMod)))
         * enemyServerMod
@@ -66,9 +71,9 @@ npRefund addSkills maxOver s =
     let
         getter =
             if maxOver then
-                toMax
+                Amount.toMax
             else
-                toMin
+                Amount.toMin
 
         offensiveNPRate  =
             s.gen.npAtk
@@ -115,7 +120,7 @@ npRefund addSkills maxOver s =
                             0
             in
             s.phantasm.effect ++ s.phantasm.over
-                |> List.map (simplify >> go)
+                |> List.map (SkillEffect.simplify >> go)
                 >> List.sum
     in
     toFloat s.phantasm.hits
@@ -177,7 +182,7 @@ starsPer s card =
                 - enemyStarDropMod
                 + criticalModifier
     in
-    toFloat (hits card s)
+    toFloat (Servant.hits card s)
         * min 3 netMod
         * overkillModifier
         + overkillAdd
@@ -206,7 +211,7 @@ npDamage addSkills special maxOver s =
                 _         -> 1
 
         triangleModifier =
-            ifSpecial enumClassNpc
+            ifSpecial Class.enumNpc
                 |> List.map (VsClass >> Special AttackUp >> matchSum buffs)
                 >> List.sum
                 >> (+) 1
@@ -255,7 +260,7 @@ npDamage addSkills special maxOver s =
                 >> List.sum
 
         superEffectiveModifier =
-            ifSpecial enumSpecial
+            ifSpecial Special.enum
                 |> List.map (SpecialDamage >> matchSum instants)
                 >> List.maximum
                 >> Maybe.withDefault 0
@@ -276,7 +281,7 @@ npDamage addSkills special maxOver s =
             matchSum buffs <| CardUp card
 
         atkMod =
-            ifSpecial enumSpecial
+            ifSpecial Special.enum
                 |> List.map (matchSum buffs << Special AttackUp)
                 >> List.maximum
                 >> Maybe.withDefault 0
@@ -360,16 +365,16 @@ gaugeUp : Bool -> Servant -> Float
 gaugeUp excludeSelf s =
     let
         include t =
-            allied t && not (excludeSelf && t == Self)
+            Target.allied t && not (excludeSelf && t == Self)
 
         npStrength =
             if s.free then
-                toMax
+                Amount.toMax
             else
-                toMin
+                Amount.toMin
 
         getter toAmount a =
-            case simplify a of
+            case SkillEffect.simplify a of
                 To t GaugeUp amt ->
                     if include t then
                         toAmount amt
@@ -384,9 +389,9 @@ gaugeUp excludeSelf s =
                 _ ->
                     0
     in
-    List.map (getter toMax) (List.concatMap .effect s.skills)
+    List.map (getter Amount.toMax) (List.concatMap .effect s.skills)
         ++ List.map (getter npStrength) s.phantasm.effect
-        ++ List.map (getter toMin) s.phantasm.over
+        ++ List.map (getter Amount.toMin) s.phantasm.over
         |> List.sum
 
 
@@ -394,25 +399,25 @@ gaugePerTurn : Bool -> Bool -> Servant -> Float
 gaugePerTurn excludeSelf owned s =
     let
         include t =
-            allied t && not (excludeSelf && t == Self)
+            Target.allied t && not (excludeSelf && t == Self)
 
         getter cd a =
-            case simplify a of
+            case SkillEffect.simplify a of
                 To t GaugeUp amt ->
                     if include t then
-                        toMax amt / toFloat cd
+                        Amount.toMax amt / toFloat cd
                     else
                         0
 
                 Grant t 0 GaugePerTurn amt ->
                     if include t then
-                        toMax amt
+                        Amount.toMax amt
                     else
                         0
 
                 Grant t turns GaugePerTurn amt ->
                     if include t then
-                        toMax amt * toFloat turns / toFloat cd
+                        Amount.toMax amt * toFloat turns / toFloat cd
                     else
                         0
                 _ ->
@@ -458,9 +463,9 @@ effects addSkills special maxOver s =
 
         maxIf x =
             if x then
-                toMax
+                Amount.toMax
             else
-                toMin
+                Amount.toMin
 
         npStrength =
             maxIf s.free
@@ -479,13 +484,13 @@ effects addSkills special maxOver s =
             s.passives
                 |> List.concatMap .effect
                 >> maybeAddSkills
-                >> List.map simplify
+                >> List.map SkillEffect.simplify
 
         npFs =
-            List.map simplify effect
+            List.map SkillEffect.simplify effect
 
         overFs =
-            List.map simplify over
+            List.map SkillEffect.simplify over
 
         firstFs =
             if first then
@@ -511,7 +516,7 @@ effects addSkills special maxOver s =
                     _ ->
                         []
             in
-            List.concatMap (go toMax) skillFs
+            List.concatMap (go Amount.toMax) skillFs
                 ++ List.concatMap (go npStrength) npFs
                 ++ List.concatMap (go overStrength) firstFs
 
@@ -520,7 +525,7 @@ effects addSkills special maxOver s =
                 go f a =
                     case a of
                         Debuff t _ debuff n ->
-                            if allied t || (not special && isSpecial t) then
+                            if Target.allied t || (not special && Target.isSpecial t) then
                                 []
                             else
                                 [(debuff, f n / 100)]
@@ -528,7 +533,7 @@ effects addSkills special maxOver s =
                         _ ->
                             []
             in
-            List.concatMap (go toMax) skillFs
+            List.concatMap (go Amount.toMax) skillFs
                 ++ List.concatMap (go npStrength) npFs
                 ++ List.concatMap (go overStrength) firstFs
 
@@ -537,7 +542,7 @@ effects addSkills special maxOver s =
                 go f a =
                     case a of
                         To t instant n ->
-                            if allied t || (not special && isSpecial t) then
+                            if Target.allied t || (not special && Target.isSpecial t) then
                                 []
                             else
                                 [(instant, f n / 100)]
@@ -545,7 +550,7 @@ effects addSkills special maxOver s =
                         _ ->
                             []
             in
-            List.concatMap (go toMax) skillFs
+            List.concatMap (go Amount.toMax) skillFs
                 ++ List.concatMap (go npStrength) npFs
                 ++ List.concatMap (go overStrength) overFs
     in
@@ -561,7 +566,7 @@ passiveBuffs s =
             case a of
                 Grant t _ buff n ->
                     if selfable t then
-                        [(buff, toMax n / 100)]
+                        [(buff, Amount.toMax n / 100)]
                     else
                         []
                 _ ->
@@ -569,7 +574,7 @@ passiveBuffs s =
   in
     s.passives
         |> List.concatMap .effect
-        >> List.concatMap (simplify >> go)
+        >> List.concatMap (SkillEffect.simplify >> go)
 
 
 {-| If a skill's target is not `Self`, `Ally`, or `Party`,

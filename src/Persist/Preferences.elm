@@ -1,93 +1,47 @@
 module Persist.Preferences exposing
-  ( Preference(..), enumPreference, ordPreference
-  , Preferences, noPreferences
-  , prefer
-  , setPreference
-  , unfoldPreferences
+  ( Preferences, empty
+  , prefers
+  , set
+  , unfold
   )
 
 import Set exposing (Set)
 
-import StandardLibrary exposing (..)
-
-
-type Preference
-    = Artorify
-    | HideSpoilers
-    | NightMode
-    | Thumbnails
-    | ShowTables
-    | ExcludeSelf
-    | MaxAscension
-    | AddSkills
-    | AddExtra
-    | HideClasses
-
-
-enumPreference : List Preference
-enumPreference =
-    [ Artorify
-    , HideSpoilers
-    , NightMode
-    , Thumbnails
-    , ShowTables
-    , ExcludeSelf
-    , MaxAscension
-    , AddSkills
-    , AddExtra
-    , HideClasses
-    ]
-
-
-type alias OrdPreference = Int
-
-
-ordPreference : Preference -> OrdPreference
-ordPreference =
-    enumToOrd enumPreference
-
-
-prefDefault : Preference -> Bool
-prefDefault a =
-    case a of
-        AddSkills    -> True
-        Artorify     -> True
-        HideSpoilers -> True
-        ShowTables   -> True
-        _            -> False
+import StandardLibrary exposing (flip)
+import Persist.Preference as Preference exposing (Preference)
 
 
 type alias Preferences =
-    Set OrdPreference
+    Set String
 
 
-noPreferences : Preferences
-noPreferences =
+empty : Preferences
+empty =
     let
-        acc pref = setPreference pref <| prefDefault pref
+        acc pref = set pref <| Preference.default pref
     in
-    List.foldr acc Set.empty enumPreference
+    List.foldr acc Set.empty Preference.enum
 
 
-prefer : Preferences -> Preference -> Bool
-prefer prefs =
-    ordPreference
+prefers : Preferences -> Preference -> Bool
+prefers prefs =
+    Preference.show
         >> flip Set.member prefs
 
 
-setPreference : Preference -> Bool -> Preferences -> Preferences
-setPreference pref a =
-    ordPreference pref |>
+set : Preference -> Bool -> Preferences -> Preferences
+set pref a =
+    Preference.show pref |>
         if a then
             Set.insert
         else
             Set.remove
 
 
-unfoldPreferences : Preferences -> List (Preference, Bool)
-unfoldPreferences prefs =
+unfold : Preferences -> List (Preference, Bool)
+unfold prefs =
     let
-        unfold x =
-            (x, prefer prefs x)
+        un x =
+            (x, prefers prefs x)
     in
-    List.map unfold enumPreference
+    List.map un Preference.enum

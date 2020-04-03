@@ -1,11 +1,8 @@
 module Test exposing (..)
 
-import Html            as H exposing (Html)
-import Html.Attributes as P
-
 import Maybe.Extra as Maybe
 
-import StandardLibrary exposing (..)
+import StandardLibrary exposing (flip)
 
 
 type Outcome

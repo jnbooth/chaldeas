@@ -1,7 +1,9 @@
-module LZW exposing (..)
+module LZW exposing
+  ( compress
+  , decompress
+  )
 
-import StandardLibrary exposing (..)
-import Array
+import StandardLibrary exposing (flip)
 import List.Extra as List
 
 
@@ -19,8 +21,7 @@ foldl f x xs =
 get : a -> List a -> Int -> a
 get x xs i =
     xs
-        |> Array.fromList
-        >> Array.get i
+        |> List.getAt i
         >> Maybe.withDefault x
 
 
@@ -86,6 +87,7 @@ lzw a w arr =
 
         [] ->
             [elemIndex w a]
+
 
 compress : String -> String
 compress a =

@@ -1,6 +1,4 @@
-{ "excludedPaths":
-    [ "src/Database/Servant/TODO.elm" ]
-, "checks":
+{ "checks":
     { "ImportAll": false
     , "ExposeAll": false
     , "MultiLineRecordFormatting": false

@@ -61,7 +61,6 @@ archers =
                   ]
     , passives  = [magicResistance D, independentAction B]
     , phantasm  = { name   = "Unlimited Blade Works"
-                  , desc   = "Infinite Creation of Swords"
                   , rank   = APlusPlus
                   , card   = Buster
                   , kind   = "Unknown"
@@ -134,7 +133,6 @@ archers =
                   ]
     , passives  = [magicResistance E, independentAction APlus, divinity B]
     , phantasm  = { name   = "Enuma Elish"
-                  , desc   = "Star of Creation that Divided Heaven and Earth"
                   , rank   = EX
                   , card   = Buster
                   , kind   = "Anti-World"
@@ -200,7 +198,6 @@ archers =
                   ]
     , passives  = [magicResistance D, independentAction A]
     , phantasm  = { name   = "Yew Bow"
-                  , desc   = "Bow of Prayer"
                   , rank   = D
                   , card   = Arts
                   , kind   = "Anti-Personnel"
@@ -267,7 +264,6 @@ archers =
                   ]
     , passives  = [magicResistance D, independentAction A]
     , phantasm  = { name   = "Phoebus Catastrophe"
-                  , desc   = "Complaint Message on the Arrow"
                   , rank   = BPlus
                   , card   = Quick
                   , kind   = "Anti-Army"
@@ -334,7 +330,6 @@ archers =
                   ]
     , passives  = [magicResistance A, independentAction APlus, coreOfGoddess EX]
     , phantasm  = { name   = "Eye of the Euryale"
-                  , desc   = "Gaze of the Goddess"
                   , rank   = B
                   , card   = Arts
                   , kind   = "Anti-Personnel"
@@ -406,7 +401,6 @@ archers =
                   ]
     , passives  = [magicResistance C, independentAction C]
     , phantasm  = { name   = "Stella"
-                  , desc   = "The Streaking Meteor"
                   , rank   = A
                   , card   = Buster
                   , kind   = "Anti-Army"
@@ -478,7 +472,6 @@ archers =
                   ]
     , passives  = [magicResistance D, independentAction APlus]
     , phantasm  = { name   = "Tri-Star Amore Mio"
-                  , desc   = "Moon Goddess's Arrows of Love and Romance"
                   , rank   = APlus
                   , card   = Arts
                   , kind   = "Anti-Personnel"
@@ -551,7 +544,6 @@ archers =
                   ]
     , passives  = [magicResistance A, independentAction A]
     , phantasm  = { name   = "Hamesh Avanim"
-                  , desc   = "The Five Stones"
                   , rank   = CMinus
                   , card   = Buster
                   , kind   = "Anti-Personnel"
@@ -620,7 +612,6 @@ archers =
                   ]
     , passives  = [magicResistance B, independentAction B]
     , phantasm  = { name   = "Three Line Formation"
-                  , desc   = "Three Thousand Worlds"
                   , rank   = A
                   , card   = Buster
                   , kind   = "Anti-Army"
@@ -690,7 +681,6 @@ archers =
                   ]
     , passives  = [magicResistance C, independentAction B]
     , phantasm  = { name   = "System Keraunos"
-                  , desc   = "Legend of Mankind: Advent of Lightning"
                   , rank   = EX
                   , card   = Buster
                   , kind   = "Anti-Fortress"
@@ -765,7 +755,6 @@ archers =
                   ]
     , passives  = [magicResistance C, independentAction A, divinity B]
     , phantasm  = { name   = "Pashupata"
-                  , desc   = "Raised Hand of the Destruction God"
                   , rank   = APlus
                   , card   = Buster
                   , kind   = "Anti-Army"
@@ -833,7 +822,6 @@ archers =
                   ]
     , passives  = [magicResistance E, independentAction A, divinity B]
     , phantasm  = { name   = "Gate of Babylon"
-                  , desc   = "King's Treasury"
                   , rank   = BPlusPlus
                   , card   = Buster
                   , kind   = "Anti-Unit"
@@ -903,7 +891,6 @@ archers =
                   ]
     , passives  = [independentAction A, riding CPlus]
     , phantasm  = { name   = "Thunderer"
-                  , desc   = "Discordant Thunderclap"
                   , rank   = CPlusPlusPlus
                   , card   = Quick
                   , kind   = "Anti-Unit"
@@ -977,7 +964,6 @@ archers =
                   ]
     , passives  = [magicResistance B, independentAction B]
     , phantasm  = { name   = "Failnaught"
-                  , desc   = "Fantasia of Lamentation"
                   , rank   = APlus
                   , card   = Quick
                   , kind   = "Anti-Army"
@@ -1048,7 +1034,6 @@ archers =
                   ]
     , passives  = [magicResistance C, independentAction B]
     , phantasm  = { name   = "Hachiman Prayer"
-                  , desc   = "O Great Bodhisattva of Arms, I beseech thy blessing upon this arrow!"
                   , rank   = BPlus
                   , card   = Buster
                   , kind   = "Anti-Army"
@@ -1119,7 +1104,6 @@ archers =
                   ]
     , passives  = [magicResistance A, independentAction A, territoryCreation A]
     , phantasm  = { name   = "Excalibur Viviane"
-                  , desc   = "Shining Sunlight—Sword of Promised Victory"
                   , rank   = A
                   , card   = Arts
                   , kind   = "Anti-Unit"
@@ -1193,7 +1177,6 @@ archers =
                   ]
     , passives  = [magicResistance D, independentAction A]
     , phantasm  = { name   = "Caribbean Free Bird Act 2"
-                  , desc   = "Bond of Lovebirds"
                   , rank   = CPlusPlus
                   , card   = Buster
                   , kind   = "Anti-Unit"
@@ -1268,7 +1251,6 @@ archers =
                   ]
     , passives  = [magicResistance C, independentAction B]
     , phantasm  = { name   = "Triple Crane Wings"
-                  , desc   = "Kakuyoku San-Ren"
                   , rank   = C
                   , card   = Arts
                   , kind   = "Anti-Unit"
@@ -1336,7 +1318,6 @@ archers =
                   ]
     , passives  = [magicResistance A, independentAction A, coreOfGoddess B]
     , phantasm  = { name   = "An Gal Tā Kigal Shē"
-                  , desc   = "Kindle of Venus For Tectonic Deformation"
                   , rank   = EX
                   , card   = Buster
                   , kind   = "Anti-Terrain/Anti-Mountain/Anti-Volcano"
@@ -1416,7 +1397,6 @@ archers =
                   ]
     , passives  = [magicResistance D, independentAction APlus]
     , phantasm  = { name   = "The Dynamics of an Asteroid"
-                  , desc   = "The Ultimate Crime"
                   , rank   = APlus
                   , card   = Buster
                   , kind   = "Anti-Army"
@@ -1486,7 +1466,6 @@ archers =
                   ]
     , passives  = [magicResistance D, independentAction A]
     , phantasm  = { name   = "Unlimited Lost Works"
-                  , desc   = "-Infinite- Creation of Swords"
                   , rank   = A
                   , card   = Arts
                   , kind   = "Anti-Unit"
@@ -1557,7 +1536,6 @@ archers =
                   ]
     , passives  = [magicResistance C, independentAction C]
     , phantasm  = { name   = "Sanat Kumara Wheel"
-                  , desc   = "Silver Torus of the Venusian Goddess"
                   , rank   = BPlus
                   , card   = Arts
                   , kind   = "Anti-Army"
@@ -1630,7 +1608,6 @@ archers =
                   ]
     , passives  = [magicResistance B, independentAction A, madness E]
     , phantasm  = { name   = "On Arorikya Sowaka"
-                  , desc   = "Shoukannon Bosatsu Mantra"
                   , rank   = B
                   , card   = Buster
                   , kind   = "Anti-Unit"
@@ -1705,7 +1682,6 @@ archers =
                   ]
     , passives  = [magicResistance C, riding EX, civilizationEncroachment EX, divinity B]
     , phantasm  = { name   = "Candy Star Photon Ray"
-                  , desc   = "Holy Night's Rainbow, Sword of the God of War"
                   , rank   = EX
                   , card   = Quick
                   , kind   = "Anti-World"
@@ -1774,7 +1750,6 @@ archers =
                   ]
     , passives  = [magicResistance D, independentAction APlus, territoryCreation B]
     , phantasm  = { name   = "Vijñapti-mātratā: Mystic Eyes of Distortion"
-                  , desc   = "Yuishiki—Waikyoku no Magan"
                   , rank   = EX
                   , card   = Buster
                   , kind   = "Anti-World"

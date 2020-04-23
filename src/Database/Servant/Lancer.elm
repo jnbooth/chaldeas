@@ -57,7 +57,6 @@ lancers =
                   ]
     , passives  = [magicResistance C, divinity B]
     , phantasm  = { name   = "Gáe Bolg"
-                  , desc   = "Barbed Spear that Pierces with Death"
                   , rank   = B
                   , card   = Quick
                   , kind   = "Anti-Personnel"
@@ -126,7 +125,6 @@ lancers =
                   ]
     , passives  = [magicResistance A, territoryCreation B]
     , phantasm  = { name   = "Báthory Erzsébet"
-                  , desc   = "Fresh Blood Demoness"
                   , rank   = EPlus
                   , card   = Buster
                   , kind   = "Anti-Personnel"
@@ -195,7 +193,6 @@ lancers =
                   ]
     , passives  = [magicResistance CPlus]
     , phantasm  = { name   = "Pilgrimage of the Five Hundred Arhat"
-                  , desc   = ""
                   , rank   = EX
                   , card   = Arts
                   , kind   = "Anti-Army"
@@ -266,7 +263,6 @@ lancers =
                   ]
     , passives  = [magicResistance C, divinity B]
     , phantasm  = { name   = "Gáe Bolg"
-                  , desc   = "The Spear which Reverses Causality"
                   , rank   = B
                   , card   = Quick
                   , kind   = "Anti-Personnel"
@@ -335,7 +331,6 @@ lancers =
                   ]
     , passives  = [magicResistance C]
     , phantasm  = { name   = "Thermopylae Enomotia"
-                  , desc   = "Guardian of the Hot Gates"
                   , rank   = B
                   , card   = Buster
                   , kind   = "Anti-Personnel"
@@ -409,7 +404,6 @@ lancers =
                   ]
     , passives  = [magicResistance B]
     , phantasm  = { name   = "Magna Voluisse Magnum"
-                  , desc   = "All Things Lead to My Spear"
                   , rank   = APlusPlus
                   , card   = Buster
                   , kind   = "Anti-Army"
@@ -478,7 +472,6 @@ lancers =
                   ]
     , passives  = [magicResistance B, riding B]
     , phantasm  = { name   = "Durindana"
-                  , desc   = "Ultimate Unbroken Spear"
                   , rank   = A
                   , card   = Buster
                   , kind   = "Anti-Army"
@@ -550,7 +543,6 @@ lancers =
                   ]
     , passives  = [magicResistance A]
     , phantasm  = { name   = "Gáe Bolg Alternative"
-                  , desc   = "Soaring Spear that Pierces with Death"
                   , rank   = BPlus
                   , card   = Quick
                   , kind   = "Anti-Personnel"
@@ -619,7 +611,6 @@ lancers =
                   ]
     , passives  = [magicResistance B]
     , phantasm  = { name   = "Gáe Dearg and Gáe Buidhe"
-                  , desc   = "Crimson Rose of Exorcism and Yellow Rose of Mortality"
                   , rank   = BPlus
                   , card   = Quick
                   , kind   = "Anti-Personnel"
@@ -689,7 +680,6 @@ lancers =
                   ]
     , passives  = [magicResistance A, riding A]
     , phantasm  = { name   = "Rhongomyniad"
-                  , desc   = "Spear that Shines to the End of the World"
                   , rank   = EX
                   , card   = Buster
                   , kind   = "Anti-Fortress"
@@ -763,7 +753,6 @@ lancers =
                   ]
     , passives  = [magicResistance C, divinity A, riding A]
     , phantasm  = { name   = "Vasavi Shakti"
-                  , desc   = "O Sun, Abide to Death"
                   , rank   = EX
                   , card   = Buster
                   , kind   = "Anti-Divine"
@@ -835,7 +824,6 @@ lancers =
                   ]
     , passives  = [magicResistance B, divinity D]
     , phantasm  = { name   = "Mac an Luin"
-                  , desc   = "Undefeated Violet Flower"
                   , rank   = APlus
                   , card   = Arts
                   , kind   = "Anti-Army"
@@ -908,7 +896,6 @@ lancers =
                   ]
     , passives  = [magicResistance B, riding A, divinity E]
     , phantasm  = { name   = "Brynhild Romantia"
-                  , desc   = "Till Death Divides the Two"
                   , rank   = BPlus
                   , card   = Buster
                   , kind   = "Anti-Personnel"
@@ -981,7 +968,6 @@ lancers =
                   ]
     , passives  = [magicResistance D]
     , phantasm  = { name   = "Shen Qiang Wu Er Da"
-                  , desc   = "Divine Spear—No Second Strike"
                   , rank   = Unknown
                   , card   = Arts
                   , kind   = "Anti-Unit"
@@ -1050,7 +1036,6 @@ lancers =
                   ]
     , passives  = [magicResistance B, riding A]
     , phantasm  = { name   = "Rhongomyniad"
-                  , desc   = "Spear Shining at the End of the World"
                   , rank   = APlusPlus
                   , card   = Buster
                   , kind   = "Anti-Fortress"
@@ -1130,7 +1115,6 @@ lancers =
                   ]
     , passives  = [riding A, territoryCreation A, divinity APlusPlus]
     , phantasm  = { name   = "Tokonatsu Nikkou—Goddess' Love Parasol"
-                  , desc   = ""
                   , rank   = C
                   , card   = Buster
                   , kind   = "Anti-Unit"
@@ -1199,7 +1183,6 @@ lancers =
                   ]
     , passives  = [madness EX, magicResistance D]
     , phantasm  = { name   = "Dojo-ji Bell Form 108—Karyu-nagi"
-                  , desc   = ""
                   , rank   = A
                   , card   = Buster
                   , kind   = "Anti-Personnel"
@@ -1272,7 +1255,6 @@ lancers =
                   ]
     , passives  = [magicResistance C]
     , phantasm  = { name   = "Kazikli Bey"
-                  , desc   = "Citadel of Impalement"
                   , rank   = C
                   , card   = Buster
                   , kind   = "Anti-Enemy"
@@ -1346,7 +1328,6 @@ lancers =
                   ]
     , passives  = [magicResistance APlus]
     , phantasm  = { name   = "La Grâce Fille Noël"
-                  , desc   = "Sing Elegantly, For the Christmas"
                   , rank   = APlus
                   , card   = Buster
                   , kind   = "Anti-Army"
@@ -1426,7 +1407,6 @@ lancers =
                   ]
     , passives  = [magicResistance A]
     , phantasm  = { name   = "Enuma Elish"
-                  , desc   = "O Humans, Let Us Restrain the Gods"
                   , rank   = EX
                   , card   = Buster
                   , kind   = "Anti-Enforcement"
@@ -1496,7 +1476,6 @@ lancers =
                   ]
     , passives  = [magicResistance B, coreOfGoddess A]
     , phantasm  = { name   = "Caress of the Medusa"
-                  , desc   = "Embrace of the Goddess"
                   , rank   = BPlus
                   , card   = Quick
                   , kind   = "Anti-Unit"
@@ -1570,7 +1549,6 @@ lancers =
                   ]
     , passives  = [magicResistance A, madness E, divinity A]
     , phantasm  = { name   = "Great Death Claw"
-                  , desc   = "The Inescapable Claw of Death"
                   , rank   = B
                   , card   = Buster
                   , kind   = "Anti-Personnel"
@@ -1643,7 +1621,6 @@ lancers =
                   ]
     , passives  = [magicResistance C, riding APlus, madness C, divinity C]
     , phantasm  = { name   = "Vajra of India"
-                  , desc   = "Shakudankan-in Kongousho"
                   , rank   = APlus
                   , card   = Buster
                   , kind   = "Anti-Personnel"
@@ -1717,7 +1694,6 @@ lancers =
                   ]
     , passives  = [magicResistance A, coreOfGoddess B]
     , phantasm  = { name   = "Trishula Shakti"
-                  , desc   = "Knowing What is Love, and Refusing to Love; That is Antipathy"
                   , rank   = EX
                   , card   = Quick
                   , kind   = "Anti-Vehicle"
@@ -1790,7 +1766,6 @@ lancers =
                   ]
     , passives  = [magicResistance DPlus]
     , phantasm  = { name   = "Oboro Urazuki, Eleven Forms"
-                  , desc   = "11th Style: Inverted Moon Thrust"
                   , rank   = C
                   , card   = Arts
                   , kind   = "Anti-Personnel"
@@ -1866,7 +1841,6 @@ lancers =
                   ]
     , passives  = [magicResistance A]
     , phantasm  = { name   = "Flying Bright Spirit, Fire-Tipped Spear"
-                  , desc   = ""
                   , rank   = A
                   , card   = Buster
                   , kind   = "Anti-Army"
@@ -1942,7 +1916,6 @@ lancers =
                   ]
     , passives  = [magicResistance D, territoryCreation APlus, coreOfGoddess B]
     , phantasm  = { name   = "Kur Ki Gal Irkalla"
-                  , desc   = ""
                   , rank   = A
                   , card   = Buster
                   , kind   = "Anti-Mountain"

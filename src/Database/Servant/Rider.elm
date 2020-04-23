@@ -56,7 +56,6 @@ riders =
                   ]
     , passives  = [magicResistance B, independentAction C, divinity EMinus, riding APlus]
     , phantasm  = { name   = "Bellerophon"
-                  , desc   = "Bridle of Chivalry"
                   , rank   = APlus
                   , card   = Quick
                   , kind   = "Anti-Army"
@@ -125,7 +124,6 @@ riders =
                   ]
     , passives  = [magicResistance A, riding B]
     , phantasm  = { name   = "Ascalon"
-                  , desc   = "Blessed Sword of Force Subversion"
                   , rank   = B
                   , card   = Arts
                   , kind   = "Anti-Personnel"
@@ -200,7 +198,6 @@ riders =
                   ]
     , passives  = [magicResistance E]
     , phantasm  = { name   = "Queen Anne's Revenge"
-                  , desc   = ""
                   , rank   = CPlusPlus
                   , card   = Buster
                   , kind   = "Anti-Army"
@@ -267,7 +264,6 @@ riders =
                   ]
     , passives  = [magicResistance D, riding A]
     , phantasm  = { name   = "Chariot of Boudica"
-                  , desc   = "Chariot of Promised Protection"
                   , rank   = BPlusPlus
                   , card   = Arts
                   , kind   = "Anti-Army"
@@ -336,7 +332,6 @@ riders =
                   ]
     , passives  = [magicResistance C, riding APlus]
     , phantasm  = { name   = "Dan-No-Ura Eight-Boat Leap"
-                  , desc   = "Dan No Ura—Hassoutobi"
                   , rank   = C
                   , card   = Quick
                   , kind   = "Anti-Personnel"
@@ -401,7 +396,6 @@ riders =
                   ]
     , passives  = [magicResistance D, divinity E, riding APlus]
     , phantasm  = { name   = "Bucephalus"
-                  , desc   = "The Beginning of Trampling Conquest"
                   , rank   = BPlusPlus
                   , card   = Quick
                   , kind   = "Anti-Army"
@@ -470,7 +464,6 @@ riders =
                   ]
     , passives  = [magicResistance C, riding APlus]
     , phantasm  = { name   = "Guillotine Breaker"
-                  , desc   = "Glory to the Crown of Lilies"
                   , rank   = APlus
                   , card   = Quick
                   , kind   = "Anti-Army"
@@ -544,7 +537,6 @@ riders =
                   ]
     , passives  = [magicResistance A, riding APlusPlus, divinity C]
     , phantasm  = { name   = "Tarasque"
-                  , desc   = "O Tragic Drake Who Knew Naught of Love"
                   , rank   = EX
                   , card   = Buster
                   , kind   = "Anti-Army"
@@ -615,7 +607,6 @@ riders =
                   ]
     , passives  = [magicResistance D, riding B]
     , phantasm  = { name   = "Golden Wild Hunt"
-                  , desc   = "Golden Stag and the Eventide Tempest"
                   , rank   = APlus
                   , card   = Buster
                   , kind   = "Anti-Army"
@@ -682,7 +673,6 @@ riders =
                   ]
     , passives  = [magicResistance D]
     , phantasm  = { name   = "Caribbean Free Bird"
-                  , desc   = "Bond of Lovebirds"
                   , rank   = CPlusPlus
                   , card   = Quick
                   , kind   = "Anti-Personnel"
@@ -749,7 +739,6 @@ riders =
                   ]
     , passives  = [magicResistance A, riding A]
     , phantasm  = { name   = "Excalibur Morgan"
-                  , desc   = "Sword of Promised Victory"
                   , rank   = APlusPlus
                   , card   = Buster
                   , kind   = "Anti-Army"
@@ -814,7 +803,6 @@ riders =
                   ]
     , passives  = [magicResistance A, riding APlus, independentAction B]
     , phantasm  = { name   = "Hippogriff"
-                  , desc   = "Otherworldly Phantom Horse"
                   , rank   = BPlusPlus
                   , card   = Quick
                   , kind   = "Anti-Army"
@@ -887,7 +875,6 @@ riders =
                   ]
     , passives  = [magicResistance B, riding A]
     , phantasm  = { name   = "Chariot My Love"
-                  , desc   = "My Dear Iron Chariot"
                   , rank   = BPlus
                   , card   = Buster
                   , kind   = "Anti-Army"
@@ -956,7 +943,6 @@ riders =
                   ]
     , passives  = [magicResistance D, riding APlus, divinity C]
     , phantasm  = { name   = "Ionioi Hetairoi"
-                  , desc   = "Army of the King"
                   , rank   = EX
                   , card   = Buster
                   , kind   = "Anti-Army"
@@ -1027,7 +1013,6 @@ riders =
                   ]
     , passives  = [divinity C]
     , phantasm  = { name   = "Golden Drive, Good Night"
-                  , desc   = ""
                   , rank   = B
                   , card   = Quick
                   , kind   = "Anti-Army"
@@ -1093,7 +1078,6 @@ riders =
                   ]
     , passives  = [magicResistance B, riding APlus, divinity B]
     , phantasm  = { name   = "Ramesseum Tentyris"
-                  , desc   = "The Shining Great Temple Complex"
                   , rank   = EX
                   , card   = Buster
                   , kind   = "Anti-Fortress"
@@ -1164,7 +1148,6 @@ riders =
                   ]
     , passives  = [magicResistance B, surfing A]
     , phantasm  = { name   = "Prydwen Tube Riding"
-                  , desc   = ""
                   , rank   = A
                   , card   = Arts
                   , kind   = "Anti-Wave"
@@ -1240,7 +1223,6 @@ riders =
                   ]
     , passives  = [magicResistance A, riding EX, coreOfGoddess EX]
     , phantasm  = { name   = "Xiuhcoatl"
-                  , desc   = "O Flame, Burn the Gods Themselves"
                   , rank   = A
                   , card   = Buster
                   , kind   = "Anti-Army/Anti-Fortress"
@@ -1313,7 +1295,6 @@ riders =
                   ]
     , passives  = [magicResistance D, riding B]
     , phantasm  = { name   = "Santa María・Drop Anchor"
-                  , desc   = "Exploration Ship of the New World"
                   , rank   = A
                   , card   = Buster
                   , kind   = "Anti-Army"
@@ -1383,7 +1364,6 @@ riders =
                   ]
     , passives  = [magicResistance B, riding B, independentAction EX]
     , phantasm  = { name   = "Secace Morgan"
-                  , desc   = "Tenacious Blaze of the Sword of Promised Victory"
                   , rank   = C
                   , card   = Quick
                   , kind   = "Anti-Army"
@@ -1461,7 +1441,6 @@ riders =
                   ]
     , passives  = [riding EX, independentAction A, coreOfGoddess B]
     , phantasm  = { name   = "An Gal Tā Seven Colors"
-                  , desc   = "Venusian Rainbow Traversing Ekur"
                   , rank   = EX
                   , card   = Quick
                   , kind   = "Anti-Personnel"
@@ -1482,5 +1461,78 @@ riders =
                   [(SecretGemOf Rider, 10), (PrimordialLanugo, 3)]
                   [(PrimordialLanugo, 5), (ScarabOfWisdom, 2)]
                   [(ScarabOfWisdom, 6), (MysteriousDivineWine, 8)]
+    }
+  , { name      = "Ivan the Terrible"
+    , spoiler   = Nothing
+    , id        = 205
+    , rarity    = 5
+    , class     = Rider
+    , stats     = { base  = { atk = 1795,  hp = 1948 }
+                  , max   = { atk = 11619, hp = 13284 }
+                  , grail = { atk = 12719, hp = 14553 }
+                  }
+    , gen       = { starWeight = 200, starRate = 8.9, npAtk = 0.62, npDef = 3 }
+    , death     = 40
+    , curve     = 10
+    , attr      = Human
+    , align     = [Lawful, Evil]
+    , gender    = Male
+    , traits    = [Humanoid, WildBeast, King, Riding, EnumaElish]
+    , deck      = Deck Quick Arts Arts Buster Buster
+    , hits      = { quick = 4, arts = 3, buster = 2, ex = 4 }
+    , skills    = [ { name   = "Mental Schism"
+                    , rank   = A
+                    , icon   = Icon.NobleUp
+                    , cd     = 7
+                    , effect = [ Grant Self 3 NPGen <| Range 30 50
+                               , To Self RemoveDebuffs Full
+                               ]
+                    }
+                  , { name   = "Innocent Monster (Foreign)"
+                    , rank   = A
+                    , icon   = Icon.StarTurn
+                    , cd     = 7
+                    , effect = [ Grant Self 3 StarsPerTurn <| Range 5 10
+                               , Grant Self 3 (CardUp Buster) <| Range 20 40
+                               ]
+                    }
+                  , { name   = "Emergency Prerogative"
+                    , rank   = A
+                    , icon   = Icon.Shield
+                    , cd     = 8
+                    , effect = [ Grant Self 1 Invincibility Full
+                               , Debuff Enemies 3 AttackDown <| Range 10 20
+                               , To Enemies RemoveBuffs Full
+                               ]
+                    }
+                  ]
+    , passives  = [magicResistance D, riding EX]
+    , phantasm  = { name   = "Zveri Krestnyi Khod"
+                  , rank   = B
+                  , card   = Buster
+                  , kind   = "Anti-Personnel"
+                  , hits   = 5
+                  , effect = [ To Enemies Damage <| Range 300 500
+                             , Debuff Enemies 3 (CardVuln Buster) <| Flat 20
+                             ]
+                  , over   = [ Grant Self 1 NPUp <| Range 30 70 ]
+                  , first  = True
+                  }
+    , limited   = True
+    , free      = False
+    , ascendUp  = Ascension
+                  [(Piece Rider, 5)]
+                  [(Piece Rider, 12), (EvilBone, 22)]
+                  [(Monument Rider, 5), (MeteorHorseshoe, 10), (PrimordialLanugo, 3)]
+                  [(Monument Rider, 12), (PrimordialLanugo, 6), (CursedBeastGallstone, 5)]
+    , skillUp   = Reinforcement
+                  [(GemOf Rider, 5)]
+                  [(GemOf Rider, 12)]
+                  [(MagicGemOf Rider, 5)]
+                  [(MagicGemOf Rider, 5), (MeteorHorseshoe, 5)]
+                  [(SecretGemOf Rider, 5), (MeteorHorseshoe, 10)]
+                  [(SecretGemOf Rider, 12), (EvilBone, 15)]
+                  [(EvilBone, 29), (DeadlyPoisonousNeedle, 15)]
+                  [(DeadlyPoisonousNeedle, 44), (EternalIce, 24)]
     }
   ]

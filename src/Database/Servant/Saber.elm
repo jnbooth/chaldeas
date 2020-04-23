@@ -54,7 +54,6 @@ sabers =
                   ]
     , passives  = [magicResistance A, riding B]
     , phantasm  = { name   = "Excalibur"
-                  , desc   = "Sword of Promised Victory"
                   , rank   = APlusPlus
                   , card   = Buster
                   , kind   = "Anti-Fortress"
@@ -119,7 +118,6 @@ sabers =
                   ]
     , passives  = [magicResistance B]
     , phantasm  = { name   = "Excalibur Morgan"
-                  , desc   = "Sword of Promised Victory"
                   , rank   = APlusPlus
                   , card   = Buster
                   , kind   = "Anti-Fortress"
@@ -184,7 +182,6 @@ sabers =
                   ]
     , passives  = [magicResistance B, riding C]
     , phantasm  = { name   = "Caliburn"
-                  , desc   = "Golden Sword of Assured Victory"
                   , rank   = BPlus
                   , card   = Buster
                   , kind   = "Anti-Personnel"
@@ -254,7 +251,6 @@ sabers =
                   ]
     , passives  = [magicResistance C, riding B]
     , phantasm  = { name   = "Laus St. Claudius"
-                  , desc   = "Imperium of the Maiden's Flowery Words"
                   , rank   = B
                   , card   = Arts
                   , kind   = "Anti-Encampment"
@@ -324,7 +320,6 @@ sabers =
                   ]
     , passives  = [riding B]
     , phantasm  = { name   = "Balmung"
-                  , desc   = "Illusory Greatsword: Felling of the Sky Demon"
                   , rank   = EX
                   , card   = Buster
                   , kind   = "Anti-Army"
@@ -394,7 +389,6 @@ sabers =
                   ]
     , passives  = [magicResistance C, riding B, divinity D]
     , phantasm  = { name   = "Crocea Mors"
-                  , desc   = "The Yellow Death"
                   , rank   = BPlus
                   , card   = Quick
                   , kind   = "Anti-Personnel"
@@ -464,7 +458,6 @@ sabers =
                   ]
     , passives  = [magicResistance B, riding A, divinity B]
     , phantasm  = { name   = "Photon Ray"
-                  , desc   = "Sword of the God of War"
                   , rank   = A
                   , card   = Buster
                   , kind   = "Anti-Army"
@@ -529,7 +522,6 @@ sabers =
                   ]
     , passives  = [magicResistance B, riding B, madness EX]
     , phantasm  = { name   = "Saint War Order"
-                  , desc   = "Rally Thy War Cries Under the Holy Flag"
                   , rank   = B
                   , card   = Arts
                   , kind   = "Anti-Personnel"
@@ -602,7 +594,6 @@ sabers =
                   ]
     , passives  = [magicResistance C, riding B]
     , phantasm  = { name   = "Fleur de Lis"
-                  , desc   = "Gorgeous Blooming Lilies"
                   , rank   = CPlus
                   , card   = Arts
                   , kind   = "Anti-Army"
@@ -671,7 +662,6 @@ sabers =
                   ]
     , passives  = [magicResistance E, riding E]
     , phantasm  = { name   = "Mumyou Sandanzuki"
-                  , desc   = "Three-Stage Thrust"
                   , rank   = Unknown
                   , card   = Quick
                   , kind   = "Anti-Personnel"
@@ -742,7 +732,6 @@ sabers =
                   ]
     , passives  = [magicResistance B, riding B]
     , phantasm  = { name   = "Caladbolg"
-                  , desc   = "Rainbow Sword"
                   , rank   = APlus
                   , card   = Buster
                   , kind   = "Anti-Army"
@@ -812,7 +801,6 @@ sabers =
                   ]
     , passives  = [magicResistance B, riding B]
     , phantasm  = { name   = "Clarent Blood Arthur"
-                  , desc   = "Rebellion Against My Beautiful Father"
                   , rank   = APlus
                   , card   = Buster
                   , kind   = "Anti-Army"
@@ -883,7 +871,6 @@ sabers =
                   ]
     , passives  = [magicResistance C, riding B]
     , phantasm  = { name   = "Fax Caelestis"
-                  , desc   = "Ending of the Rose of Prominence"
                   , rank   = BPlusPlus
                   , card   = Arts
                   , kind   = "Anti-Personnel"
@@ -958,7 +945,6 @@ sabers =
                   ]
     , passives  = [magicResistance A, connectionRoot A, independentManifestation C]
     , phantasm  = { name   = "Amalavijñāna—Boundary of Emptiness"
-                  , desc   = "Mukushiki Kara no Kyoukai"
                   , rank   = EX
                   , card   = Arts
                   , kind   = "Anti-Unit"
@@ -1029,7 +1015,6 @@ sabers =
                   ]
     , passives  = [magicResistance A, riding APlus, divinity A]
     , phantasm  = { name   = "Brahmastra"
-                  , desc   = "The Rakshasa-Piercing Immortal"
                   , rank   = APlus
                   , card   = Buster
                   , kind   = "Anti-Demon"
@@ -1098,7 +1083,6 @@ sabers =
                   ]
     , passives  = [magicResistance B, riding B]
     , phantasm  = { name   = "Arondight Overload"
-                  , desc   = "Severance of the Binding Chains—Lake's Overflowing Light"
                   , rank   = A
                   , card   = Arts
                   , kind   = "Anti-Army"
@@ -1170,7 +1154,6 @@ sabers =
                   ]
     , passives  = [magicResistance B, riding B]
     , phantasm  = { name   = "Excalibur Galatine"
-                  , desc   = "The Reborn Sword of Victory"
                   , rank   = APlus
                   , card   = Buster
                   , kind   = "Anti-Army"
@@ -1241,7 +1224,6 @@ sabers =
                   ]
     , passives  = [magicResistance B, riding A]
     , phantasm  = { name   = "Switch On—Airgetlám"
-                  , desc   = "Be my Sword, Silver Arm"
                   , rank   = CPlus
                   , card   = Buster
                   , kind   = "Anti-Unit"
@@ -1319,7 +1301,6 @@ sabers =
                   ]
     , passives  = [magicResistance A, territoryCreation C, doubleClass E]
     , phantasm  = { name   = "Báthory Brave Erzsébet"
-                  , desc   = "Tornado Demon Daughter of Fresh Blood"
                   , rank   = B
                   , card   = Buster
                   , kind   = "Anti-Army"
@@ -1393,7 +1374,6 @@ sabers =
                   ]
     , passives  = [ magicResistance A ]
     , phantasm  = { name   = "Six Paths, Five Rings: Kurikara Divine Blade"
-                  , desc   = "Five Planes of the Six Realms, The Divine Figure of Kurikara"
                   , rank   = A
                   , card   = Buster
                   , kind   = "Anti-Unit"
@@ -1460,7 +1440,6 @@ sabers =
                   ]
     , passives  = [magicResistance A, riding B]
     , phantasm  = { name   = "Excalibur"
-                  , desc   = "Sword of Promised Victory"
                   , rank   = EX
                   , card   = Buster
                   , kind   = "??"
@@ -1516,7 +1495,7 @@ sabers =
                     , rank   = BPlus
                     , icon   = Icon.Heart
                     , cd     = 8
-                    , effect = [ Debuff (EnemyType Male) 1 Stun <| Range 50 100
+                    , effect = [ Chances 50 100 <| Debuff (EnemyType Male) 1 Charm Full
                                , Debuff Enemy 1 AttackDown <| Range 10 20
                                ]
                     }
@@ -1532,7 +1511,6 @@ sabers =
                   ]
     , passives  = [magicResistance A, riding B, divinity A]
     , phantasm  = { name   = "Tenkiame"
-                  , desc   = "Heavenly Demon Rain"
                   , rank   = BPlus
                   , card   = Buster
                   , kind   = "Anti-Army"
@@ -1605,7 +1583,6 @@ sabers =
                   ]
     , passives  = [magicResistance E, riding EX, madness E]
     , phantasm  = { name   = "Skewered Plasma Blade"
-                  , desc   = "Skewering Thunder Blade"
                   , rank   = B
                   , card   = Quick
                   , kind   = "Anti-Personnel"
@@ -1679,7 +1656,6 @@ sabers =
                   ]
     , passives  = [magicResistance C, riding B]
     , phantasm  = { name   = "Kenjutsu Musou - Kenzen Ichinyo"
-                  , desc   = "Peerless Swordsmanship - Zen and the Blade as One"
                   , rank   = A
                   , card   = Arts
                   , kind   = "Anti-Personnel Ultimate Secret Technique"

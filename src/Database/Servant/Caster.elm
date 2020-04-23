@@ -56,7 +56,6 @@ casters =
                   ]
     , passives  = [territoryCreation A, itemConstruction A]
     , phantasm  = { name   = "Rule Breaker"
-                  , desc   = "All Spells Must Be Broken"
                   , rank   = CPlus
                   , card   = Arts
                   , kind   = "Anti-Thaumaturgy"
@@ -125,7 +124,6 @@ casters =
                   ]
     , passives  = [territoryCreation B]
     , phantasm  = { name   = "Prelati's Spellbook"
-                  , desc   = "Textbook of the Spiral Sunken Castle"
                   , rank   = APlus
                   , card   = Buster
                   , kind   = "Anti-Army"
@@ -192,7 +190,6 @@ casters =
                   ]
     , passives  = [territoryCreation D, itemConstruction C]
     , phantasm  = { name   = "Märchen Meines Lebens"
-                  , desc   = "A Story Just For You"
                   , rank   = CPlus
                   , card   = Arts
                   , kind   = "Anti-Personnel"
@@ -265,7 +262,6 @@ casters =
                   ]
     , passives  = [territoryCreation C]
     , phantasm  = { name   = "First Folio"
-                  , desc   = "When the Curtain Rises, the Applause Shall Be As Ten Thousand Thunders!"
                   , rank   = BPlus
                   , card   = Buster
                   , kind   = "Anti-Personnel"
@@ -334,7 +330,6 @@ casters =
                   ]
     , passives  = [territoryCreation CPlus, itemConstruction B]
     , phantasm  = { name   = "Ticktock Bomb"
-                  , desc   = "Lullaby Explosive"
                   , rank   = APlus
                   , card   = Buster
                   , kind   = "Anti-Army"
@@ -399,7 +394,6 @@ casters =
                   ]
     , passives  = [territoryCreation B]
     , phantasm  = { name   = "Requiem for Death"
-                  , desc   = "Funeral Music for the Death God"
                   , rank   = B
                   , card   = Arts
                   , kind   = "Anti-Army"
@@ -475,7 +469,6 @@ casters =
                   ]
     , passives  = [itemConstruction B, territoryCreation A]
     , phantasm  = { name   = "Unreturning Formation"
-                  , desc   = "Stone Sentinel Maze"
                   , rank   = C
                   , card   = Arts
                   , kind   = "Anti-Army"
@@ -550,7 +543,6 @@ casters =
                   ]
     , passives  = [territoryCreation B, divinity B]
     , phantasm  = { name   = "Wicker Man"
-                  , desc   = "Cage of Scorching Flames"
                   , rank   = B
                   , card   = Buster
                   , kind   = "Anti-Army"
@@ -623,7 +615,6 @@ casters =
                   ]
     , passives  = [territoryCreation B, itemConstruction A]
     , phantasm  = { name   = "Báthory Halloween Erzsébet"
-                  , desc   = "First Class Demon Daughter of Fresh Blood"
                   , rank   = EMinus
                   , card   = Buster
                   , kind   = "Anti-Army"
@@ -688,7 +679,6 @@ casters =
                   ]
     , passives  = [territoryCreation C, divinity A]
     , phantasm  = { name   = "Eightfold Blessings of Amaterasu"
-                  , desc   = "on the Weight Stone under the Sunlit Watery Heavens"
                   , rank   = D
                   , card   = Arts
                   , kind   = "Anti-Army"
@@ -757,7 +747,6 @@ casters =
                   ]
     , passives  = [territoryCreation B, itemConstruction B]
     , phantasm  = { name   = "Pain Breaker"
-                  , desc   = "All Flaws Must Be Repaired"
                   , rank   = C
                   , card   = Arts
                   , kind   = "Anti-Magic"
@@ -824,7 +813,6 @@ casters =
                   ]
     , passives  = [territoryCreation A, itemConstruction EX]
     , phantasm  = { name   = "Sword of Paracelsus"
-                  , desc   = "Magic Sword of the Elementalist"
                   , rank   = APlus
                   , card   = Arts
                   , kind   = "Anti-Army"
@@ -897,7 +885,6 @@ casters =
                   ]
     , passives  = [territoryCreation A]
     , phantasm  = { name   = "Nursery Rhyme"
-                  , desc   = "A Story For Somebody's Sake"
                   , rank   = C
                   , card   = Arts
                   , kind   = "Anti-Personnel"
@@ -970,7 +957,6 @@ casters =
                   ]
     , passives  = [itemConstructionFake A]
     , phantasm  = { name   = "Dimension of Steam"
-                  , desc   = "Glorious World of Fiery Desolation"
                   , rank   = EX
                   , card   = Buster
                   , kind   = "Anti-Army"
@@ -1040,7 +1026,6 @@ casters =
                   ]
     , passives  = [territoryCreation A, itemConstruction B]
     , phantasm  = { name   = "Sanat Kumara"
-                  , desc   = "Venusian God, Heavenly Lord of the Flame"
                   , rank   = APlus
                   , card   = Arts
                   , kind   = "Anti-Army"
@@ -1112,7 +1097,6 @@ casters =
                   ]
     , passives  = [territoryCreation D, itemConstruction D]
     , phantasm  = { name   = "World Faith Domination"
-                  , desc   = "Ｗ・Ｆ・Ｄ"
                   , rank   = EX
                   , card   = Arts
                   , kind   = "Anti-Populace"
@@ -1182,7 +1166,6 @@ casters =
                   ]
     , passives  = [territoryCreation B, itemConstruction C]
     , phantasm  = { name   = "Tsago Degi Naleya"
-                  , desc   = "Creator of the Earth and Its People"
                   , rank   = BPlus
                   , card   = Arts
                   , kind   = "Anti-Army"
@@ -1253,7 +1236,6 @@ casters =
                   ]
     , passives  = [territoryCreation B, coreOfGoddess C]
     , phantasm  = { name   = "Song of Grail"
-                  , desc   = "Sing, O White Grail"
                   , rank   = B
                   , card   = Arts
                   , kind   = "Magecraft"
@@ -1321,7 +1303,6 @@ casters =
                   ]
     , passives  = [territoryCreation APlus, divinity D]
     , phantasm  = { name   = "Five Elements Mountain Buddha Palm"
-                  , desc   = "Wu Xing Shan: Shijia Rulai Zhang"
                   , rank   = BPlus
                   , card   = Buster
                   , kind   = "Anti-Army"
@@ -1390,7 +1371,6 @@ casters =
                   ]
     , passives  = [territoryCreation A, itemConstruction BPlus, divinity B]
     , phantasm  = { name   = "Anpu Neb Ta Djeser"
-                  , desc   = "Nether Mirror's Precious Bible"
                   , rank   = BPlusPlus
                   , card   = Arts
                   , kind   = "Anti-Army"
@@ -1466,7 +1446,6 @@ casters =
                   ]
     , passives  = [territoryCreation A, itemConstruction A]
     , phantasm  = { name   = "Uomo Universale"
-                  , desc   = "Omnipotent Man"
                   , rank   = EX
                   , card   = Arts
                   , kind   = "Anti-Unit/Anti-Army"
@@ -1539,7 +1518,6 @@ casters =
                   ]
     , passives  = [territoryCreation A, itemConstruction D]
     , phantasm  = { name   = "Crystal Dress"
-                  , desc   = "The Lovable Brilliance, to Eternity"
                   , rank   = A
                   , card   = Arts
                   , kind   = "Anti-Army/Anti-Populace"
@@ -1611,7 +1589,6 @@ casters =
                   ]
     , passives  = [magicResistance B, unlimitedManaSupply C]
     , phantasm  = { name   = "Quintett Feuer"
-                  , desc   = "Multiple Ensemble Saturated Bombardment"
                   , rank   = EX
                   , card   = Buster
                   , kind   = "Anti-Unit"
@@ -1689,7 +1666,6 @@ casters =
                   ]
     , passives  = [itemConstructionFake A, territoryCreation A, divinity B]
     , phantasm  = { name   = "Melammu Dingir"
-                  , desc   = "Signal Cannon of the King"
                   , rank   = B
                   , card   = Arts
                   , kind   = "Anti-Army/Anti-Fortress"
@@ -1764,7 +1740,6 @@ casters =
                   ]
     , passives  = [territoryCreation C, itemConstruction C, mixedBlood EX]
     , phantasm  = { name   = "Garden of Avalon"
-                  , desc   = "The Forever-Sealed Utopia"
                   , rank   = C
                   , card   = Arts
                   , kind   = "Anti-Unit"
@@ -1834,7 +1809,6 @@ casters =
                   ]
     , passives  = [territoryCreation APlusPlus]
     , phantasm  = { name   = "Alfu Laylatin wa-Laylah"
-                  , desc   = "Arabian Nights"
                   , rank   = EX
                   , card   = Arts
                   , kind   = "Anti-King"
@@ -1909,7 +1883,6 @@ casters =
                   ]
     , passives  = [riding B, territoryCreation APlus, itemConstructionStrange EX]
     , phantasm  = { name   = "Laudatum Domus Illustris"
-                  , desc   = "Golden Theater Praised in Song"
                   , rank   = A
                   , card   = Buster
                   , kind   = "Anti-Army"
@@ -1980,7 +1953,6 @@ casters =
                   ]
     , passives  = [territoryCreation B, itemConstruction A]
     , phantasm  = { name   = "Fat Piglets"
-                  , desc   = "Prohibited Crazy Banquet"
                   , rank   = C
                   , card   = Buster
                   , kind   = "Anti-Unit"
@@ -2052,7 +2024,6 @@ casters =
                   ]
     , passives  = [territoryCreation C, magicResistance A]
     , phantasm  = { name   = "Three Enigmas"
-                  , desc   = "The Three Mysteries"
                   , rank   = B
                   , card   = Arts
                   , kind   = "Anti-Personnel"
@@ -2127,7 +2098,6 @@ casters =
                   ]
     , passives  = [territoryCreation A, fairyContract A]
     , phantasm  = { name   = "Viy Viy Viy"
-                  , desc   = "Sprint—Spirit Eyeballs"
                   , rank   = EX
                   , card   = Arts
                   , kind   = "Spiritual"
@@ -2199,7 +2169,6 @@ casters =
                   ]
     , passives  = [territoryCreation B, itemConstruction BPlus]
     , phantasm  = { name   = "Golem Keter Malkuth"
-                  , desc   = "Crown : Light of Wisdom"
                   , rank   = APlus
                   , card   = Buster
                   , kind   = "Anti-Army"

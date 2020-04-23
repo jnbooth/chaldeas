@@ -58,7 +58,6 @@ berserkers =
                   ]
     , passives  = [madness B, divinity A]
     , phantasm  = { name   = "Nine Lives"
-                  , desc   = "Shooting Hundred Heads"
                   , rank   = APlus
                   , card   = Buster
                   , kind   = "Unknown"
@@ -125,7 +124,6 @@ berserkers =
                   ]
     , passives  = [magicResistance E, madness C]
     , phantasm  = { name   = "Knight of Owner"
-                  , desc   = "A Knight Does Not Die with Empty Hands"
                   , rank   = APlusPlus
                   , card   = Quick
                   , kind   = "Anti-Personnel"
@@ -197,7 +195,6 @@ berserkers =
                   ]
     , passives  = [madness A]
     , phantasm  = { name   = "God Force"
-                  , desc   = "Five Weapons of the War God"
                   , rank   = A
                   , card   = Buster
                   , kind   = "Anti-Personnel/Anti-Army/Anti-Fortress"
@@ -266,7 +263,6 @@ berserkers =
                   ]
     , passives  = [madness EX]
     , phantasm  = { name   = "Crying Warmonger"
-                  , desc   = "Howl of the Wounded Beast"
                   , rank   = APlus
                   , card   = Buster
                   , kind   = "Anti-Personnel"
@@ -333,7 +329,6 @@ berserkers =
                   ]
     , passives  = [madness E, divinity D]
     , phantasm  = { name   = "Golden Spark"
-                  , desc   = "Golden Impact"
                   , rank   = CMinus
                   , card   = Buster
                   , kind   = "Anti-Personnel"
@@ -402,7 +397,6 @@ berserkers =
                   ]
     , passives  = [madness EX]
     , phantasm  = { name   = "Kazikli Bey"
-                  , desc   = "Bloody Monster King"
                   , rank   = CPlus
                   , card   = Arts
                   , kind   = "Anti-Personnel"
@@ -471,7 +465,6 @@ berserkers =
                   ]
     , passives  = [madness B]
     , phantasm  = { name   = "Chaos Labyrinth"
-                  , desc   = "Eternally Unchanging Labyrinth"
                   , rank   = EX
                   , card   = Arts
                   , kind   = "Maze"
@@ -546,7 +539,6 @@ berserkers =
                   ]
     , passives  = [madness APlus]
     , phantasm  = { name   = "Flucticulus Diana"
-                  , desc   = "Devour my Heart, Moonlight"
                   , rank   = C
                   , card   = Arts
                   , kind   = "Anti-Army"
@@ -613,7 +605,6 @@ berserkers =
                   ]
     , passives  = [madness B]
     , phantasm  = { name   = "Athanaton Ten Thousand"
-                  , desc   = "Immortal Cavalry of Ten Thousand Rank"
                   , rank   = APlus
                   , card   = Buster
                   , kind   = "Anti-Army"
@@ -684,7 +675,6 @@ berserkers =
                   ]
     , passives  = [madness EX]
     , phantasm  = { name   = "Transforming, Flame-Emitting Meditation"
-                  , desc   = "Tenshin Kasyou Zanmai Achieving Acala's Samadhi"
                   , rank   = EX
                   , card   = Buster
                   , kind   = "Anti-Personnel"
@@ -755,7 +745,6 @@ berserkers =
                   ]
     , passives  = [madness B]
     , phantasm  = { name   = "Bloodbath Crown"
-                  , desc   = "Bloody Coronation"
                   , rank   = B
                   , card   = Buster
                   , kind   = "Anti-Personnel"
@@ -822,7 +811,6 @@ berserkers =
                   ]
     , passives  = [madness C]
     , phantasm  = { name   = "Napping in the Dazzling Sunshine and Feasting"
-                  , desc   = "Opulence of Sun and Shine and Catnap"
                   , rank   = DPlus
                   , card   = Quick
                   , kind   = "Anti-Personnel"
@@ -893,7 +881,6 @@ berserkers =
                   ]
     , passives  = [madness D]
     , phantasm  = { name   = "Blasted Tree"
-                  , desc   = "Lightning Tree of Crucifixion"
                   , rank   = BPlus
                   , card   = Quick
                   , kind   = "Anti-Army"
@@ -962,7 +949,6 @@ berserkers =
                   ]
     , passives  = [madness EMinus]
     , phantasm  = { name   = "Grendel Buster"
-                  , desc   = "Conflict Wellspring"
                   , rank   = APlusPlus
                   , card   = Buster
                   , kind   = "Anti-Personnel"
@@ -1031,7 +1017,6 @@ berserkers =
                   ]
     , passives  = [madness EX]
     , phantasm  = { name   = "Nightingale Pledge"
-                  , desc   = "I Will Abstain From All Poisons and Evils"
                   , rank   = CPlus
                   , card   = Arts
                   , kind   = "Anti-Army"
@@ -1103,7 +1088,6 @@ berserkers =
                   ]
     , passives  = [madness C, divinity C]
     , phantasm  = { name   = "Curruid Coinchenn"
-                  , desc   = "Beast of Crunching Deathtusk"
                   , rank   = A
                   , card   = Buster
                   , kind   = "Anti-Personnel"
@@ -1174,7 +1158,6 @@ berserkers =
                   ]
     , passives  = [magicResistance D, madness EX, riding APlus, divinity C]
     , phantasm  = { name   = "Vengeful Lightning of the Ox-King"
-                  , desc   = "The Inescapable Net of Heaven"
                   , rank   = BPlusPlus
                   , card   = Buster
                   , kind   = "Anti-Army"
@@ -1245,7 +1228,6 @@ berserkers =
                   ]
     , passives  = [madness B]
     , phantasm  = { name   = "Great Grudge of Rashomon"
-                  , desc   = "Rashoumon Dai Engi"
                   , rank   = B
                   , card   = Buster
                   , kind   = "Anti-Army"
@@ -1324,7 +1306,6 @@ berserkers =
                   ]
     , passives  = [madness C, altreactor A]
     , phantasm  = { name   = "Cross-Calibur"
-                  , desc   = "Black Dragon Twinblade of Victory"
                   , rank   = APlus
                   , card   = Quick
                   , kind   = "Anti-Army"
@@ -1397,7 +1378,6 @@ berserkers =
                   ]
     , passives  = [madness DPlus]
     , phantasm  = { name   = "Shinsengumi"
-                  , desc   = "Undying Integrity"
                   , rank   = CPlus
                   , card   = Buster
                   , kind   = "Anti-Unit"
@@ -1471,7 +1451,6 @@ berserkers =
                   ]
     , passives  = [madness EPlus]
     , phantasm  = { name   = "Kenran Makai Nichirinjou"
-                  , desc   = "Dazzling Castle of the Sun in the Demonic Realm"
                   , rank   = C
                   , card   = Buster
                   , kind   = "Anti-Fortress"
@@ -1538,7 +1517,6 @@ berserkers =
                   ]
     , passives  = [madness EX, divinity B]
     , phantasm  = { name   = "Outrage Amazon"
-                  , desc   = "A Hero to Die by My Rage"
                   , rank   = B
                   , card   = Buster
                   , kind   = "Anti-Unit"
@@ -1607,7 +1585,6 @@ berserkers =
                   ]
     , passives  = [madness D]
     , phantasm  = { name   = "Marvelous Exploits"
-                  , desc   = ""
                   , rank   = A
                   , card   = Buster
                   , kind   = "Anti-Army"
@@ -1680,7 +1657,6 @@ berserkers =
                   ]
     , passives  = [madness C]
     , phantasm  = { name   = "Nobunaga THE Rock 'n Roll"
-                  , desc   = "Demon King of the Sixth Heaven's Demon -Natsumori-"
                   , rank   = EX
                   , card   = Buster
                   , kind   = "Anti-God"
@@ -1749,7 +1725,6 @@ berserkers =
                   ]
     , passives  = [beastification B, independentAction A]
     , phantasm  = { name   = "Tauropolos Skia Thermokrasia"
-                  , desc   = "Dark Sky-Eclipsing Shot"
                   , rank   = A
                   , card   = Quick
                   , kind   = "Anti-Personnel"

@@ -96,7 +96,6 @@ type alias Ratings =
 
 type alias NoblePhantasm =
     { name   : String
-    , desc   : String
     , rank   : Rank
     , card   : Card
     , kind   : String

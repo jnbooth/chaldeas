@@ -61,7 +61,6 @@ assassins =
                   ]
     , passives  = [presenceConcealment D]
     , phantasm  = { name   = "Swallow Reversal"
-                  , desc   = "Hiken—Tsubame Gaeshi"
                   , rank   = Unknown
                   , card   = Quick
                   , kind   = "Anti-Personnel"
@@ -128,7 +127,6 @@ assassins =
                   ]
     , passives  = [presenceConcealment APlus]
     , phantasm  = { name   = "Zabaniya"
-                  , desc   = "Delusional Heartbeat"
                   , rank   = C
                   , card   = Quick
                   , kind   = "Anti-Personnel"
@@ -197,7 +195,6 @@ assassins =
                   ]
     , passives  = [magicResistance A, presenceConcealment APlus, coreOfGoddess EX]
     , phantasm  = { name   = "Smile of the Stheno"
-                  , desc   = "Goddess' Smile"
                   , rank   = B
                   , card   = Buster
                   , kind   = "Anti-Personnel"
@@ -268,7 +265,6 @@ assassins =
                   ]
     , passives  = [presenceConcealment B]
     , phantasm  = { name   = "All I Do Is Kill"
-                  , desc   = "Unreturning Dagger"
                   , rank   = BPlus
                   , card   = Quick
                   , kind   = "Anti-Unit"
@@ -339,7 +335,6 @@ assassins =
                   ]
     , passives  = [presenceConcealment D]
     , phantasm  = { name   = "La Mort Espoir"
-                  , desc   = "Death is Hope For Tomorrow"
                   , rank   = APlus
                   , card   = Buster
                   , kind   = "Anti-Personnel"
@@ -410,7 +405,6 @@ assassins =
                   ]
     , passives  = [presenceConcealment A]
     , phantasm  = { name   = "Christine Christine"
-                  , desc   = "Love Song Resounding through Hell"
                   , rank   = BPlus
                   , card   = Arts
                   , kind   = "Anti-Army"
@@ -479,7 +473,6 @@ assassins =
                   ]
     , passives  = []
     , phantasm  = { name   = "Mata Hari"
-                  , desc   = "The Woman with Sunny Eyes"
                   , rank   = A
                   , card   = Arts
                   , kind   = "Anti-Army"
@@ -550,7 +543,6 @@ assassins =
                   ]
     , passives  = [presenceConcealment D]
     , phantasm  = { name   = "Phantom Maiden"
-                  , desc   = "Phantasmal Iron Maiden"
                   , rank   = CPlus
                   , card   = Buster
                   , kind   = "Anti-Personnel"
@@ -622,7 +614,6 @@ assassins =
                   ]
     , passives  = [presenceConcealment APlus]
     , phantasm  = { name   = "Maria the Ripper"
-                  , desc   = "Holy Mother of Dismemberment"
                   , rank   = DPlus
                   , card   = Quick
                   , kind   = "Anti-Personnel"
@@ -694,7 +685,6 @@ assassins =
                   ]
     , passives  = [presenceConcealment A, madness A]
     , phantasm  = { name   = "Dangerous Game"
-                  , desc   = "The Secret Game of Sin"
                   , rank   = CPlus
                   , card   = Buster
                   , kind   = "Anti-Personnel"
@@ -767,7 +757,6 @@ assassins =
                   ]
     , passives  = [riding EX, cosmoReactor A]
     , phantasm  = { name   = "Secret Calibur"
-                  , desc   = "Sword of Unnamed Victory"
                   , rank   = EX
                   , card   = Quick
                   , kind   = "Anti-Unit"
@@ -839,7 +828,6 @@ assassins =
                   ]
     , passives  = [presenceConcealment C, independentAction A]
     , phantasm  = { name   = "Vijñāpti-mātratā—Mystic Eyes of Death Perception"
-                  , desc   = "Yuishiki・Chokushi no Magan"
                   , rank   = EX
                   , card   = Arts
                   , kind   = "Anti-Unit"
@@ -905,7 +893,6 @@ assassins =
                   ]
     , passives  = [presenceConcealment APlus, independentAction A]
     , phantasm  = { name   = "Chronos Rose"
-                  , desc   = "Gather Ye Rosebuds While Ye May"
                   , rank   = BPlus
                   , card   = Arts
                   , kind   = "Anti-Unit"
@@ -980,7 +967,6 @@ assassins =
                   ]
     , passives  = [presenceConcealment A]
     , phantasm  = { name   = "Zabaniya"
-                  , desc   = "Delusional Illusion"
                   , rank   = BPlusPlus
                   , card   = Arts
                   , kind   = "Anti-Unit"
@@ -1051,7 +1037,6 @@ assassins =
                   ]
     , passives  = [presenceConcealment C, divinity C]
     , phantasm  = { name   = "Multicolored Poison—Shinpen Kidoku"
-                  , desc   = ""
                   , rank   = B
                   , card   = Arts
                   , kind   = "Anti-Army"
@@ -1127,7 +1112,6 @@ assassins =
                   ]
     , passives  = [presenceConcealment APlus]
     , phantasm  = { name   = "Immortal Chaos Brigade"
-                  , desc   = "Fumetsu no Konton Ryodan"
                   , rank   = BPlus
                   , card   = Quick
                   , kind   = "Anti-Army"
@@ -1201,7 +1185,6 @@ assassins =
                   ]
     , passives  = [presenceConcealment APlus, independentAction A]
     , phantasm  = { name   = "Zabaniya"
-                  , desc   = "Delusional Poison Body"
                   , rank   = CPlus
                   , card   = Arts
                   , kind   = "Anti-Unit"
@@ -1276,7 +1259,6 @@ assassins =
                   ]
     , passives  = [presenceConcealment E]
     , phantasm  = { name   = "Gáe Bolg Alternative"
-                  , desc   = "Soaring Spear of Kicked Piercing Death"
                   , rank   = BPlus
                   , card   = Quick
                   , kind   = "Anti-Army"
@@ -1346,7 +1328,6 @@ assassins =
                   ]
     , passives  = [presenceConcealment B, divinity D]
     , phantasm  = { name   = "Uraeus Astrape"
-                  , desc   = "Here Stand the Snakes, at the Dawn's End"
                   , rank   = A
                   , card   = Buster
                   , kind   = "Anti-Army"
@@ -1425,7 +1406,6 @@ assassins =
                   ]
     , passives  = [magicResistance B, presenceConcealment A, independentAction B, onTheBoundary A]
     , phantasm  = { name   = "Azrael"
-                  , desc   = "The Angel That Announces Death"
                   , rank   = C
                   , card   = Buster
                   , kind   = "Anti-Personnel"
@@ -1494,7 +1474,6 @@ assassins =
                   ]
     , passives  = [presenceConcealment C, ruffian A]
     , phantasm  = { name   = "Juumenmaifuku Muei no Gotoku"
-                  , desc   = "Ambushed from Ten Sides, As If There Was No Shadow"
                   , rank   = A
                   , card   = Quick
                   , kind   = "Anti-Unit"
@@ -1564,7 +1543,6 @@ assassins =
                   ]
     , passives  = [presenceConcealment D]
     , phantasm  = { name   = "Gào Mì Luó Zhī Jīng"
-                  , desc   = "Manual of Accusation"
                   , rank   = B
                   , card   = Quick
                   , kind   = "Anti-Personnel"
@@ -1639,7 +1617,6 @@ assassins =
                   ]
     , passives  = [presenceConcealment A, divinity BPlus]
     , phantasm  = { name   = "Sneferu Iteru Nile"
-                  , desc   = "Cleanse the Impure, Blue and Beautiful Nile"
                   , rank   = B
                   , card   = Arts
                   , kind   = "Anti-Army"
@@ -1710,7 +1687,6 @@ assassins =
                   ]
     , passives  = [presenceConcealment APlus]
     , phantasm  = { name   = "Kuchiyose, Ibukidaimyoujin-Engi"
-                  , desc   = "Summoning the Great Deity of Ibuki Pratītyasamutpāda"
                   , rank   = C
                   , card   = Arts
                   , kind   = "Anti-Personnel"
@@ -1783,7 +1759,6 @@ assassins =
                   ]
     , passives  = [presenceConcealment A]
     , phantasm  = { name   = "Karakuri Genpou - Dongyu"
-                  , desc   = "Mechanical Illusion: Bull Engulfing"
                   , rank   = C
                   , card   = Buster
                   , kind   = "Anti-Beast"
@@ -1855,7 +1830,6 @@ assassins =
                   ]
     , passives  = [territoryCreation A, presenceConcealmentDark B, divinity C]
     , phantasm  = { name   = "The Great Hachitendou of Hakuro Castle"
-                  , desc   = "Temple Guardian of The White Egret Castle Pandemonium"
                   , rank   = APlus
                   , card   = Quick
                   , kind   = "Anti-Fortress"
@@ -1929,7 +1903,6 @@ assassins =
                   ]
     , passives  = [presenceConcealment CPlus, territoryCreation EX, itemConstruction C, divinity C]
     , phantasm  = { name   = "Hanging Gardens of Babylon"
-                  , desc   = "Floating Garden of Vanity"
                   , rank   = EX
                   , card   = Buster
                   , kind   = "Anti-World"

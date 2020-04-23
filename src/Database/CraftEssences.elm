@@ -3624,6 +3624,8 @@ db =
       [party_ Arts 10, party_ Buster 10]
     , bond 790 "Wildfire Blade" "Antonio Salieri" Icon.ArtsUp
       [party_ Arts 10, party NPGen 10]
+    , bond 791 "Library of Ivan the Terrible" "Ivan the Terrible" Icon.BusterUp
+      [party_ Buster 10, party NPUp 10]
     ]
 
 

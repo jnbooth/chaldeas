@@ -60,7 +60,6 @@ extras =
                 ]
     , passives  = [magicResistance A, riding C]
     , phantasm  = { name   = "Lord Camelot"
-                  , desc   = "Castle of the Distant Utopia"
                   , rank   = BPlusPlusPlus
                   , card   = Arts
                   , kind   = "Anti-Evil"
@@ -127,7 +126,6 @@ extras =
                   ]
     , passives  = [magicResistance EX]
     , phantasm  = { name   = "Luminosité Eternelle"
-                  , desc   = "God is Here With Me"
                   , rank   = A
                   , card   = Arts
                   , kind   = "Barrier"
@@ -200,7 +198,6 @@ extras =
                   ]
     , passives  = [magicResistance A]
     , phantasm  = { name   = "Twin Arm—Big Crunch"
-                  , desc   = "Dual Arm, Zero-Order Convergence"
                   , rank   = EX
                   , card   = Buster
                   , kind   = "Anti-Army"
@@ -273,7 +270,6 @@ extras =
                   ]
     , passives  = [avenger A, oblivionCorrection B, selfRestoreMagic D]
     , phantasm  = { name   = "Enfer Château d'If"
-                  , desc   = "Tyger, Tyger, Burning Bright"
                   , rank   = A
                   , card   = Quick
                   , kind   = "Anti-Army"
@@ -347,7 +343,6 @@ extras =
                   ]
     , passives  = [avenger B, oblivionCorrection A, selfRestoreMagic APlus]
     , phantasm  = { name   = "La Grondement Du Haine"
-                  , desc   = "Howl Loudly, My Resentment"
                   , rank   = APlus
                   , card   = Buster
                   , kind   = "Anti-Army"
@@ -423,7 +418,6 @@ extras =
                   ]
     , passives  = [avenger A, oblivionCorrection A, selfRestoreMagic E]
     , phantasm  = { name   = "Verg Avesta"
-                  , desc   = "Falsely Transcribed Creation"
                   , rank   = CMinus
                   , card   = Arts
                   , kind   = "Anti-Unit"
@@ -497,7 +491,6 @@ extras =
                   ]
     , passives  = [magicResistance EX]
     , phantasm  = { name   = "Tarasque"
-                  , desc   = "O Tragic Drake Who Knew Naught of Love"
                   , rank   = A
                   , card   = Buster
                   , kind   = "Anti-Unit/Anti-Dragon"
@@ -570,7 +563,6 @@ extras =
                   ]
     , passives  = [ avenger B, oblivionCorrection C, selfRestoreMagic A ]
     , phantasm  = { name   = "Pandemonium Cetus"
-                  , desc   = "Forced Seal, Pandemonic Temple"
                   , rank   = APlus
                   , card   = Buster
                   , kind   = "Anti-Army"
@@ -642,7 +634,6 @@ extras =
                   ]
     , passives  = [avenger A, oblivionCorrection B, selfRestoreMagic B]
     , phantasm  = { name   = "Frieren Scharfrichter"
-                  , desc   = "An Execution Towards a Far Away Person"
                   , rank   = C
                   , card   = Quick
                   , kind   = "Anti-Personnel"
@@ -716,7 +707,6 @@ extras =
                   ]
     , passives  = [magicResistance B, riding B, independentAction A, coreOfGoddess B, highServant A ]
     , phantasm  = { name   = "Saraswati Meltout"
-                  , desc   = "Benzaiten's Five-Chord Biwa"
                   , rank   = EX
                   , card   = Quick
                   , kind   = "Anti-Personnel"
@@ -791,7 +781,6 @@ extras =
                   ]
     , passives  = [magicResistance C, independentAction C, presenceConcealment APlus, coreOfGoddess C, highServant A]
     , phantasm  = { name   = "Brynhild Romantia"
-                  , desc   = "Even If Death Do Us Part"
                   , rank   = C
                   , card   = Buster
                   , kind   = "Anti-Unit"
@@ -848,7 +837,7 @@ extras =
                     , rank   = C
                     , icon   = Icon.Stun
                     , cd     = 8
-                    , effect = [ Debuff Enemy 1 Stun <| Range 50 100
+                    , effect = [ Chances 50 100 <| Debuff Enemy 1 Stun Full
                                , To Enemy (Remove Invincibility) Full
                                , To Enemy (Remove Evasion) Full
                               ]
@@ -864,7 +853,6 @@ extras =
                   ]
     , passives  = [magicResistance B, itemConstruction A, territoryCreation A]
     , phantasm  = { name   = "Cursed Cupid Cleanser"
-                  , desc   = "C.C.C."
                   , rank   = A
                   , card   = Arts
                   , kind   = "Anti-Personnel"
@@ -938,7 +926,6 @@ extras =
                   ]
     , passives  = [authorityOfBeasts D, independentManifestation E, logosEater C, negaSaver A]
     , phantasm  = { name   = "Amitābha Amidala・Heaven's Hole"
-                  , desc   = "Pleasure Paradise ・ Garbhadhatu Mandala"
                   , rank   = EX
                   , card   = Arts
                   , kind   = "Anti-Personnel"
@@ -1011,7 +998,6 @@ extras =
                   ]
     , passives  = [territoryCreation EX]
     , phantasm  = { name   = "Elementary, My Dear"
-                  , desc   = ""
                   , rank   = B
                   , card   = Arts
                   , kind   = "Anti-Personnel/Anti-World"
@@ -1088,7 +1074,6 @@ extras =
                   ]
     , passives  = [magicResistance B, itemConstruction B]
     , phantasm  = { name   = "Breast Zero Erzsébet"
-                  , desc   = ""
                   , rank   = B
                   , card   = Buster
                   , kind   = "Anti-Army"
@@ -1161,7 +1146,6 @@ extras =
                   ]
     , passives  = [magicResistance B, itemConstruction B]
     , phantasm  = { name   = "Breast Zero Erzsébet"
-                  , desc   = ""
                   , rank   = B
                   , card   = Buster
                   , kind   = "Anti-Army"
@@ -1231,7 +1215,6 @@ extras =
                   ]
     , passives  = [entityOfTheOuterRealms EX, insanity B, divinity B]
     , phantasm  = { name   = "Qliphoth Rhizome"
-                  , desc   = "Hollow Tree Filled With A Remnant of Light"
                   , rank   = EX
                   , card   = Buster
                   , kind   = "Anti-Personnel"
@@ -1303,7 +1286,6 @@ extras =
                   ]
     , passives  = [entityOfTheOuterRealms EX, itemConstruction B, territoryCreation D, divinity B]
     , phantasm  = { name   = "Thirty-Six Views of Mount Fuji"
-                  , desc   = "Dragon Climbing Mount Fuji"
                   , rank   = A
                   , card   = Arts
                   , kind   = "Anti-Army"
@@ -1355,13 +1337,13 @@ extras =
                                , Times 3 << Grant Self 5 CritUp <| Range 20 30
                                ]
                     }
-                  , { name   = "Armor of Lamentation"
+                  , { name   = "Lamenting Exterior"
                     , rank   = A
                     , icon   = Icon.ArtsUp
                     , cd     = 7
                     , effect = [ Times 3 << Grant Self 5 (CardUp Arts) <| Range 20 30 ]
                     }
-                  , { name   = "Flames of Wildfire"
+                  , { name   = "Wildfire"
                     , rank   = B
                     , icon   = Icon.ShieldDown
                     , cd     = 7
@@ -1369,8 +1351,7 @@ extras =
                     }
                   ]
     , passives  = [avenger C, oblivionCorrection B, selfRestoreMagic C]
-    , phantasm  = { name   = "Dio Santissimo Misericordia de mi"
-                  , desc   = "Supreme God, Have Mercy on Me"
+    , phantasm  = { name   = "Dio Santissimo Misericordia de Mi"
                   , rank   = C
                   , card   = Arts
                   , kind   = "Anti-Army"

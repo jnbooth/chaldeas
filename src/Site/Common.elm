@@ -156,7 +156,7 @@ sourceEl filter srcs label bit =
             toggled = and srcs bit /= 0
         in
         Just <|
-        H.p []
+        H.p [P.class "effects"]
         [ H.input [ P.type_ "checkbox"
                 , P.checked toggled
                 , E.onClick << SetSources <| Bitwise.xor srcs bit
@@ -187,7 +187,7 @@ effectsDialog filter srcs efs =
       , sourceEl filter srcs "Include special targets" C.special
       , sourceEl filter srcs "Include Noble Phantasm" C.np
       , sourceEl filter srcs "Fully overcharge NP" C.maxOver
-      , Just << H.form [P.id "effects"] <<
+      , Just << H.form [P.class "effects"] <<
         List.map effectSortEl <| C.all srcs efs
       ]
 

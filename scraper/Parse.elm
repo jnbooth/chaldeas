@@ -128,8 +128,14 @@ translate a =
         "Divine Wine—Shinpen Kidoku" ->
             "Divine Wine - Shinpen Kidoku"
 
+        "Emergency Prerogative" ->
+            "Supreme Authority"
+
         "Eternal Ice" ->
             "Permafrost"
+
+        "Feral Logic" ->
+            "Wild Beast's Logic"
 
         "\"First Hassan\"" ->
             "First Hassan"
@@ -143,17 +149,29 @@ translate a =
         "Galactic Meteor Sword XEX" ->
             "Galactic Meteor Sword"
 
+        "Innocent Monster (Foreign)" ->
+            "Innocent Monster (Strange)"
+
+        "Ivan the Terrible" ->
+            "Ivan the Thunder Emperor"
+
         "Jack-o'-lantern" ->
             "Jack-o'-Lantern"
 
         "Katou Danzo" ->
             "Kato Danzou"
 
+        "Lamenting Exterior" ->
+            "Wailing Armor"
+
         "Leonardo da Vinci" ->
             "Leonardo Da Vinci"
 
         "Logic of Wild Beasts" ->
             "Wild Beast's Logic"
+
+        "Mental Schism" ->
+            "Contradictory Spirit"
 
         "Mystic Eyes of Penetration" ->
             "Clairvoyant Mystic Eyes"
@@ -176,7 +194,6 @@ translate a =
         "Poisoned Blade" ->
             "Poison Blade"
 
-
         "Pseudonym \"Iseidako\"" ->
             "Pseudonym - Alien Octopus"
 
@@ -186,8 +203,17 @@ translate a =
         "Rainbow Candy" ->
             "Rainbow Syrup"
 
+        "Self Evolution" ->
+            "Self-Evolution"
+
+        "Schwipsig" ->
+            "Shvibzik"
+
         "The End of Four Nights" ->
             "End of the Four Nights"
+
+        "Tranquil Fig" ->
+            "Fig Tree of Tranquility"
 
         "Yagyu Munenori" ->
             "Munenori Yagyu"
@@ -224,6 +250,9 @@ translate a =
 
         "King Shahryay's Bedchamber" ->
             "King Shahryar's Chambers"
+
+        "Library of Ivan the Terrible" ->
+            "Archive of Ivan the Thunder Emperor"
 
         "Manifestation of the Golden Rule" ->
             "Manifestation of The Golden Rule"

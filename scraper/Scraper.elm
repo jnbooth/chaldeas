@@ -264,10 +264,7 @@ testServant getWiki s =
       let
         npWiki = getWiki <| Parse.npRank s
       in
-        [ {-Wiki.matchOne npWiki "Name" 0 s.phantasm.name
-        , Wiki.matchOne npWiki "Description" 1 s.phantasm.desc
-        , -}
-          Wiki.matchEffects npWiki "effect" (0, 6) <|
+        [ Wiki.matchEffects npWiki "effect" (0, 6) <|
           Parse.effects s.phantasm.effect
         , Wiki.matchEffects npWiki "oceffect" (0, 6) <|
           Parse.effects s.phantasm.over

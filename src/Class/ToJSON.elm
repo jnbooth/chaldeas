@@ -168,7 +168,6 @@ noblePhantasm : NoblePhantasm -> Value
 noblePhantasm x =
     E.object
     [ ("name",           E.string x.name)
-    , ("desc",           E.string x.desc)
     , ("rank",           E.string <| Rank.show x.rank)
     , ("card",           E.string <| Card.show x.card)
     , ("classification", E.string x.kind)

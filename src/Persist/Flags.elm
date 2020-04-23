@@ -72,11 +72,11 @@ decodePreferences =
             D.succeed <| case a of
                 Just prefs ->
                     let
-                        acc pref =
+                        go pref =
                             Preferences.set pref <|
                             List.member (Preference.show pref) prefs
                     in
-                    List.foldr acc Set.empty Preference.enum
+                    List.foldr go Set.empty Preference.enum
 
                 Nothing ->
                     Preferences.empty

@@ -10,6 +10,8 @@ import Browser.Navigation as Navigation
 import Date exposing (Date)
 import Html exposing (Html)
 
+import Database.Calculator as C exposing (Sources)
+import Model.Skill.SkillEffect exposing (SkillEffect(..))
 import Persist.Preference exposing (Preference)
 import Persist.Preferences exposing (Preferences)
 import Persist.Flags exposing (Flags)
@@ -28,20 +30,23 @@ type alias Component model msg =
 
 type SiteMsg filt focus
     = ToSection (Maybe Section)
-    | Focus     (Maybe focus)
+    | Focus (Maybe focus)
     | ClearAll
-    | Check     FilterTab Bool
-    | FilterBy  (List (Filter filt))
-    | Toggle    (Filter filt)
-    | MatchAny  Bool
-    | SetSort   SortBy
-    | SetPref   Preference Bool
-    | Ascend    focus Int
-    | OnMine    Bool focus
-    | OnTeam    Int Int
+    | Check FilterTab Bool
+    | FilterBy (List (Filter filt))
+    | Toggle (Filter filt)
+    | MatchAny Bool
+    | SetSort SortBy
+    | EffectSort SkillEffect
+    | EffectDialog Bool
+    | SetSources Sources
+    | SetPref Preference Bool
+    | Ascend focus Int
+    | OnMine Bool focus
+    | OnTeam Int Int
     | Export
     | Import
-    | Entry     String
+    | Entry String
     | ReceiveCompress String
     | ReceiveDecompress String
     | DoNothing
@@ -58,6 +63,8 @@ type alias SiteModel filt focus extra =
     , matchAny   : Bool
     , focus      : Maybe focus
     , sortBy     : SortBy
+    , dialog     : Bool
+    , sources    : Sources
     , sorted     : List (String, focus)
     , listing    : List (String, focus)
     , extra      : extra
@@ -77,6 +84,8 @@ init getFilters flags navKey extra =
     , matchAny   = True
     , focus      = Nothing
     , sortBy     = Rarity
+    , sources    = C.selfish + C.special + C.skills + C.np
+    , dialog     = False
     , sorted     = []
     , listing    = []
     , extra      = extra

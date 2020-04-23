@@ -3,22 +3,25 @@ module Site.Update exposing (siteUpdate)
 import List.Extra as List
 
 import StandardLibrary exposing (pure, removeWith)
+import Model.Skill.SkillEffect exposing (SkillEffect)
 import Site.Algebra exposing (SiteModel, SiteMsg(..))
 import Site.FilterTab as FilterTab
 import Site.Common exposing (..)
 import Site.Filter as Filter
 import Site.Filtering as Filtering
+import Site.SortBy exposing (SortBy(..))
 import Persist.Preferences exposing (Preferences)
 
 
 siteUpdate : (focus -> filt)
           -> (filt -> String)
           -> (SiteModel filt focus extra -> SiteModel filt focus extra)
+          -> (SkillEffect -> SiteModel filt focus extra -> SiteModel filt focus extra)
           -> Preferences
           -> SiteMsg filt focus
           -> SiteModel filt focus extra
           -> (SiteModel filt focus extra, Cmd (SiteMsg filt focus))
-siteUpdate transform show reSort prefs msg st =
+siteUpdate transform show reSort effectSort prefs msg st =
     let
         relist =
             Filtering.updateListing prefs transform
@@ -56,6 +59,13 @@ siteUpdate transform show reSort prefs msg st =
         SetSort sortBy ->
             goUp << relist <| reSort { st | sortBy = sortBy }
 
+        EffectSort ef ->
+            goUp << relist <|
+            effectSort ef { st | dialog = False, sortBy = Effect }
+
+        EffectDialog b ->
+            goUp <| { st | dialog = b }
+
         MatchAny matchAny ->
             goUp <| relist { st | matchAny = matchAny }
 
@@ -82,6 +92,9 @@ siteUpdate transform show reSort prefs msg st =
                 , filters = filters
                 , focus   = Nothing
                 }
+
+        SetSources srcs ->
+            pure { st | sources = srcs }
 
         SetPref _ _ ->
             pure << relist <| reSort st

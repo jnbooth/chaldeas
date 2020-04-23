@@ -18,9 +18,9 @@ type alias Preferences =
 empty : Preferences
 empty =
     let
-        acc pref = set pref <| Preference.default pref
+        go pref = set pref <| Preference.default pref
     in
-    List.foldr acc Set.empty Preference.enum
+    List.foldr go Set.empty Preference.enum
 
 
 prefers : Preferences -> Preference -> Bool

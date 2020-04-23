@@ -56,7 +56,6 @@ component =
                     [ text_ H.strong "Craft Essences"
                     , a_ ["Servants"]
                     , a_ ["My Servants"]
-                    --, a_ ["Teams"]
                     ]
             in
             lazy3 unlazyView prefs st.listing st.sortBy
@@ -71,7 +70,7 @@ component =
 
         update : Preferences -> Msg -> Model -> (Model, Cmd Msg)
         update =
-            Update.siteUpdate identity .name reSort
+            Update.siteUpdate identity .name reSort <| \_ st -> st
   in
     { init = init, view = view, update = update }
 

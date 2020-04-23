@@ -19,6 +19,7 @@ get prefs a = case a of
         in
         List.sortWith sortWith
             >> List.map (\x -> ("", x))
+
     _ ->
         let
             sortOn ms =

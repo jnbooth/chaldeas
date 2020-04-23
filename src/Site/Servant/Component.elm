@@ -14,6 +14,7 @@ import Maybe.Extra as Maybe
 
 import StandardLibrary exposing (flip, pure)
 import Database
+import Database.Calculator as C
 import Database.CraftEssences as CraftEssences
 import Database.Servants as Servants
 import Model.Material as Material exposing (Material(..))
@@ -23,7 +24,7 @@ import Model.Servant as Servant exposing (Ascension(..), Reinforcement(..), Serv
 import Model.Skill exposing (Skill)
 import Model.Skill.RangeInfo as RangeInfo exposing (RangeInfo)
 import Model.Skill.Rank as Rank exposing (Rank(..))
-import Model.Skill.SkillEffect as SkillEffect
+import Model.Skill.SkillEffect as SkillEffect exposing (SkillEffect)
 import Persist.Flags as Flags exposing (Flags)
 import Persist.Preference exposing (Preference(..))
 import Persist.Preferences exposing (Preferences, prefers)
@@ -63,9 +64,19 @@ type alias Msg =
 
 reSort : Preferences -> Model -> Model
 reSort prefs st =
-    { st
-    | sorted = Sorting.get prefs st.sortBy st.extra.myServs
-    }
+    case st.sortBy of
+        Effect -> st
+        _      -> { st | sorted = Sorting.get prefs st.sortBy st.extra.myServs }
+
+
+effectSort : SkillEffect -> Model -> Model
+effectSort  ef st =
+    let
+        sortWith =
+            .servant
+                >> C.servantEffects st.sources
+    in
+    { st | sorted = C.effectSort sortWith ef st.extra.myServs st.sources }
 
 
 reMine : Model -> Model
@@ -125,8 +136,7 @@ component ports =
             in
             lazy4 unlazyView prefs st.extra.mineOnly st.listing st.sortBy
                 |> Rendering.siteView prefs st SortBy.enum nav
-                >> popup prefs
-                   st.extra.mineOnly st.extra.ascent st.focus st.extra.export
+                >> popup prefs st
 
         unlazyView prefs mineOnly listing sortBy =
             let
@@ -265,7 +275,7 @@ component ports =
                 _ ->
                     Update.siteUpdate .base
                     (Servant.show <| prefers prefs HideSpoilers)
-                    (reSort prefs) prefs a st
+                    (reSort prefs) effectSort prefs a st
     in
     { init = init, view = view, update = update }
 
@@ -363,35 +373,40 @@ keyedPortrait big prefs mineOnly baseAscension (label, ms) =
     (ms.base.name, lazy5 portrait big prefs mineOnly baseAscension (label, ms))
 
 
-popup : Preferences -> Bool -> Int -> Maybe MyServant -> Maybe String
-     -> List (Html Msg) -> Html Msg
-popup prefs mineOnly ascent a ex = case (ex, a) of
-  (Just "", _) ->
+popup : Preferences -> Model -> List (Html Msg) -> Html Msg
+popup prefs st = case (st.dialog, st.extra.export, st.focus) of
+  (True, _, _) ->
     H.div [P.id "elm", P.class <| mode prefs ++ " fade"] << (++)
-    [ H.a [P.id "cover", P.href <| "/" ++ getRoot mineOnly] []
+    [ H.a [P.id "cover", P.href <| "/" ++ getRoot st.extra.mineOnly] []
+    , effectsDialog C.allSources st.sources <|
+      List.map (.servant >> C.servantEffects st.sources) st.extra.myServs
+    ]
+  (_, Just "", _) ->
+    H.div [P.id "elm", P.class <| mode prefs ++ " fade"] << (++)
+    [ H.a [P.id "cover", P.href <| "/" ++ getRoot st.extra.mineOnly] []
     , H.article [P.id "focus"]
       [ H.textarea [E.onInput Entry] []
       , button_ "Import" True Import
       ]
     ]
-  (Just export, _) ->
+  (_, Just export, _) ->
     H.div [P.id "elm", P.class <| mode prefs ++ " fade"] << (++)
-    [ H.a [P.id "cover", P.href <| "/" ++ getRoot mineOnly] []
+    [ H.a [P.id "cover", P.href <| "/" ++ getRoot st.extra.mineOnly] []
     , H.article [P.id "focus"] [H.textarea [P.value export] []]
     ]
-  (_, Nothing) ->
+  (_, _, Nothing) ->
     H.div [P.id "elm", P.class <| mode prefs] << (++)
-    [ H.a [P.id "cover", P.href <| "/" ++ getRoot mineOnly] []
+    [ H.a [P.id "cover", P.href <| "/" ++ getRoot st.extra.mineOnly] []
     , H.article [P.id "focus"] []
     ]
-  (_, Just ms) ->
+  (_, _, Just ms) ->
     let
       b   = ms.base
       s   = ms.servant
       fou = ms.fou
       link ({show} as has) tab x =
           H.a
-          [ P.href <| "/" ++ getRoot mineOnly
+          [ P.href <| "/" ++ getRoot st.extra.mineOnly
           , E.onClick << FilterBy <| Filters.single has tab x
           ]
           [H.text <| show x]
@@ -477,10 +492,10 @@ popup prefs mineOnly ascent a ex = case (ex, a) of
           >> List.singleton
     in
       H.div [P.id "elm", P.class <| mode prefs ++ " fade"] << (++)
-      [ H.a [P.id "cover", P.href <| "/" ++ getRoot mineOnly] []
+      [ H.a [P.id "cover", P.href <| "/" ++ getRoot st.extra.mineOnly] []
       , H.article [P.id "focus"] <|
         [ H.div []
-          [ portrait True prefs mineOnly ascent ("", ms)
+          [ portrait True prefs st.extra.mineOnly st.extra.ascent ("", ms)
           , H.div [] <|
             [ table_ ["", "ATK", "HP"]
                 [ H.tr []

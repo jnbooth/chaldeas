@@ -28,6 +28,7 @@ import Model.Icon as Icon exposing (Icon)
 import Model.Servant exposing (Servant)
 import Model.Skill.BuffEffect as BuffEffect exposing (BuffEffect(..))
 import Model.Skill.DebuffEffect as DebuffEffect exposing (DebuffEffect(..))
+import Model.Skill.SkillEffect as SkillEffect exposing (SkillEffect(..))
 
 
 type alias ImagePath =
@@ -98,6 +99,19 @@ debuffEffect : ToImage DebuffEffect
 debuffEffect =
     ImagePath "Effect" <<
     DebuffEffect.name
+
+
+skillEffect : SkillEffect -> Maybe ImagePath
+skillEffect a =
+    case SkillEffect.simplify a of
+        Grant _ _ f _ ->
+            Just <| buffEffect f
+
+        Debuff _ _ f _ ->
+            Just <| debuffEffect f
+
+        _ ->
+            Nothing
 
 
 ceThumb : CraftEssence -> Html a

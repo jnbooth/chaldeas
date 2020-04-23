@@ -29,7 +29,7 @@ type SortBy
     | NPSpecOver
     | NPRefund
     | NPRefundOver
-    | NPInstant
+    | Effect
     -- | NPTurn
 
 
@@ -50,8 +50,7 @@ enum =
     , NPSpecOver
     , NPRefund
     , NPRefundOver
-    , NPInstant
-    -- , NPTurn
+    , Effect
     ]
 
 
@@ -69,12 +68,12 @@ show a =
         NPRefundOver -> "NP Refund + Overcharge"
         NPSpec       -> "NP Special Damage"
         NPSpecOver   -> "NP Special + Overcharge"
-        NPInstant    -> "NP Gauge increase"
         -- NPTurn       -> "Average Gauge per turn"
         Rarity       -> "Rarity"
         StarDeck     -> "Stars per full deck"
         StarQuick    -> "Stars per Quick card"
         StarWeight   -> "Star Weight"
+        Effect       -> "Effect"
 
 
 type alias Ord =
@@ -97,7 +96,6 @@ format a =
         NPSpecOver   -> Print.commas
         NPArts       -> Print.places 2 >> flip (++) "%"
         NPDeck       -> Print.places 2 >> flip (++) "%"
-        NPInstant    -> Print.places 0 >> flip (++) "%"
         NPRefund     -> Print.places 2 >> flip (++) "%"
         -- NPTurn       -> Print.places 2 >> flip (++) "%"
         NPRefundOver -> Print.places 2 >> flip (++) "%"
@@ -111,6 +109,5 @@ addToSort prefs sort =
     case sort of
         NPDeck    -> prefers prefs AddExtra
         StarDeck  -> prefers prefs AddExtra
-        NPInstant -> prefers prefs ExcludeSelf
         -- NPTurn    -> prefers prefs ExcludeSelf
         _         -> prefers prefs AddSkills

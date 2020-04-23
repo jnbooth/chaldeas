@@ -2,6 +2,7 @@ module Model.Skill.Amount exposing
   ( Amount(..)
   , show
   , toMin, toMax
+  , maxIf
   )
 
 
@@ -37,3 +38,11 @@ toMax a =
         Full        -> 1/0
         Flat x      -> x
         Range _ y   -> y
+
+
+maxIf : Bool -> Amount -> Float
+maxIf pred =
+    if pred then
+        toMax
+    else
+        toMin

@@ -26,6 +26,7 @@ extra = List.concat
         , "Atalante (Alter)"
         , "Avicebron"
         , "Antonio Salieri"
+        , "Ivan the Terrible"
         ]
       , Filter [] Nothing FilterTab.Availability "Free" <| \_ s ->
             s.free
@@ -47,11 +48,12 @@ scheduled =
         [ "Anastasia Nikolaevna Romanova"
         , "Atalante (Alter)"
         , "Avicebron"
+        ]
+    , ScheduledFilter (Date 2020 Apr 2) (Date 2020 Apr 16) <|
+        Filtering.name FilterTab.Availability "Rate-Up"
+        [ "Ivan the Terrible"
         , "Antonio Salieri"
         ]
-    , ScheduledFilter (Date 2020 Mar 26) (Date 2020 Mar 27) <|
-        Filter [] Nothing FilterTab.Availability "Class Summon" <| \_ s ->
-        s.class == Saber && not s.limited
     ]
 
 

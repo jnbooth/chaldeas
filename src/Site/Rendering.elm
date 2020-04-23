@@ -48,10 +48,28 @@ render prefs a st sorts nav =
             if List.isEmpty sorts then
                 []
             else
+                let
+                    renderSort sort =
+                        case sort of
+                            Effect ->
+                                H.p [E.onClick <| EffectDialog True] <|
+                                [ H.input
+                                  [ P.type_ "radio"
+                                  , P.checked <| st.sortBy == Effect
+                                  ] []
+                                , H.button
+                                  [ P.type_ "button"
+                                  , E.onClick <| EffectDialog True
+                                  ]
+                                  [H.text "Effect"]
+                                ]
+
+                            _ ->
+                                H.p [E.onClick <| SetSort sort] <|
+                                radio_ (SortBy.show sort) (st.sortBy == sort)
+                in
                 [ h_ 1 "Sort by"
-                , H.form [] << flip List.map sorts <| \sort ->
-                    H.p [E.onClick <| SetSort sort] <|
-                    radio_ (SortBy.show sort) (st.sortBy == sort)
+                , H.form [] <| List.map renderSort sorts
                 ]
 
         Section.Include ->

@@ -75,12 +75,14 @@ focusFromPath : (b -> Bool) -> SiteModel a b c -> SiteModel a b c
 focusFromPath pred st =
     case Maybe.map pred st.focus of
         Just True ->
-            st
+            { st | dialog = False }
 
         _ ->
-            { st | focus = st.listing
-                               |> List.map Tuple.second
-                               >> List.find pred
+            { st
+            | dialog = False
+            , focus  = st.listing
+                           |> List.map Tuple.second
+                           >> List.find pred
             }
 
 

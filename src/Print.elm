@@ -30,14 +30,24 @@ stars padded rarity =
 
 {-| Formats a number with commas every 3 digits. -}
 commas : Float -> String
-commas =
-    format { usLocale | decimals = 0 }
+commas x =
+    if not <| isInfinite x then
+        format { usLocale | decimals = 0 } x
+    else if x < 0 then
+        "-∞"
+    else
+        "∞"
 
 
 {-| Formats a number to a specified decimal precision. -}
 places : Int -> Float -> String
-places decimals =
-    format { usLocale | decimals = decimals, thousandSeparator = "" }
+places decimals x =
+    if not <| isInfinite x then
+        format { usLocale | decimals = decimals, thousandSeparator = "" } x
+    else if x < 0 then
+        "-∞"
+    else
+        "∞"
 
 
 {-| Removes specified characters from strings. -}

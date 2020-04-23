@@ -1,6 +1,7 @@
 module Model.Skill.SkillEffect exposing
   ( SkillEffect(..)
   , show
+  , Ord, ord
   , demerit
   , simplify
   , mapAmount
@@ -8,6 +9,7 @@ module Model.Skill.SkillEffect exposing
 
 import Model.Skill.Amount as Amount exposing (Amount(..))
 import Model.Skill.BonusEffect as BonusEffect exposing (BonusEffect(..), BonusType)
+import Model.Skill.BuffCategory as BuffCategory
 import Model.Skill.BuffEffect as BuffEffect exposing (BuffEffect(..))
 import Model.Skill.DebuffEffect as DebuffEffect exposing (DebuffEffect(..))
 import Model.Skill.InstantEffect as InstantEffect exposing (InstantEffect(..))
@@ -27,6 +29,49 @@ type SkillEffect
     | ToMax Amount SkillEffect
     | After Int SkillEffect
 
+
+type alias Ord = String
+
+
+ord : SkillEffect -> Ord
+ord a =
+    let
+        pref =
+            case a of
+                To _ _ _ ->
+                    "1"
+
+                Debuff _ _ _ _ ->
+                    "2"
+
+                Grant _ _ f _ ->
+                    f
+                        |> BuffEffect.category
+                        >> BuffCategory.show
+                        >> String.cons '3'
+
+                Bonus _ _ _ ->
+                    "4"
+
+                Chance _ _ ->
+                    "5"
+
+                Chances _ _ _ ->
+                    "5"
+
+                When _ _ ->
+                    "6"
+
+                Times _ _ ->
+                    "7"
+
+                ToMax _ _ ->
+                    "8"
+
+                After _ _ ->
+                    "9"
+    in
+    pref ++ show a
 
 
 show : SkillEffect -> String

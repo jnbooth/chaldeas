@@ -8,6 +8,7 @@ and stats for particular Servants. This module defines the container for
 such information, which is a `Database.Servant` wrapper with additional
 user info such as Fou stats and skill levels. -}
 
+import Bitwise exposing (or)
 import Dict exposing (Dict)
 
 import StandardLibrary exposing (dict)
@@ -15,7 +16,7 @@ import Database.Servants as Servants
 import Model.Card exposing (Card(..))
 import Model.Deck as Deck
 import Model.Stat as Stat exposing (Stat)
-import Database.Calculator as Calculator
+import Database.Calculator as C
 import Model.Servant as Servant exposing (Servant)
 import Model.Skill.Amount exposing (Amount(..))
 import Model.Skill.SkillEffect as SkillEffect
@@ -107,8 +108,8 @@ recalc ms =
     }
 
 
-deckSum : Bool -> (Servant -> Card -> Float) -> Servant -> Float
-deckSum addExtra f s =
+deckSum : Servant -> Bool -> (Servant -> Card -> Float) -> Float
+deckSum s addExtra f =
     let
         withExtra xs =
             if addExtra then
@@ -125,23 +126,72 @@ deckSum addExtra f s =
 
 toSort : Bool -> SortBy -> Servant -> Float
 toSort addBonus sortBy s =
+    let
+        mask =
+            if addBonus then
+                C.passives + C.selfish + C.np + C.skills
+            else
+                C.passives + C.selfish + C.np
+    in
     case sortBy of
-        ID           -> toFloat <| -1 * s.id
-        Rarity       -> toFloat s.rarity
-        ATK          -> toFloat s.stats.max.atk
-        HP           -> toFloat s.stats.max.hp
-        StarWeight   -> toFloat s.gen.starWeight
-        NPArts       -> Calculator.npPer s Arts
-        NPDeck       -> deckSum addBonus Calculator.npPer s
-        StarQuick    -> Calculator.starsPer s Quick
-        StarDeck     -> deckSum addBonus Calculator.starsPer s
-        NPDmg        -> Calculator.npDamage addBonus False False s
-        NPDmgOver    -> Calculator.npDamage addBonus False True s
-        NPSpec       -> Calculator.npDamage addBonus True False s
-        NPSpecOver   -> Calculator.npDamage addBonus True True s
-        NPRefund     -> Calculator.npRefund addBonus False s
-        NPRefundOver -> Calculator.npRefund addBonus True s
-        NPInstant    -> Calculator.gaugeUp addBonus s
+        ID ->
+            toFloat <| -1 * s.id
+
+        Rarity ->
+            toFloat s.rarity
+
+        ATK ->
+            toFloat s.stats.max.atk
+
+        HP ->
+            toFloat s.stats.max.hp
+
+        StarWeight ->
+            toFloat s.gen.starWeight
+
+        NPArts ->
+            C.npPer s Arts
+
+        NPDeck ->
+            deckSum s addBonus C.npPer
+
+        StarQuick ->
+            C.starsPer s Quick
+
+        StarDeck ->
+            deckSum s addBonus C.starsPer
+
+        NPDmg ->
+            mask
+                |> C.npDamage s
+
+        NPDmgOver ->
+            mask
+                |> or C.maxOver
+                >> C.npDamage s
+
+        NPSpec ->
+            mask
+                |> or C.special
+                >> C.npDamage s
+
+        NPSpecOver ->
+            mask
+                |> or C.maxOver
+                >> or C.special
+                >> C.npDamage s
+
+        NPRefund ->
+            mask
+                |> C.npRefund s
+
+        NPRefundOver ->
+            mask
+                |> or C.maxOver
+                >> C.npRefund s
+
+        Effect ->
+            0
 
 
 mapSort : MyServant -> MyServant

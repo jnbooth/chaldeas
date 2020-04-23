@@ -2,16 +2,20 @@ module Site.Common exposing (..)
 
 {-| Utility functions for rendering to HTML. -}
 
+import Bitwise exposing (and)
 import Browser.Dom as Dom
 import Browser.Navigation as Navigation
 import Html as H exposing (Html)
 import Html.Attributes as P
 import Html.Events as E
 import Json.Decode as Json
+import Maybe.Extra as Maybe
 import Task
 import Url.Builder as Url
 
 import StandardLibrary exposing (flip, stripSuffix)
+import Class.ToImage as ToImage
+import Database.Calculator as C exposing (EffectsRaw, Sources)
 import Model.Class as Class
 import Model.Skill.RangeInfo exposing (RangeInfo)
 import Model.Skill.SkillEffect as SkillEffect exposing (SkillEffect)
@@ -145,6 +149,49 @@ effectEl xs getEffects ef =
             Nothing     -> []
 
 
+sourceEl : Sources -> Sources -> String -> Sources -> Maybe (Html (SiteMsg a b))
+sourceEl filter srcs label bit =
+    if filter |> C.contains bit then
+        let
+            toggled = and srcs bit /= 0
+        in
+        Just <|
+        H.p []
+        [ H.input [ P.type_ "checkbox"
+                , P.checked toggled
+                , E.onClick << SetSources <| Bitwise.xor srcs bit
+                ] []
+        , H.text label
+        ]
+    else
+        Nothing
+
+
+effectSortEl : SkillEffect -> Html (SiteMsg a b)
+effectSortEl ef =
+    H.button [P.type_ "button", E.onClick <| EffectSort ef] <|
+    case ToImage.skillEffect ef of
+        Just img ->
+            [ToImage.image img, H.text <| SkillEffect.show ef]
+
+        Nothing ->
+            [H.text << String.dropRight 1 <| SkillEffect.show ef]
+
+
+effectsDialog : Sources -> Sources -> List EffectsRaw -> Html (SiteMsg a b)
+effectsDialog filter srcs efs =
+    H.article [P.id "focus"] <| Maybe.values
+      [ sourceEl filter srcs "Include self-applied effects" C.selfish
+      , sourceEl filter srcs "Include skills" C.skills
+      , sourceEl filter srcs "Include passives" C.passives
+      , sourceEl filter srcs "Include special targets" C.special
+      , sourceEl filter srcs "Include Noble Phantasm" C.np
+      , sourceEl filter srcs "Fully overcharge NP" C.maxOver
+      , Just << H.form [P.id "effects"] <<
+        List.map effectSortEl <| C.all srcs efs
+      ]
+
+
 {-| `<a>` -}
 a_ : List String -> Html msg
 a_ path =
@@ -169,6 +216,7 @@ h_ level = text_ <| case level of
     5 -> H.h5
     _ -> H.h6
 
+
 {-| `<button>` -}
 button_ : String -> Bool -> msg -> Html msg
 button_ label enable click =
@@ -181,6 +229,7 @@ button_ label enable click =
                 [P.disabled True]
     in
     H.button meta [H.text label]
+
 
 {-| `<input type="checkbox">` -}
 checkbox_ : Maybe (Html msg) -> String -> Bool -> List (Html msg)

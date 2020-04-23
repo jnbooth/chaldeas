@@ -407,11 +407,11 @@ extras =
                     , icon   = Icon.QuickUp
                     , cd     = 9
                     , effect = [ Times 1 << Grant Self 6 GutsPercent <| Flat 50
-                               , Grant Self 1 (CardUp Quick) <| Range 20 40
-                               , After 1 <| Grant Self 1 (CardUp Quick) <| Range 40 80
-                               , After 2 <| Grant Self 1 (CardUp Quick) <| Range 60 120
-                               , After 3 <| Grant Self 1 (CardUp Quick) <| Range 80 160
-                               , After 4 <| Grant Self 1 (CardUp Quick) <| Range 100 200
+                               , Grant Self 5 (CardUp Quick) <| Range 20 40
+                               , After 1 <| Grant Self 4 (CardUp Quick) <| Range 20 40
+                               , After 2 <| Grant Self 3 (CardUp Quick) <| Range 20 40
+                               , After 3 <| Grant Self 2 (CardUp Quick) <| Range 20 40
+                               , After 4 <| Grant Self 1 (CardUp Quick) <| Range 20 40
                                , After 5 <| To Self DemeritKill Full
                                ]
                     }
@@ -1002,7 +1002,7 @@ extras =
                   , card   = Arts
                   , kind   = "Anti-Personnel/Anti-World"
                   , hits   = 0
-                  , effect = [ Debuff Enemies 3 DefenseDown <| Flat 500
+                  , effect = [ Chance 500 << Debuff Enemies 3 DefenseDown <| Range 30 50
                              , Grant Party 3 IgnoreDef Full
                              , Grant Party 3 IgnoreInvinc Full
                              ]

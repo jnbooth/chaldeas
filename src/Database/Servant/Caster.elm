@@ -1815,7 +1815,7 @@ casters =
                   , hits   = 5
                   , effect = [ Grant Self 1 NPUp <| Flat 20
                              , To Enemies Damage <| Range 600 900
-                             , Times 1 << Debuff Enemies 3 DebuffVuln <| Flat 500
+                             , Chance 500 << Times 1 << Debuff Enemies 3 DebuffVuln <| Flat 50
                              ]
                   , over   = [ To Enemies (SpecialDamage <| VsTrait King) <| Range 200 300 ]
                   , first  = False

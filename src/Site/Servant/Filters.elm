@@ -22,11 +22,9 @@ import Site.Filtering as Filtering exposing (ScheduledFilter)
 extra : List (Filter Servant)
 extra = List.concat
     [ [ Filtering.name FilterTab.Availability "New"
-        [ "Anastasia Nikolaevna Romanova"
-        , "Atalante (Alter)"
-        , "Avicebron"
-        , "Antonio Salieri"
-        , "Ivan the Terrible"
+        [ "Achilles"
+        , "Chiron"
+        , "Sieg"
         ]
       , Filter [] Nothing FilterTab.Availability "Free" <| \_ s ->
             s.free

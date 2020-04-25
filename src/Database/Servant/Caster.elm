@@ -2194,4 +2194,68 @@ casters =
                   [(OctupletCrystals, 7), (EternalIce, 4)]
                   [(EternalIce, 12), (MysticGunpowder, 48)]
     }
+  , { name      = "Sieg"
+    , spoiler   = Nothing
+    , id        = 208
+    , rarity    = 4
+    , class     = Caster
+    , stats     = { base  = { atk = 1399,  hp = 1806 }
+                  , max   = { atk = 8394,  hp = 11288 }
+                  , grail = { atk = 10163, hp = 13686 }
+                  }
+    , gen       = { starWeight = 50, starRate = 10.8, npAtk = 0.78, npDef = 3 }
+    , death     = 54
+    , curve     = 4
+    , attr      = Human
+    , align     = [Neutral, Good]
+    , gender    = Male
+    , traits    = [Humanoid, Dragon, EnumaElish]
+    , deck      = Deck Quick Arts Arts Buster Buster
+    , hits      = { quick = 3, arts = 2, buster = 3, ex = 4 }
+    , skills    = [ { name   = "Artificial Hero (Fake)"
+                    , rank   = BPlus
+                    , icon   = Icon.NobleUp
+                    , cd     = 7
+                    , effect = [ Grant Self 3 NPGen <| Range 20 30
+                               , Grant Self 3 HPUp <| Range 1000 2000
+                               ]
+                    }
+                  , { name   = "Magecraft"
+                    , rank   = C
+                    , icon   = Icon.ArtsUp
+                    , cd     = 7
+                    , effect = [ Grant Self 1 (CardUp Arts) <| Range 22 36 ]
+                    }
+                  , { name   = "Dead-Count Shapeshifter"
+                    , rank   = EX
+                    , icon   = Icon.DamageUp
+                    , cd     = 7
+                    , effect = [ Grant Self 1 (Special AttackUp <| VsTrait Dragon) <| Range 50 100
+                               , To Self GaugeUp <| Range 20 30
+                               ]
+                    }
+                  ]
+    , passives  = [independentAction EX, homunculus CPlus]
+    , phantasm  = { name   = "Ákafiloga All-gríð"
+                  , rank   = EX
+                  , card   = Arts
+                  , kind   = "Anti-Personnel"
+                  , hits   = 3
+                  , effect = [ To Enemies Damage <| Range 450 750 ]
+                  , over   = [ Debuff Enemies 3 DefenseDown <| Range 20 40 ]
+                  , first  = True
+                  }
+    , limited   = True
+    , free      = True
+    , ascendUp  = Welfare "Leaf of Remembrance"
+    , skillUp   = Reinforcement
+                  [(GemOf Caster, 4)]
+                  [(GemOf Caster, 10)]
+                  [(MagicGemOf Caster, 4)]
+                  [(MagicGemOf Caster, 10), (DragonFang, 10)]
+                  [(SecretGemOf Caster, 4), (DragonFang, 20)]
+                  [(SecretGemOf Caster, 10), (GreatKnightMedal, 8)]
+                  [(GreatKnightMedal, 16), (HeartOfTheForeignGod, 2)]
+                  [(HeartOfTheForeignGod, 6), (DragonsReverseScale, 8)]
+    }
   ]

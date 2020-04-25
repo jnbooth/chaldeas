@@ -1535,4 +1535,75 @@ riders =
                   [(EvilBone, 29), (DeadlyPoisonousNeedle, 15)]
                   [(DeadlyPoisonousNeedle, 44), (EternalIce, 24)]
     }
+  , { name      = "Achilles"
+    , spoiler   = Nothing
+    , id        = 206
+    , rarity    = 5
+    , class     = Rider
+    , stats     = { base  = { atk = 1836,  hp = 1938 }
+                  , max   = { atk = 11883, hp = 13219 }
+                  , grail = { atk = 13008, hp = 14482 }
+                  }
+    , gen       = { starWeight = 196, starRate = 9.1, npAtk = 0.57, npDef = 3 }
+    , death     = 40
+    , curve     = 10
+    , attr      = Earth
+    , align     = [Lawful, Balanced]
+    , gender    = Male
+    , traits    = [Humanoid, Divine, Riding, LovedOne, GreekMythMale, EnumaElish]
+    , deck      = Deck Quick Quick Arts Arts Buster
+    , hits      = { quick = 4, arts = 3, buster = 2, ex = 4 }
+    , skills    = [ { name   = "Drómos Komḗtēs"
+                    , rank   = APlus
+                    , icon   = Icon.QuickUp
+                    , cd     = 7
+                    , effect = [ Grant Self 3 (CardUp Quick) <| Range 20 30
+                               , Grant Self 3 CritUp <| Range 20 30
+                               ]
+                    }
+                  , { name   = "Andreíos Amárantos"
+                    , rank   = B
+                    , icon   = Icon.Shield
+                    , cd     = 7
+                    , effect = [ Times 2 <| Grant Self 5 Invincibility Full
+                               , Grant Self 3 DefenseUp <| Range 10 20
+                               ]
+                    }
+                  , { name   = "Diatrekhо̄n Astēr Lonkhē"
+                    , rank   = BPlus
+                    , icon   = Icon.CrosshairUp
+                    , cd     = 8
+                    , effect = [ Chance 500 <| Grant Self 1 Taunt Full
+                               , Grant Self 1 NPGen <| Range 20 30
+                               , To Self GaugeUp <| Range 20 30
+                               ]
+                    }
+                  ]
+    , passives  = [magicResistance C, riding APlus, divinity C]
+    , phantasm  = { name   = "Troias Tragо̄idia"
+                  , rank   = A
+                  , card   = Quick
+                  , kind   = "Anti-Army"
+                  , hits   = 5
+                  , effect = [ To Enemies Damage <| Range 600 1000 ]
+                  , over   = [ Grant Self 1 (CardUp Quick) <| Range 20 60 ]
+                  , first  = True
+                  }
+    , limited   = False
+    , free      = False
+    , ascendUp  = Ascension
+                  [(Piece Rider, 5)]
+                  [(Piece Rider, 12), (ProofOfHero, 22)]
+                  [(Monument Rider, 5), (EternalGear, 10), (WarhorsesYoungHorn, 3)]
+                  [(Monument Rider, 12), (WarhorsesYoungHorn, 6), (PhoenixFeather, 10)]
+    , skillUp   = Reinforcement
+                  [(GemOf Rider, 5)]
+                  [(GemOf Rider, 12)]
+                  [(MagicGemOf Rider, 5)]
+                  [(MagicGemOf Rider, 12), (EternalGear, 5)]
+                  [(SecretGemOf Rider, 5), (EternalGear, 10)]
+                  [(SecretGemOf Rider, 12), (ProofOfHero, 15)]
+                  [(ProofOfHero, 29), (MeteorHorseshoe, 6)]
+                  [(MeteorHorseshoe, 18), (HeartOfTheForeignGod, 10)]
+    }
   ]

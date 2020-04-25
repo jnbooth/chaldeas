@@ -95,8 +95,14 @@ skillRank s x =
 translate : String -> String
 translate a =
     case a of
+        "Andreias Amarantos" ->
+            "Amaranth of the Brave"
+
         "Armor of Lamentation" ->
             "Wailing Armor"
+
+        "Artificial Hero (Fake)" ->
+            "Artificial Hero (False)"
 
         "Attila the San(ta)" ->
             "Altera the San(ta)"
@@ -110,6 +116,12 @@ translate a =
         "Blessing of Kur" ->
             "Protection of the Underworld"
 
+        "Dead-Count Shapeshifter" ->
+            "Dragon Revelation Command Spell"
+
+        "Diatrekhon Aster Lonkhe" ->
+            "Spear-tip of the Star Traversing the Skies"
+
         "Frigid Charisma" ->
             "Freezing Charisma"
 
@@ -122,11 +134,17 @@ translate a =
         "Crest of the Shiny Star" ->
             "Emblem of the Glittering Stars"
 
+        "Eternal Dedication" ->
+            "Immortal Dedication"
+
         "Distant Thoughts" ->
             "Affection Towards The Beyond"
 
         "Divine Wine—Shinpen Kidoku" ->
             "Divine Wine - Shinpen Kidoku"
+
+        "Drómos Komḗtēs" ->
+            "Comet Running Form"
 
         "Emergency Prerogative" ->
             "Supreme Authority"
@@ -263,6 +281,9 @@ translate a =
         "Mugashiki—Shinkuu Myou" ->
             "Mugashiki - Shinkuu Myōu"
 
+        "Nameless Death" ->
+            "The Death Without a Name"
+
         "Nina" ->
             "La Niña"
 
@@ -296,8 +317,14 @@ translate a =
         "Tenka Fubu -2017 Summer.ver-" ->
             "Tenka Fubu ~2017 Summer.ver~"
 
+        "The Object That Can Hold a Universe" ->
+            "The Thing That Contains the World"
+
         "The Palace of Luoyang" ->
             "Palace of Luoyang"
+
+        "The Purpose of Learning and Teaching" ->
+            "To Teach and Learn"
 
         "The Rainbow Soaring Under the Night Sky" ->
             "Rainbow Running Through the Night Sky"

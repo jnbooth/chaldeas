@@ -1777,4 +1777,80 @@ archers =
                   [(EvilBone, 24), (StakeOfWailingNight, 15)]
                   [(StakeOfWailingNight, 45), (MysticSpinalFluid, 60)]
     }
+  , { name      = "Chiron"
+    , spoiler   = Nothing
+    , id        = 207
+    , rarity    = 4
+    , class     = Archer
+    , stats     = { base  = { atk = 1549,  hp = 1960 }
+                  , max   = { atk = 9294,  hp = 12250 }
+                  , grail = { atk = 11253, hp = 14853 }
+                  }
+    , gen       = { starWeight = 148, starRate = 8.1, npAtk = 0.68, npDef = 3 }
+    , death     = 31.5
+    , curve     = 9
+    , attr      = Sky
+    , align     = [Lawful, Good]
+    , gender    = Male
+    , traits    = [Humanoid, Divine, GreekMythMale, EnumaElish]
+    , deck      = Deck Quick Quick Arts Arts Buster
+    , hits      = { quick = 3, arts = 3, buster = 4, ex = 5 }
+    , skills    = [ { name   = "Mind's Eye (True)"
+                    , rank   = A
+                    , icon   = Icon.Dodge
+                    , cd     = 8
+                    , effect = [ Grant Self 3 DefenseUp <| Range 10 20
+                               , Grant Self 1 Evasion Full
+                               ]
+                    }
+                  , { name   = "Eternal Dedication"
+                    , rank   = EX
+                    , icon   = Icon.ExclamationUp
+                    , cd     = 7
+                    , effect = [ Grant Party 3 CritUp <| Range 30 50
+                               , To Party GainStars <| Range 5 15
+                               , To Self DemeritHealth <| Flat 500
+                               ]
+                    }
+                  , { name   = "Wisdom of Divine Gift"
+                    , rank   = APlus
+                    , icon   = Icon.AllUp
+                    , cd     = 8
+                    , effect = [ Grant Ally 3 (CardUp Quick) <| Range 20 30
+                               , Grant Ally 3 (CardUp Arts) <| Range 20 30
+                               , Grant Ally 3 (CardUp Buster) <| Range 20 30
+                               ]
+                    }
+                  ]
+    , passives  = [magicResistance B, independentAction A, divinity C]
+    , phantasm  = { name   = "Antares Snipe"
+                  , rank   = A
+                  , card   = Arts
+                  , kind   = "Anti-Personnel"
+                  , hits   = 4
+                  , effect = [ To Enemy (Remove DefenseUp) Full
+                             , To Enemy (Remove Evasion) Full
+                             , To Enemy (Remove Invincibility) Full
+                             , To Enemy Damage <| Range 900 1500
+                             ]
+                  , over   = [ Debuff Enemy 3 CritChance <| Range 20 60 ]
+                  , first  = False
+                  }
+    , limited   = False
+    , free      = False
+    , ascendUp  = Ascension
+                  [(Piece Archer, 4)]
+                  [(Piece Archer, 10), (MeteorHorseshoe, 6)]
+                  [(Monument Archer, 4), (ForbiddenPage, 8), (SpiritRoot, 2)]
+                  [(Monument Archer, 10), (SpiritRoot, 4), (ScarabOfWisdom, 4)]
+    , skillUp   = Reinforcement
+                  [(GemOf Archer, 4)]
+                  [(GemOf Archer, 10)]
+                  [(MagicGemOf Archer, 4)]
+                  [(MagicGemOf Archer, 10), (ForbiddenPage, 4)]
+                  [(SecretGemOf Archer, 4), (ForbiddenPage, 8)]
+                  [(MagicGemOf Archer, 10), (MeteorHorseshoe, 4)]
+                  [(MeteorHorseshoe, 8), (SerpentJewel, 4)]
+                  [(SerpentJewel, 12), (DeadlyPoisonousNeedle, 48)]
+    }
   ]

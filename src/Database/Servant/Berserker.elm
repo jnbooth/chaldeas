@@ -1724,7 +1724,7 @@ berserkers =
                     }
                   ]
     , passives  = [beastification B, independentAction A]
-    , phantasm  = { name   = "Tauropolos Skia Thermokrasia"
+    , phantasm  = { name   = "Tauropolos Skia Thermokrasía"
                   , rank   = A
                   , card   = Quick
                   , kind   = "Anti-Personnel"

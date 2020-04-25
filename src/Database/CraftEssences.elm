@@ -3313,6 +3313,8 @@ db =
       , bond    = Nothing
       , limited = False
       }
+    , gift 583 "Fate/Apocrypha" Icon.Road
+      [Bonus MysticCode Units <| Flat 50]
     , bond 586 "King Shahryay's Bedchamber" "Scheherazade" Icon.HoodUp
       [self DebuffResist 100]
     , bond 587 "The Palace of Luoyang" "Wu Zetian" Icon.QuickUp
@@ -3519,6 +3521,8 @@ db =
       [party_ Buster 20, demeritAll DebuffVuln 20]
     , bond 688 "Guardian Gigantic" "Mecha Eli-chan MkII" Icon.BusterUp
       [party_ Buster 20, demeritAll DebuffVuln 20]
+    , gift 689 "Pray Upon the Sword, Wish Upon Life" Icon.Road
+      [Bonus EXP Units <| Flat 50]
     , { name    = "Soul Eater"
       , id      = 691
       , rarity  = 3
@@ -3626,6 +3630,81 @@ db =
       [party_ Arts 10, party NPGen 10]
     , bond 791 "Library of Ivan the Terrible" "Ivan the Terrible" Icon.BusterUp
       [party_ Buster 10, party NPUp 10]
+    , { name    = "Distant Pilgrimage"
+      , id      = 792
+      , rarity  = 5
+      , icon    = Icon.NobleUp
+      , stats   = { base = { atk = 250,  hp = 400 }
+                  , max  = { atk = 1000, hp = 1600 }
+                  }
+      , effect  = [ Grant Self 0 NPGen <| Range 10 15
+                  , Grant Self 0 NPUp <| Range 10 15
+                  , To Self GaugeUp <| Range 40 50
+                  ]
+      , bond    = Nothing
+      , limited = True
+      }
+    , { name    = "Moment of Bliss"
+      , id      = 793
+      , rarity  = 4
+      , icon    = Icon.BusterArtsUp
+      , stats   = { base = { atk = 0, hp = 600 }
+                  , max  = { atk = 0, hp = 2250 }
+                  }
+      , effect  = [ Grant Self 0 (CardUp Buster) <| Range 8 10
+                  , Grant Self 0 (CardUp Arts) <| Range 8 10
+                  , Grant Self 0 DefenseUp <| Range 3 5
+                  ]
+      , bond    = Nothing
+      , limited = True
+      }
+    , { name    = "Away We Go!"
+      , id      = 794
+      , rarity  = 3
+      , icon    = Icon.QuickUp
+      , stats   = { base = { atk = 100, hp = 160 }
+                  , max  = { atk = 500, hp = 800 }
+                  }
+      , effect  = [ Grant Self 0 (CardUp Quick) <| Range 3 5
+                  , Grant Self 0 NPGen <| Range 5 10
+                  ]
+      , bond    = Nothing
+      , limited = True
+      }
+    , { name    = "An Afternoon at the Fortress"
+      , id      = 795
+      , rarity  = 5
+      , icon    = Icon.BusterArtsUp
+      , stats   = { base = { atk = 0, hp = 750 }
+                  , max  = { atk = 0, hp = 3000 }
+                  }
+      , effect  = [ Grant Self 0 (CardUp Buster) <| Range 10 15
+                  , Grant Self 0 (CardUp Arts) <| Range 10 15
+                  , Grant Self 0 NPUp <| Range 10 15
+                  ]
+      , bond    = Nothing
+      , limited = True
+      }
+    , { name    = "At Trifas"
+      , id      = 796
+      , rarity  = 5
+      , icon    = Icon.NobleUp
+      , stats   = { base = { atk = 500,  hp = 0 }
+                  , max  = { atk = 2000, hp = 0 }
+                  }
+      , effect  = [ Grant Self 0 NPGen <| Range 10 15
+                  , Grant Self 0 CritUp <| Range 10 15
+                  , Grant Self 0 StarsPerTurn <| Range 3 4
+                  ]
+      , bond    = Nothing
+      , limited = True
+      }
+    , bond 798 "The Object That Can Hold a Universe" "Achilles" Icon.Shield
+      [self NPUp 30, Times 1 <| Grant Party 3 Invincibility Full]
+    , bond 799 "The Purpose of Learning and Teaching" "Chiron" Icon.ArtsQuickUp
+      [party_ Arts 10, party_ Quick 10]
+    , bond 800 "Nameless Death" "Sieg" Icon.NobleUp
+      [party NPGen 10, party NPUp 10]
     ]
 
 

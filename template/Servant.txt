@@ -38,7 +38,6 @@
                   ]
     , passives  = 
     , phantasm  = { name   = 
-                  , desc   = 
                   , rank   = 
                   , card   = 
                   , kind   = 

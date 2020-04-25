@@ -515,7 +515,7 @@ lancers =
                   , max   = { atk = 11375, hp = 14825 }
                   , grail = { atk = 12452, hp = 16241 }
                   }
-    , skills    = [ { name  = "Wisdom of Dun Scaith"
+    , skills    = [ { name  = "Wisdom of Dún Scáith"
                     , rank   = APlus
                     , icon    = Icon.Dodge
                     , cd      = 7

@@ -116,6 +116,13 @@ highServant =
     []
 
 
+homunculus =
+    passive "Homunculus" Icon.ArtsUp
+    [ Give Self (CardUp Arts) [ (CPlus, 6.5) ]
+    , Give Self DebuffResist [ (CPlus, 6.5) ]
+    ]
+
+
 independentAction =
     passive "Independent Action" Icon.Dash
     [ Give Self CritUp [ (EX, 12), (APlus, 11), (A, 10), (B, 8), (C, 6) ] ]

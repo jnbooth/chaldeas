@@ -20,8 +20,13 @@ import Site.Filtering as Filtering exposing (ScheduledFilter)
 extra : List (Filter CraftEssence)
 extra = List.concat
     [ [ Filtering.name FilterTab.Availability "New"
-        [ "Room Guard"
-        , "Devilish Bodhisattva"
+        [ "Pray Upon the Sword, Wish Upon Life"
+        , "Fate/Apocrypha"
+        , "An Afternoon at the Fortress"
+        , "At Trifas"
+        , "Distant Pilgrimage"
+        , "Moment of Bliss"
+        , "Away We Go!"
         ]
       , Filter [] Nothing FilterTab.Source "Limited" <| \_ ce ->
             ce.limited && Maybe.isNothing ce.bond

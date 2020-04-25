@@ -137,15 +137,6 @@ pretty a =
         "Edmond Dantes" ->
             "Edmond Dantès"
 
-        "Leonardo da Vinci" ->
-            "Leonardo Da Vinci"
-
-        "Tauropolos Skia Thermokrasia" ->
-            "Tauropolos Skia Thermokrasía"
-
-        "Wisdom of Dun Scaith" ->
-            "Wisdom of Dún Scáith"
-
         "Cafe Camelot" ->
             "Café Camelot"
 
@@ -163,6 +154,9 @@ pretty a =
 
         "The Dantes Files: Undercover in a Foreign Land" ->
             "The Dantès Files: Undercover in a Foreign Land"
+
+        "Gazing Upon Dun Scaith" ->
+            "Gazing Upon Dún Scáith"
 
         _ ->
             a

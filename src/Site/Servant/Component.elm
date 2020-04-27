@@ -66,7 +66,7 @@ reSort : Preferences -> Model -> Model
 reSort prefs st =
     case st.sortBy of
         Effect -> st
-        _      -> { st | sorted = Sorting.get prefs st.sortBy st.extra.myServs }
+        x     -> { st | sorted = Sorting.get prefs x st.extra.myServs }
 
 
 effectSort : SkillEffect -> Model -> Model
@@ -106,6 +106,7 @@ component ports =
         init : Flags -> Navigation.Key -> Model
         init flags navKey =
             Site.init (Filtering.collectFilters Filters.get) flags navKey
+            (C.selfish + C.special + C.skills + C.np)
             { mine = flags.mine
             , mineOnly = False
             , ascent = 1
@@ -378,7 +379,7 @@ popup prefs st = case (st.dialog, st.extra.export, st.focus) of
   (True, _, _) ->
     H.div [P.id "elm", P.class <| mode prefs ++ " fade"] << (++)
     [ H.a [P.id "cover", P.href <| "/" ++ getRoot st.extra.mineOnly] []
-    , effectsDialog C.allSources st.sources <|
+    , effectsDialog C.allSources st.sources "Fully overcharge NP" <|
       List.map (.servant >> C.servantEffects st.sources) st.extra.myServs
     ]
   (_, Just "", _) ->

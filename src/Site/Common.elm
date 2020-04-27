@@ -15,7 +15,7 @@ import Url.Builder as Url
 
 import StandardLibrary exposing (flip, stripSuffix)
 import Class.ToImage as ToImage
-import Database.Calculator as C exposing (EffectsRaw, Sources)
+import Database.Calculator as C
 import Model.Class as Class
 import Model.Skill.RangeInfo exposing (RangeInfo)
 import Model.Skill.SkillEffect as SkillEffect exposing (SkillEffect)
@@ -149,7 +149,7 @@ effectEl xs getEffects ef =
             Nothing     -> []
 
 
-sourceEl : Sources -> Sources -> String -> Sources -> Maybe (Html (SiteMsg a b))
+sourceEl : C.Sources -> C.Sources -> String -> C.Sources -> Maybe (Html (SiteMsg a b))
 sourceEl filter srcs label bit =
     if filter |> C.contains bit then
         let
@@ -178,15 +178,16 @@ effectSortEl ef =
             [H.text << String.dropRight 1 <| SkillEffect.show ef]
 
 
-effectsDialog : Sources -> Sources -> List EffectsRaw -> Html (SiteMsg a b)
-effectsDialog filter srcs efs =
+effectsDialog : C.Sources -> C.Sources -> String -> List C.EffectsRaw
+             -> Html (SiteMsg a b)
+effectsDialog filter srcs overLabel efs =
     H.article [P.id "focus"] <| Maybe.values
       [ sourceEl filter srcs "Include self-applied effects" C.selfish
       , sourceEl filter srcs "Include skills" C.skills
       , sourceEl filter srcs "Include passives" C.passives
       , sourceEl filter srcs "Include special targets" C.special
       , sourceEl filter srcs "Include Noble Phantasm" C.np
-      , sourceEl filter srcs "Fully overcharge NP" C.maxOver
+      , sourceEl filter srcs overLabel C.maxOver
       , Just << H.form [P.class "effects"] <<
         List.map effectSortEl <| C.all srcs efs
       ]

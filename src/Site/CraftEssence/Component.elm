@@ -12,7 +12,7 @@ import StandardLibrary exposing (flip)
 import Class.ToImage as ToImage
 import Model.CraftEssence exposing (CraftEssence)
 import Model.Skill.Amount exposing (Amount(..))
-import Model.Skill.SkillEffect as SkillEffect
+import Model.Skill.SkillEffect as SkillEffect exposing (SkillEffect)
 import Persist.Flags exposing (Flags)
 import Persist.Preference exposing (Preference(..))
 import Persist.Preferences exposing (Preferences, prefers)
@@ -24,6 +24,7 @@ import Site.Rendering as Rendering
 import Site.Update as Update
 import Site.SortBy exposing (SortBy(..))
 import Database.CraftEssences as CraftEssences
+import Database.Calculator as C
 
 import Site.CraftEssence.Filters as Filters
 import Site.CraftEssence.Sorting as Sorting
@@ -36,7 +37,15 @@ type alias Msg = SiteMsg CraftEssence CraftEssence
 
 
 reSort : Model -> Model
-reSort st = { st | sorted = Sorting.get st.sortBy }
+reSort st =
+    case st.sortBy of
+        Effect -> st
+        x      -> { st | sorted = Sorting.get x }
+
+
+effectSort : SkillEffect -> Model -> Model
+effectSort ef st =
+    { st | sorted = C.effectSort C.craftEssenceEffects ef CraftEssences.db st.sources }
 
 
 component : Component Model Msg
@@ -44,7 +53,9 @@ component =
     let
         init : Flags -> Navigation.Key -> Model
         init flags navKey =
-            Site.init (Filtering.collectFilters Filters.get) flags navKey ()
+            Site.init (Filtering.collectFilters Filters.get) flags navKey
+            (C.selfish + C.skills + C.np)
+            ()
                 |> reSort
                 >> Filtering.updateListing flags.preferences identity
                 >> \st -> { st | root = "CraftEssences" }
@@ -59,8 +70,8 @@ component =
                     ]
             in
             lazy3 unlazyView prefs st.listing st.sortBy
-                |> Rendering.siteView prefs st [Rarity, ID, ATK, HP] nav
-                >> popup prefs st.focus
+                |> Rendering.siteView prefs st [Rarity, ID, ATK, HP, Effect] nav
+                >> popup prefs st
 
         unlazyView prefs listing sortBy =
             listing
@@ -70,7 +81,7 @@ component =
 
         update : Preferences -> Msg -> Model -> (Model, Cmd Msg)
         update =
-            Update.siteUpdate identity .name reSort <| \_ st -> st
+            Update.siteUpdate identity .name reSort effectSort
   in
     { init = init, view = view, update = update }
 
@@ -128,9 +139,21 @@ keyedPortrait big prefs (label, ce) =
     (ce.name, lazy3 portrait big prefs (label, ce))
 
 
-popup : Preferences -> Maybe CraftEssence -> List (Html Msg) -> Html Msg
-popup prefs a =
-    case a of
+ceEffects : List C.EffectsRaw
+ceEffects =
+    List.map C.craftEssenceEffects CraftEssences.db
+
+
+popup : Preferences -> Model -> List (Html Msg) -> Html Msg
+popup prefs st =
+    if st.dialog then
+        H.div [P.id "elm", P.class <| mode prefs ++ " fade"] << (++)
+        [ H.a [P.id "cover", P.href <| "/CraftEssences"] []
+        , effectsDialog (C.special + C.selfish + C.maxOver) st.sources
+          "Max Limit Break"
+          ceEffects
+        ]
+    else case st.focus of
         Nothing ->
             H.div [P.id "elm", P.class <| mode prefs] << (++)
             [ H.a [P.id "cover", P.href "/CraftEssences"] []

@@ -71,9 +71,9 @@ type alias SiteModel filt focus extra =
     }
 
 
-init : (Date -> FilterList filt) -> Flags -> Navigation.Key -> extra
-    -> SiteModel filt focus extra
-init getFilters flags navKey extra =
+init : (Date -> FilterList filt) -> Flags -> Navigation.Key -> C.Sources
+    -> extra -> SiteModel filt focus extra
+init getFilters flags navKey sources extra =
     { today      = flags.today
     , navKey     = navKey
     , root       = ""
@@ -84,7 +84,7 @@ init getFilters flags navKey extra =
     , matchAny   = True
     , focus      = Nothing
     , sortBy     = Rarity
-    , sources    = C.selfish + C.special + C.skills + C.np
+    , sources    = sources
     , dialog     = False
     , sorted     = []
     , listing    = []

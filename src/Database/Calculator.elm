@@ -12,7 +12,7 @@ module Database.Calculator exposing
 {-| Calculates information for sorting based on datamined formulas. -}
 
 import Bitwise exposing (and, complement)
-import Dict
+import Dict exposing (Dict)
 
 import Model.Card exposing (Card(..))
 import Model.Class as Class exposing (Class(..))
@@ -289,11 +289,7 @@ npDamage s srcs =
             matchSum buffs <| CardUp card
 
         atkMod =
-            useIf (srcs |> contains special) Special.enum
-                |> List.map (matchSum buffs << Special AttackUp)
-                >> List.maximum
-                >> Maybe.withDefault 0
-                >> (+) (matchSum buffs AttackUp)
+            matchSum buffs AttackUp
 
         defMod =
             -1 * matchSum debuffs DefenseDown
@@ -363,22 +359,66 @@ npDamage s srcs =
             + directDamage
 
 
+updateSum : comparable -> number -> Dict comparable number -> Dict comparable number
+updateSum k v =
+    Dict.update k <|
+    Maybe.withDefault 0
+        >> (+) v
+        >> Just
+
+
+
+buffTotal : BuffEffect -> Sources -> List (BuffEffect, Float) -> Float
+buffTotal ef srcs =
+    let
+        useSpecial =
+            srcs |> contains special
+
+        go nonSpecialSum specialSum xxs =
+            case xxs of
+                [] ->
+                    specialSum
+                        |> Dict.values
+                        >> List.maximum
+                        >> Maybe.withDefault 0
+                        >> (+) nonSpecialSum
+
+                (Special buff vs, amt) :: xs ->
+                    if useSpecial && buff == ef then
+                        go nonSpecialSum
+                        (updateSum (Special.ord vs) amt specialSum)
+                        xs
+                    else
+                        go nonSpecialSum specialSum xs
+
+
+                (buff, amt) :: xs ->
+                    if buff == ef then
+                        go (nonSpecialSum + amt) specialSum xs
+                    else
+                        go nonSpecialSum specialSum xs
+    in
+    go 0 Dict.empty
+
+
+
 total : EffectsRaw -> SkillEffect -> Sources -> Float
 total efs skillEffect srcs =
     let
-        sum getter ef =
+        totaled =
             effects srcs efs
-                |> getter
-                >> List.filter (Tuple.first >> (==) ef)
-                >> List.map Tuple.second
-                >> List.sum
+
+        sum ef =
+                List.filter (Tuple.first >> (==) ef)
+                    >> List.map Tuple.second
+                    >> List.sum
 
         go a =
             case a of
-                Grant _ _ ef _  -> sum .buffs ef
-                Debuff _ _ ef _ -> sum .debuffs ef
-                To _ ef _       -> sum .instants ef
-                Bonus ef _ _    -> sum .bonuses ef
+                Grant _ _ ef _  -> buffTotal ef srcs totaled.buffs
+                Debuff _ _ ef _ -> sum ef totaled.debuffs
+                To _ ef _       -> sum ef totaled.instants
+                Bonus ef _ _    -> sum ef totaled.bonuses
                 Chance _ ef     -> go ef
                 Chances _ _ ef  -> go ef
                 When _ ef       -> go ef
@@ -410,8 +450,11 @@ effectSort getter ef xs srcs =
             String.contains "%" <| SkillEffect.show ef
 
         showAmt x =
-            if isBonus && x >= 1 then
-                Print.places 2 x
+            if isBonus then
+                if x >= 1 then
+                    Print.places 0 x
+                else
+                    Print.places 2 (x * 100) ++ "%"
             else if isPercent then
                 Print.places 2 (x * 100) ++ "%"
             else
@@ -458,6 +501,7 @@ selfish = 64
 allSources : Sources
 allSources =
     complement 0
+
 
 type alias Effects =
     { buffs : List (BuffEffect, Float)
@@ -520,8 +564,8 @@ servantEffects srcs s =
 craftEssenceEffects : CraftEssence -> EffectsRaw
 craftEssenceEffects ce =
     { skills = []
-    , np = ce.effect |> List.filter (not << SkillEffect.demerit)
-    , over = []
+    , np = []
+    , over = ce.effect |> List.filter (not << SkillEffect.demerit)
     , npStrength = Amount.toMin
     }
 
@@ -532,8 +576,15 @@ all srcs =
         buff (a, x) =
             if x == 0 || isInfinite x then
                 Nothing
-            else
-                Just <| Grant Someone 0 a Placeholder
+            else case a of
+                Special b _ ->
+                    if srcs |> contains special then
+                        Just <| Grant Someone 0 b Placeholder
+                    else
+                        Nothing
+
+                _ ->
+                    Just <| Grant Someone 0 a Placeholder
 
         debuff (a, x) =
             if x == 0 || isInfinite x then
@@ -551,7 +602,7 @@ all srcs =
             if x == 0 || isInfinite x then
                 Nothing
             else
-                Just <| Bonus a Percent Placeholder
+                Just <| Bonus a Units Placeholder
 
         collect efs =
             List.filterMap buff efs.buffs
@@ -628,22 +679,18 @@ effects srcs raw =
                 ++ List.concatMap (go raw.npStrength) raw.np
                 ++ List.concatMap (go overStrength) raw.over
 
+        usable t =
+            (contains selfish srcs || t /= Self)
+                && (contains special srcs || not (Target.isSpecial t))
+
         buffs =
             sum <| \f a ->
                 case a of
-                    Grant t _ (Special buff _) n ->
-                        useIf (contains special srcs && selfable t)
-                        [(buff, f n / 100)]
-
                     Grant t _ buff n ->
                         useIf (selfable t) [(buff, f n / 100)]
 
                     _ ->
                         []
-
-        usable t =
-            (contains selfish srcs || t /= Self)
-                && (contains special srcs || not (Target.isSpecial t))
 
         debuffs =
             sum <| \f a ->

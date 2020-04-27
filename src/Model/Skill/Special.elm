@@ -1,6 +1,7 @@
 module Model.Skill.Special exposing
   ( Special(..)
   , show
+  , Ord, ord
   , enum
   )
 {-| There are three types of skill effects in the game:
@@ -25,6 +26,13 @@ type Special
     = VsTrait Trait
     | VsClass Class
     | VsAttribute Attribute
+
+
+type alias Ord = String
+
+
+ord : Special -> Ord
+ord = show
 
 
 show : Special -> String

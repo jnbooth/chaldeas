@@ -1,9 +1,6 @@
 # CHALDEAS
 Bringing order to Fate/Grand Order
 
-## Links
-[CHALDEAS](https://chaldeas.surge.sh)
-
 ## License
 BSD 3-Clause, see [LICENSE](https://github.com/jnbooth/chaldeas/blob/master/LICENSE).
 
